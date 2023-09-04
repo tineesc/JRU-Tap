@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use Filament\Forms;
+use App\Models\Jeep;
 use App\Models\Trip;
 use Filament\Tables;
 use Filament\Forms\Form;
@@ -39,8 +40,10 @@ class TripResource extends Resource
                 TextInput::make('fare')
                 ->numeric()
                 ->required(),
-                TextInput::make('jnumber')
+                Select::make('jnumber')
                     ->label('Jeep Plate Number')
+                    ->searchable()
+                    ->options(Jeep::all()->pluck('jnumber','id'))
                     ->required(),
                 Select::make('status')->options([
                     'Available' => 'Available',

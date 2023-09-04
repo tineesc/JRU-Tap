@@ -11,9 +11,9 @@ class Trip extends Model
 {
     use HasFactory;
 
-    public function Trip(): BelongsTo
+    public function Jeep(): BelongsTo
     {
-        return $this->belongsTo(Trip::class);
+        return $this->belongsTo(Jeep::class);
     }
 }
 
