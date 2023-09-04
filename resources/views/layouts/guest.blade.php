@@ -13,15 +13,27 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-        <!-- Styles -->
-        @livewireStyles
     </head>
+    <style>
+        .popup {
+            animation: signup 0.8s;
+        }
+
+        @keyframes signup {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
     <body>
-        <div class="font-sans text-gray-900 dark:text-gray-100 antialiased">
+        <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
-
-        @livewireScripts
     </body>
 </html>
