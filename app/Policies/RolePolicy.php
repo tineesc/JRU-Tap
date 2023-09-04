@@ -13,10 +13,10 @@ class RolePolicy
      */
     public function viewAny(User $user)
     {
-        return $user->hasRole(['Admin','Moderator']);
-        if($user->hasPermissionTo('Create Post')) {
-            return true;
-        }
+        return $user->hasRole([1,2]);
+        // if($user->hasPermissionTo('Create Post')) {
+        //     return true;
+        // }
         return false;
     }
 
