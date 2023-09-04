@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Ixudra\Curl\Facades\Curl;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class PaymentController extends Controller
 {
@@ -25,8 +26,8 @@ class PaymentController extends Controller
                     'payment_method_types' => [
                         'card',
                     ],
-                    'success_url' => 'http://127.0.0.1:8000/success',
-                    'cancel_url' => 'http://127.0.0.1:8000/cancel',
+                    'success_url' => 'http://localhost:8000/success',
+                    'cancel_url' => 'http://localhost:8000/cancel',
                     'description' => 'text'
                 ],
             ]
@@ -40,15 +41,15 @@ class PaymentController extends Controller
             ->asJson()
             ->post();
 
-        // dd($response);
-        \Session::put('session_id',$response->data->id); 
+        dd($response);
+        // Session::put('session_id',$response->data->id); 
 
         return redirect()->to($response->data->attributes->checkout_url);
     }
 
     public function success()
     {
-        $sessionId = \Session::get('session_id');
+        $sessionId = Session::get('session_id');
 
 
         $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions/' . $sessionId)
