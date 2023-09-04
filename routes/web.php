@@ -35,7 +35,7 @@ Route::controller(PaymentController::class)->group(function () {
     Route::get('pay','pay')->name('pay');
     Route::get('success','success');
     Route::get('link-pay','linkPay')->name('linkPay');
-    Route::get('link-status','linkStatus');
+    Route::get('link-status/{linkid}','linkStatus');
     Route::get('refund','refund');
     Route::get('refund-status/{id}','refundStatus');
  });
