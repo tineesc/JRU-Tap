@@ -19,8 +19,8 @@
                                 :value="old('credits')" required autofocus autocomplete="credits" placeholder="amount" />
                         </div>
                         <div class="py-5 mx-5 text-center">
-                            <x-button>Pay Card</x-button>
-                            <x-button>Pay E-Wallet</x-button>
+                            <x-button ><a href="{{ route('pay') }}">Pay Card</a></x-button>
+                            <x-button><a href="{{ route('linkPay') }}">Pay Link</a></x-button>
                         </div>
                         
                     </div>

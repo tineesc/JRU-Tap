@@ -2,6 +2,7 @@
 
 use App\Livewire\Credits;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,12 @@ Route::middleware([
 });
 
 Route::get('/credits', Credits::class)->name('credits');
+
+Route::controller(PaymentController::class)->group(function () {
+    Route::get('pay','pay')->name('pay');
+    Route::get('success','success');
+    Route::get('link-pay','linkPay')->name('linkPay');
+    Route::get('link-status','linkStatus');
+    Route::get('refund','refund');
+    Route::get('refund-status/{id}','refundStatus');
+ });
