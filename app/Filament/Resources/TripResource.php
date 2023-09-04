@@ -87,6 +87,7 @@ class TripResource extends Resource
                 TextColumn::make('status')
                     ->sortable()
                     ->searchable()
+                    ->badge()
                     ->toggleable(isToggledHiddenByDefault: false),
             ])
             ->filters([
