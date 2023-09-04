@@ -25,7 +25,7 @@ class RolePolicy
      */
     public function view(User $user, Role $role)
     {
-        //
+        return $user->hasRole(1);
     }
 
     /**
@@ -33,7 +33,7 @@ class RolePolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasRole(1);
     }
 
     /**
@@ -41,7 +41,7 @@ class RolePolicy
      */
     public function update(User $user, Role $role)
     {
-        //
+        return $user->hasRole(1);
     }
 
     /**
@@ -49,7 +49,7 @@ class RolePolicy
      */
     public function delete(User $user, Role $role)
     {
-        //
+        return $user->hasRole(1);
     }
 
     /**
@@ -57,7 +57,7 @@ class RolePolicy
      */
     public function restore(User $user, Role $role)
     {
-        //
+        return $user->hasRole(1);
     }
 
     /**
@@ -65,6 +65,6 @@ class RolePolicy
      */
     public function forceDelete(User $user, Role $role)
     {
-        //
+        return $user->hasRole(1);
     }
 }
