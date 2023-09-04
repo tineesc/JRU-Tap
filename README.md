@@ -13,8 +13,8 @@
 - **Username: test@example.com - Password: password**
 
 ## Links
-admin link - 127.0.0.1:8000/admin
-user link - 127.0.0.1:8000
+- **admin link - 127.0.0.1:8000/admin**
+- **user link - 127.0.0.1:8000**
 
 
 
