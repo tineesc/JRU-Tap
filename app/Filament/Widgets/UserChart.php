@@ -12,7 +12,7 @@ class UserChart extends ChartWidget
 {
     protected static string $color = 'warning';
 
-    protected static ?string $heading = 'Users Registered Every Day';
+    protected static ?string $heading = 'Users Registered Monthly';
 
     protected function getData(): array
     {
