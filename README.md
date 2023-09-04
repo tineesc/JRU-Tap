@@ -1,3 +1,23 @@
+## Installation
+
+- **composer install**
+- **npm install**
+- **php artisan key:generate**
+- **php artisan migrate --seed**
+- **if database is already Existing - php artisan migrate:fresh --seed**
+- **php artisan serve**
+- **npm run dev**
+
+## Credentials
+- **Username: admin@example.com - Password: password**
+- **Username: test@example.com - Password: password**
+
+## Links
+admin link - 127.0.0.1:8000/admin
+user link - 127.0.0.1:8000
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
