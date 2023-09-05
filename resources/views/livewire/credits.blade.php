@@ -13,7 +13,7 @@
                     <div class="bg-sky-600 p-5">
                         <h2 class="font-semibol text-2xl">Virtual Card</h2>
                         <h2 class="font-semibol text-2xl font-semibold">Modern Jeepney (ACTONA)</h2>
-                        <div class="pt-16 flex justify-between">
+                        <div class="pt-16 pb-10 flex justify-between">
                             <img src="/image/chip.png" alt="" class="max-w-full h-10"/>
                             <h2 class="font-semibold text-2xl">{{ Auth::user()->name }}</h2>
                         </div>

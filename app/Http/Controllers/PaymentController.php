@@ -11,11 +11,8 @@ use Illuminate\Support\Facades\Session;
 
 class PaymentController extends Controller
 {
-    public function pay($id)
+    public function pay()
     {   
-        
-        // $user = User::findOrFail($id);
-     
         $data = [
             'data' => [
                 'attributes' => [
@@ -41,7 +38,7 @@ class PaymentController extends Controller
         $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions')
             ->withHeader('Content-Type: application/json')
             ->withHeader('accept: application/json')
-            ->withHeader('Authorization: Basic'. env('AUTH_PAY'))
+            ->withHeader('Authorization: Basic ' . env('AUTH_PAY'))
             ->withData($data)
             ->asJson()
             ->post();
@@ -49,7 +46,7 @@ class PaymentController extends Controller
         // dd($response);
         Session::put('session_id',$response->data->id); 
 
-        return redirect()->to($response->data->attributes->checkout_url,compact('user'));
+        return redirect()->to($response->data->attributes->checkout_url);
     }
 
     public function success(Request $request, User $user)
@@ -82,7 +79,7 @@ class PaymentController extends Controller
         $response = Curl::to('https://api.paymongo.com/v1/links')
             ->withHeader('Content-Type: application/json')
             ->withHeader('accept: application/json')
-            ->withHeader('Authorization: Basic'. env('AUTH_PAY'))
+            ->withHeader('Authorization: Basic ' . env('AUTH_PAY'))
             ->withData($data)
             ->asJson()
             ->post();
@@ -96,7 +93,7 @@ class PaymentController extends Controller
     {
         $response = Curl::to('https://api.paymongo.com/v1/links/' . $linkid)
             ->withHeader('accept: application/json')
-            ->withHeader('Authorization: Basic'. env('AUTH_PAY'))
+            ->withHeader('Authorization: Basic ' . env('AUTH_PAY'))
             ->asJson()
             ->get();
 
