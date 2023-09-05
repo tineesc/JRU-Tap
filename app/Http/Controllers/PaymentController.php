@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Ixudra\Curl\Facades\Curl;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class PaymentController extends Controller
 {
-    public function pay()
-    {
+    public function pay($id)
+    {   
+        
+        // $user = User::findOrFail($id);
+     
         $data = [
             'data' => [
                 'attributes' => [
@@ -44,23 +49,27 @@ class PaymentController extends Controller
         // dd($response);
         Session::put('session_id',$response->data->id); 
 
-        return redirect()->to($response->data->attributes->checkout_url);
+        return redirect()->to($response->data->attributes->checkout_url,compact('user'));
     }
 
-    public function success()
+    public function success(Request $request, User $user)
     {
         $sessionId = Session::get('session_id');
 
+        // $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions/' . $sessionId)
+        //     ->withHeader('accept: application/json')
+        //     ->withHeader('Authorization: Basic'. env('AUTH_PAY'))
+        //     ->asJson()
+        //     ->get();
 
-        $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions/' . $sessionId)
-            ->withHeader('accept: application/json')
-            ->withHeader('Authorization: Basic'. env('AUTH_PAY'))
-            ->asJson()
-            ->get();
+        // dd($response);
 
-        dd($response);
+        // $user->card_amount->$request->credits;
+        // $user->card_id->$request->cardID;
 
-        return view('dashboard')->with('message', 'Successfully Paid');
+        flash()->addSuccess('Credits Successfully Paid');
+
+        return view('dashboard');
     }
 
 

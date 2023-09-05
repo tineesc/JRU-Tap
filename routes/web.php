@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Credits;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentController;
 
@@ -25,6 +26,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
+        // flash()->addInfo('Welcome Back', Auth::user()->name);
         return view('dashboard');
     })->name('dashboard');
 });

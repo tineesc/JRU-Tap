@@ -12,11 +12,11 @@
 
                 <div class="grid grid-rows-4 grid-flow-col gap-4 rounded shadow-md">
                     <div class="grid place-content-center row-span-4 col-span-2  bg-purple-50">
-                        <form action="">
+                        <form>
                             <h2 class="font-semibold text-3xl text-center text-slate-600 py-5">Top up Credits</h2>
                             <div class="mx-5 py-2">
                                 <x-label for="email" value="{{ __('Credits') }}" />
-                                <x-input id="credits" class="block mt-1 w-full" type="text" name="credits"
+                                <x-input id="credits" class="block mt-1 w-full" type="number" name="credits"
                                     :value="old('credits')" required autofocus autocomplete="credits" placeholder="amount"
                                     required />
                             </div>

@@ -1,9 +1,10 @@
 <?php
 
+
 use App\Enums\TripStatus;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -21,7 +22,7 @@ return new class extends Migration
             $table->integer('fare');
             $table->string('jnumber');
             $table->string('driver')->nullable();
-            $table->enum('status', TripStatus::getValues());
+            $table->enum('status', ['Available', 'Not Available']);
             $table->timestamps();
         });
     }
