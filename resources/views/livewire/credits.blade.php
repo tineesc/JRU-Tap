@@ -14,11 +14,11 @@
                         <h2 class="font-semibol text-2xl">Virtual Card</h2>
                         <h2 class="font-semibol text-2xl font-semibold">Modern Jeepney (ACTONA)</h2>
                         <div class="pt-16 pb-10 flex justify-between">
-                            <img src="/image/chip.png" alt="" class="max-w-full h-10"/>
+                            <img src="/image/chip.png" alt="" class="max-w-full h-10" />
                             <h2 class="font-semibold text-2xl">{{ Auth::user()->name }}</h2>
                         </div>
                         <div class="flex justify-between">
-                            <p class="text-3xl pt-6 font-bold">8765439871234567</p>
+                            <p class="text-3xl pt-6 font-bold">{{ Auth::user()->card_id }}</p>
                             <p class="text-3xl pt-6">Logo</p>
                         </div>
                     </div>
@@ -47,19 +47,20 @@
                     </div>
                     <div
                         class="grid place-content-center row-span-2 col-span-2 bg-purple-50 text-center rounded shadow-md">
-                        <form action="">
-                            <h2 class="font-semibold text-2xl  text-slate-600 py-2">Balance Credits</h2>
-                            <p class="font-bold text-xl">0</p>
-                            <div class="py-5 mx-5 text-center">
-                                <x-button>Register Card</x-button>
-                            </div>
-                        </form>
+                        <h2 class="font-semibold text-2xl  text-slate-600 py-2">Balance Credits</h2>
+                        <p class="font-bold text-xl">{{ Auth::user()->card_amount }}</p>
+                        <div class="py-5 mx-5 text-center">
+                           
+                            <button
+                                class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
+                                wire:click="showModal({{ Auth::user()->id }})">Register Card</button>
+                        </div>
                     </div>
                     <div
                         class="grid place-content-center row-span-2 col-span-2 bg-purple-50 text-center rounded shadow-md">
                         <form action="">
                             <h2 class="font-semibold text-2xl  text-slate-600 py-2">Driver Wallet Balance</h2>
-                            <p class="font-bold text-xl">0</p>
+                            <p class="font-bold text-xl">{{ Auth::user()->wallet_amount }}</p>
                             <div class="py-5 mx-5 text-center">
                                 <x-button>Send</x-button>
                                 <x-button>Withdraw</x-button>
@@ -71,5 +72,28 @@
             </div>
         </div>
     </div>
+    {{-- Modal Start --}}
+    <div class="max-w-6xl mx-auto">
+        <x-dialog-modal wire:model="showingModal" action="">
+           <form wire:click="store" action="{{ route('update') }}" method="POST">
+            @method('PUT')
+            @csrf
+            <x-slot name="title">Link Card</x-slot>
+            <x-slot name="content">
+                <div>
+                    <x-label for="card_id" value="{{ __('Card ID Number') }}" />
+                    <x-input wire:model="card_id" id="card_id" class="block mt-1 w-full" type="text" name="card_id"
+                        required autofocus autocomplete="card_id"/>
+                </div>
+            </x-slot>
+            <x-slot name="footer">
+                <x-button wire:click="update"
+                class="mx-2">Link</x-button>
+                <x-button wire:click="closeModal">Close</x-button>
+            </x-slot>
+           </form>
+        </x-dialog-modal>
+    </div>
+    {{-- Modal End  --}}
 
 </div>

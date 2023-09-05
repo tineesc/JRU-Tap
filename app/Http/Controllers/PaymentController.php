@@ -101,6 +101,22 @@ class PaymentController extends Controller
         dd($response);
     }
 
+    public function update(User $user,Request $request)
+    {
+        $id = Auth::user()->id;
+
+        $user = User::findOrFail($id);
+
+        if($user)
+        {
+            $user->card_id=$request->card_id;
+            $user->save();
+        }
+
+        flash()->addSuccess('Card Link Success');
+        return back();
+    }
+
 
     // public function refund()
     // {
