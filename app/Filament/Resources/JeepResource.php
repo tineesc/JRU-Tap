@@ -21,7 +21,7 @@ class JeepResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-truck';
 
-    protected static ?int $navigatorSort = 1;
+    protected static ?int $navigationSort = 1;
 
     protected static ?string $navigationGroup = 'Travel';
 

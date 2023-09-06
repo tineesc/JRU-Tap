@@ -32,6 +32,10 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
+        'card_id',
+        'card_amount',
+        'wallet_id',
+        'wallet_amount',
     ];
 
     /**

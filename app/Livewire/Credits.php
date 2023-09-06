@@ -24,38 +24,35 @@ class Credits extends Component
         $this->showingModal = false;
     }
 
-    public function store()
-    {
-        $this->validate([
-            'card_id' => 'required|string|max:255',
-        ]);
+    // public function store()
+    // {
+    //     $this->validate([
+    //         'card_id' => 'required|string|max:255',
+    //     ]);
         
-        User::create([
-            'card_id'
-        ]);
+    //     User::create([
+    //         'card_id'
+    //     ]);
 
-        $this->reset('card_id');
-    }
+    //     $this->reset('card_id');
+    // }
 
-    public function update(User $user)
-    {
-        // $this->card_id = $user->card_id;
-        $id = Auth::user()->id;
-        $this->user = User::findorFail($id);
-        $this->user = $user;
+    // public function update(User $user)
+    // {
+    //     $id = Auth::user()->id;
+    //     $this->user = User::findorFail($id);
+    //     $this->user = $user;
+    //     $this->card_id = $user->card_id; 
     
-        // $this->validate([
-        //     'card_id' => 'required|string|max:255',
-        // ]);
+    //     $this->validate([
+    //         'card_id' => 'required|string|max:255',
+    //     ]);
 
-        $this->user->update(['card_id' => $this->card_id]);
+    //     $this->user->update(['card_id' => $this->card_id]);
 
-        $this->reset('card_id');
-      
-        
-        
-        
-    }
+    //     $this->reset('card_id');
+ 
+    // }
 
     public function render()
     {

@@ -25,7 +25,7 @@ class TripResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-currency-euro';
 
-    protected static ?int $navigatorSort = 2;
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $navigationGroup = 'Travel';
 

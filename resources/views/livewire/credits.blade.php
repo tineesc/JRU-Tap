@@ -50,10 +50,10 @@
                         <h2 class="font-semibold text-2xl  text-slate-600 py-2">Balance Credits</h2>
                         <p class="font-bold text-xl">{{ Auth::user()->card_amount }}</p>
                         <div class="py-5 mx-5 text-center">
-                           
+
                             <button
                                 class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
-                                wire:click="showModal({{ Auth::user()->id }})">Register Card</button>
+                                wire:click="showModal">Register Card</button>
                         </div>
                     </div>
                     <div
@@ -74,24 +74,26 @@
     </div>
     {{-- Modal Start --}}
     <div class="max-w-6xl mx-auto">
-        <x-dialog-modal wire:model="showingModal" action="">
-           <form wire:click="store" action="{{ route('update') }}" method="POST">
-            @method('PUT')
-            @csrf
+        <x-dialog-modal wire:model="showingModal">
+
             <x-slot name="title">Link Card</x-slot>
             <x-slot name="content">
-                <div>
-                    <x-label for="card_id" value="{{ __('Card ID Number') }}" />
-                    <x-input wire:model="card_id" id="card_id" class="block mt-1 w-full" type="text" name="card_id"
-                        required autofocus autocomplete="card_id"/>
+                <div class="text-center">
+                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Please Contact Administrator
+                        to Link your Card!</h3>
                 </div>
             </x-slot>
             <x-slot name="footer">
-                <x-button wire:click="update"
-                class="mx-2">Link</x-button>
+                {{-- <x-button 
+                class="mx-2">Link</x-button> --}}
                 <x-button wire:click="closeModal">Close</x-button>
             </x-slot>
-           </form>
+
         </x-dialog-modal>
     </div>
     {{-- Modal End  --}}
