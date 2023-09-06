@@ -56,17 +56,21 @@
                                 wire:click="showModal">Register Card</button>
                         </div>
                     </div>
-                    <div
-                        class="grid place-content-center row-span-2 col-span-2 bg-purple-50 text-center rounded shadow-md">
-                        <form action="">
-                            <h2 class="font-semibold text-2xl  text-slate-600 py-2">Driver Wallet Balance</h2>
-                            <p class="font-bold text-xl">{{ Auth::user()->wallet_amount }}</p>
-                            <div class="py-5 mx-5 text-center">
-                                <x-button>Send</x-button>
-                                <x-button>Withdraw</x-button>
-                            </div>
-                        </form>
-                    </div>
+
+                    @role(4)
+                        <div
+                            class="grid place-content-center row-span-2 col-span-2 bg-purple-50 text-center rounded shadow-md">
+                            <form action="">
+                                <h2 class="font-semibold text-2xl  text-slate-600 py-2">Driver Wallet Balance</h2>
+                                <p class="font-bold text-xl">{{ Auth::user()->wallet_amount }}</p>
+                                <div class="py-5 mx-5 text-center">
+                                    <x-button>Send</x-button>
+                                    <x-button>Withdraw</x-button>
+                                </div>
+                            </form>
+                        </div>
+                    @endrole
+
                 </div>
 
             </div>
