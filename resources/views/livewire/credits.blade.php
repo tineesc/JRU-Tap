@@ -18,7 +18,13 @@
                             <h2 class="font-semibold text-2xl">{{ Auth::user()->name }}</h2>
                         </div>
                         <div class="flex justify-between">
-                            <p class="text-3xl pt-6 font-bold">8765439871234567</p>
+                            <p class="text-3xl pt-6 font-bold">
+                                @if (Auth::user()->card_id)
+                                {{ Auth::user()->card_id }}
+                                @else
+                                    No Register Card ID
+                                @endif
+                            </p>
                             <p class="text-3xl pt-6">Logo</p>
                         </div>
                     </div>
@@ -49,7 +55,13 @@
                         class="grid place-content-center row-span-2 col-span-2 bg-purple-50 text-center rounded shadow-md">
                         <form action="">
                             <h2 class="font-semibold text-2xl  text-slate-600 py-2">Balance Credits</h2>
-                            <p class="font-bold text-xl">0</p>
+                            <p class="font-bold text-xl">
+                                @if (Auth::user()->card_amount)
+                                {{ Auth::user()->card_amount }}
+                                @else
+                                    No Balance to show
+                                @endif
+                            </p>
                             <div class="py-5 mx-5 text-center">
                                 <x-button>Register Card</x-button>
                             </div>
@@ -59,7 +71,13 @@
                         class="grid place-content-center row-span-2 col-span-2 bg-purple-50 text-center rounded shadow-md">
                         <form action="">
                             <h2 class="font-semibold text-2xl  text-slate-600 py-2">Driver Wallet Balance</h2>
-                            <p class="font-bold text-xl">0</p>
+                            <p class="font-bold text-xl">
+                                @if (Auth::user()->wallet_amount)
+                                {{ Auth::user()->wallet_amount }}
+                                @else
+                                    No Balance to show
+                                @endif
+                            </p>
                             <div class="py-5 mx-5 text-center">
                                 <x-button>Send</x-button>
                                 <x-button>Withdraw</x-button>
