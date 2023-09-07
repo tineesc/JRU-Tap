@@ -11,17 +11,18 @@ use Illuminate\Support\Facades\Session;
 
 class PaymentController extends Controller
 {
-    public function pay()
+    public function pay(Request $request)
     {   
+        $amount = $request->input('credits');
         $data = [
             'data' => [
                 'attributes' => [
                     'line_items' => [
                         [
                             'currency'      => 'PHP',
-                            'amount'        => 10000,
+                            'amount'        => $amount * 100,
                             'description'   => 'text',
-                            'name'          => 'Test Product',
+                            'name'          => 'Add Credits',
                             'quantity'      => 1,
                         ]
                     ],
@@ -38,7 +39,7 @@ class PaymentController extends Controller
         $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions')
             ->withHeader('Content-Type: application/json')
             ->withHeader('accept: application/json')
-            ->withHeader('Authorization: Basic ' . env('AUTH_PAY'))
+            ->withHeader('Authorization: Basic'. env('AUTH_PAY'))
             ->withData($data)
             ->asJson()
             ->post();
@@ -71,15 +72,16 @@ class PaymentController extends Controller
 
 
 
-    public function linkPay()
+    public function linkPay(Request $request)
     {
-        $data['data']['attributes']['amount'] = 150050;
-        $data['data']['attributes']['description'] = 'Test transaction.';
+        $amount = $request->input('credits');
+        $data['data']['attributes']['amount'] = $amount * 100;
+        $data['data']['attributes']['description'] = 'Add Credits.';
 
         $response = Curl::to('https://api.paymongo.com/v1/links')
             ->withHeader('Content-Type: application/json')
             ->withHeader('accept: application/json')
-            ->withHeader('Authorization: Basic ' . env('AUTH_PAY'))
+            ->withHeader('Authorization: Basic'. env('AUTH_PAY'))
             ->withData($data)
             ->asJson()
             ->post();
@@ -93,7 +95,7 @@ class PaymentController extends Controller
     {
         $response = Curl::to('https://api.paymongo.com/v1/links/' . $linkid)
             ->withHeader('accept: application/json')
-            ->withHeader('Authorization: Basic ' . env('AUTH_PAY'))
+            ->withHeader('Authorization: Basic'. env('AUTH_PAY'))
             ->asJson()
             ->get();
 

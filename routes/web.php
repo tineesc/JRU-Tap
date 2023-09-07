@@ -35,7 +35,6 @@ Route::middleware([
 Route::get('/credits', Credits::class)->name('credits');
 
 Route::controller(PaymentController::class)->group(function () {
-    Route::put('update','update')->name('update');
     Route::get('pay','pay')->name('pay');
     Route::get('success','success');
     Route::get('link-pay','linkPay')->name('linkPay');
