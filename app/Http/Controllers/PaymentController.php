@@ -101,20 +101,6 @@ class PaymentController extends Controller
         dd($response);
     }
 
-    public function update(User $user,Request $request, int $id)
-    {
-        $id = Auth::user()->id;
-
-        $user = User::findOrFail($id);
-
-            $user->card_id = $request->card_id;
-            $user->save();
-        
-
-        flash()->addSuccess('Card Link Success');
-        return view(route('credits'));
-    }
-
 
     // public function refund()
     // {
@@ -145,4 +131,3 @@ class PaymentController extends Controller
     //     dd($response);
     // }
 }
-v
