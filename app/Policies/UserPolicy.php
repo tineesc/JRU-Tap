@@ -29,6 +29,9 @@ class UserPolicy
     public function create(User $user)
     {
         return $user->hasRole(1);
+        // if($user->hasPermissionTo('Create Users')) {
+        //         return true;
+        //     }
     }
 
     /**

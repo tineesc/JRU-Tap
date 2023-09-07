@@ -34,6 +34,7 @@ class RolePolicy
     public function create(User $user)
     {
         return $user->hasRole(1);
+        
     }
 
     /**
