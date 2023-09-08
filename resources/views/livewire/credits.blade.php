@@ -82,6 +82,7 @@
                             </div>
                         </form>
                     </div>
+                    @role(4)
                     <div
                         class="grid place-content-center row-span-2 col-span-2 bg-purple-50 text-center rounded shadow-md">
                         <form action="">
@@ -99,6 +100,7 @@
                             </div>
                         </form>
                     </div>
+                    @endrole
                 </div>
 
             </div>
