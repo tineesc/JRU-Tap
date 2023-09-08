@@ -16,7 +16,7 @@
 
         <div class="flex flex-col-reverse md:flex-row">
 
-            <form class="sm:w-52 md:w-1/2 mx-auto" method="POST" action="{{ route('login') }}">
+            <form class="sm:w-52 md:w-1/2 mx-auto self-center" method="POST" action="{{ route('login') }}">
                 @csrf
         
                 <div>
