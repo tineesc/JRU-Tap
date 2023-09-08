@@ -169,6 +169,11 @@
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 
+                {{-- Credits --}}
+                <x-responsive-nav-link href="{{ route('credits') }}" :active="request()->routeIs('credits')">
+                    {{ __('Credits') }}
+                </x-responsive-nav-link>
+
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                     <x-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
                         {{ __('API Tokens') }}
