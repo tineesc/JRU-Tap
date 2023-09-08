@@ -14,13 +14,13 @@
                         <h2 class="font-semibol text-2xl">Virtual Card</h2>
                         <h2 class="font-semibol text-2xl font-semibold">Modern Jeepney (ACTONA)</h2>
                         <div class="pt-16 pb-10 flex justify-between">
-                            <img src="/image/chip.png" alt="" class="max-w-full h-10"/>
+                            <img src="/image/chip.png" alt="" class="max-w-full h-10" />
                             <h2 class="font-semibold text-2xl">{{ Auth::user()->name }}</h2>
                         </div>
                         <div class="flex justify-between">
                             <p class="text-3xl pt-6 font-bold">
                                 @if (Auth::user()->card_id)
-                                {{ Auth::user()->card_id }}
+                                    {{ Auth::user()->card_id }}
                                 @else
                                     No Register Card ID
                                 @endif
@@ -31,7 +31,7 @@
                 </div>
                 <div class="grid grid-rows-4 grid-flow-col gap-4 rounded shadow-md">
                     <div class="grid place-content-center row-span-4 col-span-4  bg-purple-50">
-                        <form action="{{ route('pay') }}">
+                        <form action="{{ route('process') }}">
                             <h2 class="font-semibold text-3xl text-center text-slate-600 py-5">Top up Credits</h2>
                             <div class="mx-5 py-2">
                                 <x-label for="credits" value="{{ __('Credits') }}" />
@@ -45,9 +45,24 @@
                                     :value="old('cardID')" required autofocus autocomplete="cardID"
                                     placeholder="Card ID Number" required />
                             </div>
+
+                            <div class="mx-5 py-2">
+
+                                <label for="payment"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an
+                                    option</label>
+                                <select id="payment" name="payment"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option selected>Choose a country</option>
+                                    <option value="pay">Card</option>
+                                    <option value="link">Link</option>
+                                </select>
+
+                            </div>
+
                             <div class="py-5 mx-5 text-center">
                                 <x-button>Pay Card</x-button>
-                                <x-button><a href="{{ route('linkPay') }}">Pay Link</a></x-button>
+                              
                             </div>
                         </form>
                     </div>
@@ -57,7 +72,7 @@
                             <h2 class="font-semibold text-2xl  text-slate-600 py-2">Balance Credits</h2>
                             <p class="font-bold text-xl">
                                 @if (Auth::user()->card_amount)
-                                {{ Auth::user()->card_amount }}
+                                    {{ Auth::user()->card_amount }}
                                 @else
                                     No Balance to show
                                 @endif
@@ -73,7 +88,7 @@
                             <h2 class="font-semibold text-2xl  text-slate-600 py-2">Driver Wallet Balance</h2>
                             <p class="font-bold text-xl">
                                 @if (Auth::user()->wallet_amount)
-                                {{ Auth::user()->wallet_amount }}
+                                    {{ Auth::user()->wallet_amount }}
                                 @else
                                     No Balance to show
                                 @endif

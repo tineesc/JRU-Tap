@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Trip;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -19,9 +20,9 @@ class Dashboard extends Component
 
     public function render()
     {
-        $items = User::orderBy('id','DESC')->get();
+        $items = Trip::orderBy('id','DESC')->get();
         return view('livewire.dashboard', [
-            'items' => User::where('name', 'like', '%'.$this->query.'%')->paginate(12),
+            'items' => Trip::where('name', 'like', '%'.$this->query.'%')->paginate(12),
         ],compact('items'));
     }
 }

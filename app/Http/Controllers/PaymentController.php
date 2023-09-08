@@ -11,8 +11,24 @@ use Illuminate\Support\Facades\Session;
 
 class PaymentController extends Controller
 {
+    public function process(Request $request)
+    {
+        $selectedRoute = $request->input('payment');
+
+        switch ($selectedRoute) {
+            case 'pay':
+                return $this->pay($request);
+            case 'link':
+                return $this->linkPay($request);
+                // Add more cases for other routes
+            default:
+                flash()->addError('Invalid Route');
+                return redirect()->back();
+        }
+    }
+
     public function pay(Request $request)
-    {   
+    {
         $amount = $request->input('credits');
         $data = [
             'data' => [
@@ -35,7 +51,7 @@ class PaymentController extends Controller
                 ],
             ]
         ];
-        
+
         $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions')
             ->withHeader('Content-Type: application/json')
             ->withHeader('accept: application/json')
@@ -45,18 +61,18 @@ class PaymentController extends Controller
             ->post();
 
         // dd($response);
-        Session::put('session_id',$response->data->id); 
+        Session::put('session_id', $response->data->id);
 
         return redirect()->to($response->data->attributes->checkout_url);
     }
 
     public function success(Request $request, User $user)
     {
-        $sessionId = Session::get('session_id');
+        // $sessionId = Session::get('session_id');
 
         // $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions/' . $sessionId)
         //     ->withHeader('accept: application/json')
-        //     ->withHeader('Authorization: Basic'. env('AUTH_PAY'))
+        //     ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
         //     ->asJson()
         //     ->get();
 
@@ -64,6 +80,8 @@ class PaymentController extends Controller
 
         // $user->card_amount->$request->credits;
         // $user->card_id->$request->cardID;
+        
+        $cardID = $request->input('cardID');
 
         flash()->addSuccess('Credits Successfully Paid');
 
@@ -114,7 +132,7 @@ class PaymentController extends Controller
     //     $response = Curl::to('https://api.paymongo.com/refunds')
     //         ->withHeader('Content-Type: application/json')
     //         ->withHeader('accept: application/json')
-    //         ->withHeader('Authorization: Basic'. env('AUTH_PAY'))
+    //         ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
     //         ->withData($data)
     //         ->asJson()
     //         ->post();
@@ -126,7 +144,7 @@ class PaymentController extends Controller
     // {
     //     $response = Curl::to('https://api.paymongo.com/refunds/' . $id)
     //         ->withHeader('accept: application/json')
-    //         ->withHeader('Authorization: Basic'. env('AUTH_PAY'))
+    //         ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
     //         ->asJson()
     //         ->get();
 
