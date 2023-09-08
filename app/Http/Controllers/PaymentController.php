@@ -55,7 +55,7 @@ class PaymentController extends Controller
         $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions')
             ->withHeader('Content-Type: application/json')
             ->withHeader('accept: application/json')
-            ->withHeader('Authorization: Basic'. env('AUTH_PAY'))
+            ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
             ->withData($data)
             ->asJson()
             ->post();
@@ -99,7 +99,7 @@ class PaymentController extends Controller
         $response = Curl::to('https://api.paymongo.com/v1/links')
             ->withHeader('Content-Type: application/json')
             ->withHeader('accept: application/json')
-            ->withHeader('Authorization: Basic'. env('AUTH_PAY'))
+            ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
             ->withData($data)
             ->asJson()
             ->post();
@@ -113,7 +113,7 @@ class PaymentController extends Controller
     {
         $response = Curl::to('https://api.paymongo.com/v1/links/' . $linkid)
             ->withHeader('accept: application/json')
-            ->withHeader('Authorization: Basic'. env('AUTH_PAY'))
+            ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
             ->asJson()
             ->get();
 

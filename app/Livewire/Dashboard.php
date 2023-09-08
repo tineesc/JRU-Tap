@@ -22,7 +22,7 @@ class Dashboard extends Component
     {
         $items = Trip::orderBy('id','DESC')->get();
         return view('livewire.dashboard', [
-            'items' => Trip::where('name', 'like', '%'.$this->query.'%')->paginate(12),
+            'items' => Trip::where('location', 'like', '%'.$this->query.'%')->paginate(12),
         ],compact('items'));
     }
 }
