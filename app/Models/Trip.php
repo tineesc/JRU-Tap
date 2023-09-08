@@ -17,6 +17,7 @@ class Trip extends Model
         'destination',
         'date',
         'time',
+        'fare',
         'jnumber',
         'status',
     ];
