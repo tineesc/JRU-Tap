@@ -14,9 +14,9 @@
             </div>
         @endif
 
-        <div class="flex">
+        <div class="flex flex-col-reverse md:flex-row">
 
-            <form class="self-center w-1/2" method="POST" action="{{ route('login') }}">
+            <form class="sm:w-52 md:w-1/2 mx-auto" method="POST" action="{{ route('login') }}">
                 @csrf
         
                 <div>
@@ -49,7 +49,7 @@
                 </div>
             </form>
         
-            <div class="block place-content-center w-96 mx-5 px-5 py-5">
+            <div class="sm:w-52 md:w-1/2 mx-auto mb-8 block place-content-center px-5 py-5">
                 <img class="image" src="{{ url('https://i.pinimg.com/736x/f1/17/e8/f117e815732266479c1ed21534d4ec26.jpg') }}" alt="Image" />
             </div>
             
