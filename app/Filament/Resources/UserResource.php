@@ -55,15 +55,15 @@ class UserResource extends Resource
                             ->searchable()
                             ->preload(),
                         TextInput::make('wallet_id')
-                            ->visibleOn(['edit', 'view']),
+                            ->visibleOn(['edit', 'view','create']),
                         TextInput::make('card_id')
-                            ->visibleOn(['edit', 'view']),
+                            ->visibleOn(['edit', 'view','create']),
                         TextInput::make('wallet_amount')
                             ->label('Wallet Balance')
-                            ->ReadOnly(),
+                            ->visibleOn(['edit', 'view','create']),
                         TextInput::make('card_amount')
                             ->label('Card Balance')
-                            ->ReadOnly(),
+                            ->visibleOn(['edit', 'view','create']),
                     ])->columns(2),
             ]);
     }
