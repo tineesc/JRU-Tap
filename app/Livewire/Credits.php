@@ -9,8 +9,10 @@ use Illuminate\Support\Facades\Auth;
 class Credits extends Component
 {
     public $showingModal = false;
-    public $card_id;
+    public $cardId;
+    public $credits;
     public $user;
+   
 
     // Open Modal
     public function showModal() 
@@ -22,6 +24,21 @@ class Credits extends Component
     public function closeModal()
     {
         $this->showingModal = false;
+    }
+
+    public function updatedNumber()
+    {
+        // Remove non-numeric characters from the input
+        $this->cardId = preg_replace("/[^0-9]/", "", $this->cardId);
+        $this->credits = preg_replace("/[^0-9]/", "", $this->credits);
+    }
+
+    public function rules()
+    {
+        return [
+            'cardId' => 'required|numeric',
+            'credits' => 'required|numeric',
+        ];
     }
 
     // public function store()

@@ -11,15 +11,18 @@
                         <h2 class="font-semibold text-3xl text-center text-slate-600 py-5 mx-auto">Top up Credits</h2>
                         <div class="mx-6 py-2">
                             <x-label for="credits" value="{{ __('Credits') }}" />
-                            <x-input id="credits" class="block mt-1 w-full md:w-92 mx-auto" type="text" name="credits"
-                                :value="old('credits')" required autofocus autocomplete="credits" placeholder="amount"
-                                required />
+                            <x-input wire:model="credits" id="credits" class="block mt-1 w-full md:w-92 mx-auto"
+                                type="text" name="credits" :value="old('credits')" required autofocus
+                                autocomplete="credits" placeholder="amount" required {{-- Numbers only Validation --}}
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
+
                         </div>
                         <div class="mx-6 py-2">
                             <x-label for="cardID" value="{{ __('Card ID Number') }}" />
-                            <x-input id="cardID" class="block mt-1 w-full md:w-92 mx-auto" type="text" name="cardID"
-                                :value="old('cardID')" required autofocus autocomplete="cardID" placeholder="Card ID Number"
-                                required />
+                            <x-input wire:model="cardId" id="cardID" class="block mt-1 w-full md:w-92 mx-auto"
+                                type="text" name="cardID" :value="old('cardID')" required autofocus autocomplete="cardID"
+                                placeholder="Card ID Number" required {{-- Numbers only Validation --}}
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
                         </div>
 
                         <div class="mx-6 py-2">
@@ -90,17 +93,35 @@
                     <h2 class="font-semibold text-2xl">{{ Auth::user()->name }}</h2>
                 </div>
                 <div class="flex justify-between">
-                    <p class="text-3xl pt-6 font-bold">
+                    <p class="text-3xl pt-6 font-bold" id="myText">
                         @if (Auth::user()->card_id)
                             {{ Auth::user()->card_id }}
                         @else
                             No Register Card ID
                         @endif
                     </p>
-                    <p class="text-3xl pt-6">Logo</p>
+                    <button id="copy-button" class="onclick:text-red-200 rounded-md text-white p-2 mt-2 z-10"
+                        onclick="copyContent()">Copy to Clipboard</button>
                 </div>
             </div>
-
         </div>
     </div>
-</div>
+    <script>
+        let text = document.getElementById('myText').innerHTML;
+        const copyContent = async () => {
+            try {
+                await navigator.clipboard.writeText(text);
+                console.log('Content copied to clipboard');
+
+                // Change the button text to indicate success
+                document.getElementById('copy-button').textContent = 'Copied!';
+
+                // Revert the button text to its original state after 3 seconds
+                setTimeout(() => {
+                    document.getElementById('copy-button').textContent = 'Copy to Clipboard';
+                }, 3000); // 3000 milliseconds = 3 seconds
+            } catch (err) {
+                console.error('Failed to copy: ', err);
+            }
+        }
+    </script>
