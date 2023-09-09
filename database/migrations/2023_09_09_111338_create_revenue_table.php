@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('revenue', function (Blueprint $table) {
+        Schema::create('revenues', function (Blueprint $table) {
             $table->id();
             $table->string('wallet_id')->nullable();
             $table->string('wallet_amount')->nullable();
             $table->integer('fare');
             $table->string('jnumber');
-            $table->string('payment_method');
+            $table->string('payment_method')->nullable();
             $table->string('status');
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('revenue');
+        Schema::dropIfExists('revenues');
     }
 };
