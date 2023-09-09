@@ -27,19 +27,31 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        // flash()->addInfo('Welcome Back', Auth::user()->name);
         return view('dashboard');
     })->name('dashboard');
 });
 
-Route::get('/credits', Credits::class)->name('credits');
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/credits', Credits::class)->name('credits');
+});
 
-Route::controller(PaymentController::class)->group(function () {
-    Route::get('process','process')->name('process');
-    Route::get('pay','pay')->name('pay');
-    Route::get('success','success');
-    Route::get('link-pay','linkPay')->name('linkPay');
-    Route::get('link-status/{linkid}','linkStatus');
-    Route::get('refund','refund');
-    Route::get('refund-status/{id}','refundStatus');
- });
+Route::controller(PaymentController::class)
+    ->middleware([
+        'auth:sanctum',
+        config('jetstream.auth_session'),
+        'verified',
+    ])->group(function () {
+        Route::get('process', 'process')->name('process');
+        Route::get('pay', 'pay')->name('pay');
+        Route::get('success', 'success');
+        Route::get('link-pay', 'linkPay')->name('linkPay');
+        Route::get('link-status/{linkid}', 'linkStatus');
+        Route::get('refund', 'refund');
+        Route::get('refund-status/{id}', 'refundStatus');
+    });
+
+    
