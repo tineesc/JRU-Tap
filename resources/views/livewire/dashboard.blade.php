@@ -1,6 +1,11 @@
+<style>
+    .image{
+        background-image: url('https://scontent.fmnl17-4.fna.fbcdn.net/v/t39.30808-6/333301757_5309027922533223_2056172026227239585_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=8bfeb9&_nc_eui2=AeGXrbmiZs729RKtF70JIW0zqLDwnf8V-zmosPCd_xX7OQ6Nglq9qsHozfeydOVqKV8BbucROe1C03BuhoXdvcMh&_nc_ohc=iiyc_y8isowAX8_KGgf&_nc_ht=scontent.fmnl17-4.fna&oh=00_AfAgE2SXMjc9cuH0JX1jhw1NRFTzU2YKqVCAt7RtL7E7UA&oe=64F1FA9E');
+    }
+</style>
 <div class="py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <!-- Added responsive padding -->
-        <div class="bg-gray-200 dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
+        <div class="image dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
             <div>
                 <div class="max-w-6xl mx-auto mt-4">
                     <div class="py-2">
@@ -27,7 +32,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         @foreach ($items as $item)
                             <div class="py-2 text-center">
-                                <div class="p-4 bg-white shadow-lg rounded-md">
+                                <div class="p-4 bg-slate-50 bg-opacity-75 shadow-lg rounded-md">
                                     <p class="text-md font-semibold text-red-500">Date {{ $item->date }}</p>
                                     <p class="text-md font-semibold text-red-400">Time {{ $item->time }}</p>
                                     <h2 class="text-lg font-normal text-slate-500 mb-2 "> {{ $item->location }}</h2>
@@ -39,7 +44,7 @@
                                         </svg>
                                     </p>
                                     <h2 class="text-xl font-medium text-slate-700 mb-2"> {{ $item->destination }}</h2>
-                                    <p class="text-md font-medium text-slate-700">Plate Number {{ $item->jnumber }}</p>
+                                    <p class="text-md font-semibold text-slate-700">Plate Number {{ $item->jnumber }}</p>
                                     <p class="text-md font-semibold text-red-500">Price {{ $item->fare }}</p>
                                 </div>
                             </div>
