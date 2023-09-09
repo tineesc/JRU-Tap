@@ -1,15 +1,11 @@
-<style>
-    .image{
-        background-image: url('https://scontent.fmnl17-4.fna.fbcdn.net/v/t39.30808-6/333301757_5309027922533223_2056172026227239585_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=8bfeb9&_nc_eui2=AeGXrbmiZs729RKtF70JIW0zqLDwnf8V-zmosPCd_xX7OQ6Nglq9qsHozfeydOVqKV8BbucROe1C03BuhoXdvcMh&_nc_ohc=iiyc_y8isowAX8_KGgf&_nc_ht=scontent.fmnl17-4.fna&oh=00_AfAgE2SXMjc9cuH0JX1jhw1NRFTzU2YKqVCAt7RtL7E7UA&oe=64F1FA9E');
-    }
-</style>
+
 <div class="py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <!-- Added responsive padding -->
         <div class="image dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
             <div>
                 <div class="max-w-6xl mx-auto mt-4">
                     <div class="py-2">
-                        <form wire:submit="search" class="mb-4 sm:w-1/2 lg:w-1/3"> <!-- Responsive form width -->
+                        <form wire:submit="search" class="mb-4 sm:w-1/2 lg:w-1/3 z-10"> <!-- Responsive form width -->
                             <label for="default-search"
                                 class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                             <div class="relative">
@@ -50,7 +46,7 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="py-2">
+                    <div class="py-2 z-10">
                         {{ $items->links() }}
                     </div>
                 </div>
