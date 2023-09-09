@@ -28,7 +28,8 @@
                         @foreach ($items as $item)
                             <div class="py-2 text-center">
                                 <div class="p-4 bg-white shadow-lg rounded-md">
-                                    <p class="text-md font-semibold text-red-500">ID {{ $item->id }}</p>
+                                    <p class="text-md font-semibold text-red-500">Date {{ $item->date }}</p>
+                                    <p class="text-md font-semibold text-red-400">Time {{ $item->time }}</p>
                                     <h2 class="text-lg font-normal text-slate-500 mb-2 "> {{ $item->location }}</h2>
                                     <p class="grid justify-items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -38,7 +39,7 @@
                                         </svg>
                                     </p>
                                     <h2 class="text-xl font-medium text-slate-700 mb-2"> {{ $item->destination }}</h2>
-                                    <p class="text-md font-semibold text-red-500">Plate Number {{ $item->jnumber }}</p>
+                                    <p class="text-md font-medium text-slate-700">Plate Number {{ $item->jnumber }}</p>
                                     <p class="text-md font-semibold text-red-500">Price {{ $item->fare }}</p>
                                 </div>
                             </div>
