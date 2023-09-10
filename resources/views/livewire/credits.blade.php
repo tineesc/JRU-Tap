@@ -8,6 +8,7 @@
                 <div class="bg-purple-50">
                     <!-- Content -->
                     <form action="{{ route('pay') }}">
+                        @csrf
                         <h2 class="font-semibold text-3xl text-center text-slate-600 py-5 mx-auto">Top up Credits</h2>
                         <div class="mx-6 py-2">
                             <x-label for="credits" value="{{ __('Credits') }}" />
@@ -26,7 +27,7 @@
                         </div>
 
                         <div class="py-5 mx-5 text-center">
-                            <x-button>Pay Card</x-button>
+                            <x-button class="uppercase">add credits</x-button>
                         </div>
                     </form>
                 </div>
@@ -35,7 +36,7 @@
                 <div class="grid place-content-center bg-purple-50 text-center">
                     <form action="">
                         <!-- Content -->
-                        <h2 class="font-semibold text-2xl  text-slate-600 py-2">Balance Credits</h2>
+                        <h2 class="font-semibold text-2xl  text-slate-600 py-2">Card Balance Credits</h2>
                         <p class="font-bold text-xl">
                             @if (Auth::user()->card_amount)
                                 {{ Auth::user()->card_amount }}a

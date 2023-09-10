@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Revenue;
 use Illuminate\Http\Request;
 use Ixudra\Curl\Facades\Curl;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Revenue;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -30,7 +31,6 @@ class PaymentController extends Controller
 
     public function pay(Request $request)
     {
-        $cardID = $request->input('cardID');
         $amount = $request->input('credits');
         $data = [
             'data' => [
@@ -45,7 +45,7 @@ class PaymentController extends Controller
                         ]
                     ],
                     'payment_method_types' => [
-                        'card','gcash',
+                        'card', 'gcash',
                     ],
                     'success_url' => 'http://127.0.0.1:8000/success',
                     'cancel_url' => 'http://127.0.0.1:8000/cancel',
@@ -80,10 +80,7 @@ class PaymentController extends Controller
 
         // dd($response);
 
-        // $user->card_amount->$request->credits;
-        // $user->card_id->$request->cardID;
-    
-        flash()->addSuccess('Credits Successfully Paid');
+        flash()->addSuccess('Credits Transaction Successfull');
 
         return view('dashboard');
     }
@@ -95,6 +92,8 @@ class PaymentController extends Controller
 
         return view('dashboard');
     }
+
+
 
 
     // public function linkPay(Request $request)

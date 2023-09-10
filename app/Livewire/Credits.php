@@ -2,8 +2,10 @@
 
 namespace App\Livewire;
 
+use Closure;
 use App\Models\User;
 use Livewire\Component;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class Credits extends Component
@@ -12,10 +14,10 @@ class Credits extends Component
     public $cardId;
     public $credits;
     public $user;
-   
+
 
     // Open Modal
-    public function showModal() 
+    public function showModal()
     {
         $this->showingModal = true;
     }
@@ -41,12 +43,13 @@ class Credits extends Component
         ];
     }
 
+
     // public function store()
     // {
     //     $this->validate([
     //         'card_id' => 'required|string|max:255',
     //     ]);
-        
+
     //     User::create([
     //         'card_id'
     //     ]);
@@ -60,7 +63,7 @@ class Credits extends Component
     //     $this->user = User::findorFail($id);
     //     $this->user = $user;
     //     $this->card_id = $user->card_id; 
-    
+
     //     $this->validate([
     //         'card_id' => 'required|string|max:255',
     //     ]);
@@ -68,7 +71,7 @@ class Credits extends Component
     //     $this->user->update(['card_id' => $this->card_id]);
 
     //     $this->reset('card_id');
- 
+
     // }
 
     public function render()
