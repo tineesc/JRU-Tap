@@ -12,21 +12,21 @@ use Illuminate\Support\Facades\Session;
 
 class PaymentController extends Controller
 {
-    public function process(Request $request)
-    {
-        $selectedRoute = $request->input('payment');
+    // public function process(Request $request)
+    // {
+    //     $selectedRoute = $request->input('payment');
 
-        switch ($selectedRoute) {
-            case 'pay':
-                return $this->pay($request);
-            case 'link':
-                return $this->linkPay($request);
-                // Add more cases for other routes
-            default:
-                flash()->addError('Invalid Route');
-                return redirect()->back();
-        }
-    }
+    //     switch ($selectedRoute) {
+    //         case 'pay':
+    //             return $this->pay($request);
+    //         case 'link':
+    //             return $this->linkPay($request);
+    //             // Add more cases for other routes
+    //         default:
+    //             flash()->addError('Invalid Route');
+    //             return redirect()->back();
+    //     }
+    // }
 
     public function pay(Request $request)
     {
@@ -68,7 +68,7 @@ class PaymentController extends Controller
         return redirect()->to($response->data->attributes->checkout_url);
     }
 
-    public function success(Request $request, Revenue $revenue)
+    public function success()
     {
         // $sessionId = Session::get('session_id');
 
@@ -89,37 +89,44 @@ class PaymentController extends Controller
     }
 
 
-
-    public function linkPay(Request $request)
+    public function cancel()
     {
-        $amount = $request->input('credits');
-        $data['data']['attributes']['amount'] = $amount * 100;
-        $data['data']['attributes']['description'] = 'Add Credits.';
+        flash()->addError('Unsuccessfull Credits Transaction');
 
-        $response = Curl::to('https://api.paymongo.com/v1/links')
-            ->withHeader('Content-Type: application/json')
-            ->withHeader('accept: application/json')
-            ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
-            ->withData($data)
-            ->asJson()
-            ->post();
-
-        // dd($response);
-
-        return redirect()->to($response->data->attributes->checkout_url);
+        return view('dashboard');
     }
 
-    public function linkStatus($linkid)
-    {
-        $response = Curl::to('https://api.paymongo.com/v1/links/' . $linkid)
-            ->withHeader('accept: application/json')
-            ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
-            ->asJson()
-            ->get();
 
-        // dd($response);
-        dd($response);
-    }
+    // public function linkPay(Request $request)
+    // {
+    //     $amount = $request->input('credits');
+    //     $data['data']['attributes']['amount'] = $amount * 100;
+    //     $data['data']['attributes']['description'] = 'Add Credits.';
+
+    //     $response = Curl::to('https://api.paymongo.com/v1/links')
+    //         ->withHeader('Content-Type: application/json')
+    //         ->withHeader('accept: application/json')
+    //         ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
+    //         ->withData($data)
+    //         ->asJson()
+    //         ->post();
+
+    //     // dd($response);
+
+    //     return redirect()->to($response->data->attributes->checkout_url);
+    // }
+
+    // public function linkStatus($linkid)
+    // {
+    //     $response = Curl::to('https://api.paymongo.com/v1/links/' . $linkid)
+    //         ->withHeader('accept: application/json')
+    //         ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
+    //         ->asJson()
+    //         ->get();
+
+    //     // dd($response);
+    //     dd($response);
+    // }
 
 
     // public function refund()
