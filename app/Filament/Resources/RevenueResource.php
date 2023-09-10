@@ -26,9 +26,9 @@ class RevenueResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('wallet_id')
-                ->required(),
-                TextInput::make('wallet_amount'),
+                TextInput::make('email'),
+                TextInput::make('card_id'),
+                TextInput::make('card_amount'),
                 TextInput::make('fare'),
                 TextInput::make('jnumber'),
                 Select::make('status')->options([
@@ -43,9 +43,9 @@ class RevenueResource extends Resource
     {
         return $table
             ->columns([
-               TextColumn::make('wallet_id'),
-               TextColumn::make('wallet_amount'),
-               TextColumn::make('fare'),
+                TextColumn::make('card_id'),
+                TextColumn::make('card_amount'),
+                TextColumn::make('fare'),
             ])
             ->filters([
                 //
@@ -64,14 +64,14 @@ class RevenueResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -79,5 +79,5 @@ class RevenueResource extends Resource
             'create' => Pages\CreateRevenue::route('/create'),
             'edit' => Pages\EditRevenue::route('/{record}/edit'),
         ];
-    }    
+    }
 }

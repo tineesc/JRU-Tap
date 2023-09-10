@@ -46,8 +46,9 @@ class TripResource extends Resource
                     ->options(Jeep::all()->pluck('jnumber','id'))
                     ->required(),
                 Select::make('status')->options([
-                    'Available' => 'Available',
-                    'Not Available' => 'Not Available',
+                    'approve' => 'approve',
+                    'pending' => 'pending',
+                    'decline' => 'decline',
                 ])->required(),
             ]);
     }

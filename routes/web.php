@@ -40,18 +40,16 @@ Route::middleware([
 });
 
 Route::controller(PaymentController::class)
-    ->middleware([
-        'auth:sanctum',
-        config('jetstream.auth_session'),
-        'verified',
-    ])->group(function () {
-        Route::get('process', 'process')->name('process');
-        Route::get('pay', 'pay')->name('pay');
-        Route::get('success', 'success');
-        Route::get('link-pay', 'linkPay')->name('linkPay');
-        Route::get('link-status/{linkid}', 'linkStatus');
-        Route::get('refund', 'refund');
-        Route::get('refund-status/{id}', 'refundStatus');
-    });
-
-    
+->middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('process','process')->name('process');
+    Route::get('pay','pay')->name('pay');
+    Route::get('success','success');
+    Route::get('link-pay','linkPay')->name('linkPay');
+    Route::get('link-status/{linkid}','linkStatus');
+    Route::get('refund','refund');
+    Route::get('refund-status/{id}','refundStatus');
+ });

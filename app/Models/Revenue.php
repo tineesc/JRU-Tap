@@ -10,8 +10,8 @@ class Revenue extends Model
     use HasFactory;
 
     protected $fillable = [
-        'wallet_id',
-        'wallet_amount',
+        'card_id',
+        'card_amount',
         'fare',
         'jnumber',
         'payment_method',

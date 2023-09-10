@@ -19,7 +19,7 @@
                         </div>
                         <div class="mx-6 py-2">
                             <x-label for="cardID" value="{{ __('Card ID Number') }}" />
-                            <x-input wire:model="cardId" id="cardID" class="block mt-1 w-full md:w-92 mx-auto"
+                            <x-input wire:model="cardID" id="cardID" class="block mt-1 w-full md:w-92 mx-auto"
                                 type="text" name="cardID" :value="old('cardID')" required autofocus autocomplete="cardID"
                                 placeholder="Card ID Number" required {{-- Numbers only Validation --}}
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
@@ -50,7 +50,7 @@
                         <h2 class="font-semibold text-2xl  text-slate-600 py-2">Balance Credits</h2>
                         <p class="font-bold text-xl">
                             @if (Auth::user()->card_amount)
-                                {{ Auth::user()->card_amount }}
+                                {{ Auth::user()->card_amount }}a
                             @else
                                 No Balance to show
                             @endif
@@ -64,7 +64,7 @@
                 <!-- Driver Wallet Balance (Only for Role 4) -->
                 @role(4)
                     <div class="grid place-content-center bg-purple-50 text-center">
-                        <form action="">
+                        <form>
                             <!-- Content -->
                             <h2 class="font-semibold text-2xl  text-slate-600 py-2">Driver Wallet Balance</h2>
                             <p class="font-bold text-xl">

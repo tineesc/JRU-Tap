@@ -24,7 +24,7 @@ class TripFactory extends Factory
             'time' => $this->faker->time('H:i'),
             'fare' => $this->faker->numberBetween(100,999),
             'jnumber' => $this->faker->numerify('###'), 
-            'status' => $this->faker->randomElement(['Available','Not Available']),
+            'status' => $this->faker->randomElement(['approve','pending','decline']),
         ];
     }
 }

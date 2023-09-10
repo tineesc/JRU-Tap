@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Ixudra\Curl\Facades\Curl;
 use App\Http\Controllers\Controller;
+use App\Models\Revenue;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -29,6 +30,7 @@ class PaymentController extends Controller
 
     public function pay(Request $request)
     {
+        $cardID = $request->input('cardID');
         $amount = $request->input('credits');
         $data = [
             'data' => [
@@ -45,7 +47,7 @@ class PaymentController extends Controller
                     'payment_method_types' => [
                         'card',
                     ],
-                    'success_url' => 'http://127.0.0.1:8000/success',
+                    'success_url' => route('success/', $cardID ),
                     'cancel_url' => 'http://127.0.0.1:8000/cancel',
                     'description' => 'text'
                 ],
@@ -66,7 +68,7 @@ class PaymentController extends Controller
         return redirect()->to($response->data->attributes->checkout_url);
     }
 
-    public function success(Request $request, User $user)
+    public function success(Request $request, Revenue $revenue)
     {
         // $sessionId = Session::get('session_id');
 
@@ -80,12 +82,10 @@ class PaymentController extends Controller
 
         // $user->card_amount->$request->credits;
         // $user->card_id->$request->cardID;
-        
-        $cardID = $request->input('cardID');
-
+    
         flash()->addSuccess('Credits Successfully Paid');
 
-        return view('dashboard');
+        return redirect()->route('update');
     }
 
 

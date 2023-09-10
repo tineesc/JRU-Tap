@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('fare');
             $table->string('jnumber');
             $table->string('driver')->nullable();
-            $table->enum('status', ['Available', 'Not Available']);
+            $table->enum('status', ['approve', 'pending', 'decline']);
             $table->timestamps();
         });
     }

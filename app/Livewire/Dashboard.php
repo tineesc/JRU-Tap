@@ -9,6 +9,8 @@ use Livewire\WithPagination;
 
 class Dashboard extends Component
 {
+    public $status;
+
     use WithPagination;
 
     public $query = '';
@@ -17,6 +19,8 @@ class Dashboard extends Component
     {
         $this->resetPage();
     }
+
+   
 
     public function render()
     {
