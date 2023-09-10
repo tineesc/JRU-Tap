@@ -45,9 +45,9 @@ class PaymentController extends Controller
                         ]
                     ],
                     'payment_method_types' => [
-                        'card',
+                        'card','gcash',
                     ],
-                    'success_url' => route('success/', $cardID ),
+                    'success_url' => 'http://127.0.0.1:8000/success',
                     'cancel_url' => 'http://127.0.0.1:8000/cancel',
                     'description' => 'text'
                 ],
@@ -57,7 +57,7 @@ class PaymentController extends Controller
         $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions')
             ->withHeader('Content-Type: application/json')
             ->withHeader('accept: application/json')
-            ->withHeader('Authorization: Basic c2tfdGVzdF9xeEdvR3g0dXZycG1yaXJ0VkVpY2lmNGg6')
+            ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
             ->withData($data)
             ->asJson()
             ->post();
@@ -74,7 +74,7 @@ class PaymentController extends Controller
 
         // $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions/' . $sessionId)
         //     ->withHeader('accept: application/json')
-        //     ->withHeader('Authorization: Basic c2tfdGVzdF9xeEdvR3g0dXZycG1yaXJ0VkVpY2lmNGg6')
+        //     ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
         //     ->asJson()
         //     ->get();
 
@@ -85,7 +85,7 @@ class PaymentController extends Controller
     
         flash()->addSuccess('Credits Successfully Paid');
 
-        return redirect()->route('update');
+        return view('dashboard');
     }
 
 
@@ -99,7 +99,7 @@ class PaymentController extends Controller
         $response = Curl::to('https://api.paymongo.com/v1/links')
             ->withHeader('Content-Type: application/json')
             ->withHeader('accept: application/json')
-            ->withHeader('Authorization: Basic c2tfdGVzdF9xeEdvR3g0dXZycG1yaXJ0VkVpY2lmNGg6')
+            ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
             ->withData($data)
             ->asJson()
             ->post();
@@ -113,7 +113,7 @@ class PaymentController extends Controller
     {
         $response = Curl::to('https://api.paymongo.com/v1/links/' . $linkid)
             ->withHeader('accept: application/json')
-            ->withHeader('Authorization: Basic c2tfdGVzdF9xeEdvR3g0dXZycG1yaXJ0VkVpY2lmNGg6')
+            ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
             ->asJson()
             ->get();
 
@@ -132,7 +132,7 @@ class PaymentController extends Controller
     //     $response = Curl::to('https://api.paymongo.com/refunds')
     //         ->withHeader('Content-Type: application/json')
     //         ->withHeader('accept: application/json')
-    //         ->withHeader('Authorization: Basic c2tfdGVzdF9xeEdvR3g0dXZycG1yaXJ0VkVpY2lmNGg6')
+    //         ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
     //         ->withData($data)
     //         ->asJson()
     //         ->post();
@@ -144,7 +144,7 @@ class PaymentController extends Controller
     // {
     //     $response = Curl::to('https://api.paymongo.com/refunds/' . $id)
     //         ->withHeader('accept: application/json')
-    //         ->withHeader('Authorization: Basic c2tfdGVzdF9xeEdvR3g0dXZycG1yaXJ0VkVpY2lmNGg6')
+    //         ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
     //         ->asJson()
     //         ->get();
 
