@@ -36,6 +36,7 @@ class User extends Authenticatable implements  MustVerifyEmail,FilamentUser
         'card_amount',
         'wallet_id',
         'wallet_amount',
+        'recaptcha_token',
     ];
 
     /**

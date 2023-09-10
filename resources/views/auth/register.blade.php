@@ -8,14 +8,14 @@
 
         <div class="flex flex-col-reverse md:flex-row">
             <!-- Registration Form -->
-            <form class="sm:w-52 md:w-1/2 mx-auto" method="POST" action="{{ route('register') }}">
+            <form class="sm:w-52 md:w-1/2 mx-auto" method="POST" action="{{ route('register') }}" id="registerForm">
                 @csrf
-                
+                <input type="hidden" class="g-recaptcha" name="recaptcha_token" id="recaptcha_token">
                 {{-- Name --}}
                 <div class="mb-4">
                     <x-label for="name" value="{{ __('Name') }}" />
-                    <x-input id="name" class="block w-full" type="text" name="name" :value="old('name')" required
-                        autofocus autocomplete="name" />
+                    <x-input id="name" class="block w-full" type="text" name="name" :value="old('name')"
+                        required autofocus autocomplete="name" />
                 </div>
 
                 {{-- Email --}}
@@ -75,7 +75,8 @@
                         {{ __('Already registered?') }}
                     </a>
 
-                    <x-button class="ml-4">
+                    <x-button class="g-recaptcha ml-4" data-sitekey="{{ config('services.recaptcha.site_key') }}"
+                        data-callback='onSubmit' data-action='register'>
                         {{ __('Register') }}
                     </x-button>
                 </div>
@@ -87,5 +88,11 @@
                     alt="Image" />
             </div>
         </div>
+
     </x-authentication-card>
+    <script>
+        function onSubmit(token) {
+          document.getElementById("registerFOrm").submit();
+        }
+      </script>
 </x-guest-layout>
