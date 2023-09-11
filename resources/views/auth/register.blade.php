@@ -75,7 +75,8 @@
                         {{ __('Already registered?') }}
                     </a>
 
-                    <x-button class="ml-4">
+                    <x-button class="g-recaptcha ml-4" data-sitekey="{{ config('services.recaptcha.site_key') }}"
+                        data-callback='onSubmit' data-action='register'>
                         {{ __('Register') }}
                     </x-button>
                 </div>
@@ -88,21 +89,10 @@
             </div>
         </div>
 
-        @push('scripts')
-        <script>
-            grecaptcha.ready(function () {
-                document.getElementById('registerForm').addEventListener("submit", function (event) {
-                    event.preventDefault();
-                    grecaptcha.execute('{{ config('services.recaptcha.site_key') }}', { action: 'register' })
-                        .then(function (token) {
-                            document.getElementById("recaptcha_token").value = token;
-                            document.getElementById('registerForm').submit();
-                        });
-                });
-            });
-        </script>
-    @endpush
-
     </x-authentication-card>
-  
+    <script>
+        function onSubmit(token) {
+          document.getElementById("registerFOrm").submit();
+        }
+      </script>
 </x-guest-layout>
