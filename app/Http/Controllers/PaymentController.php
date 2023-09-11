@@ -32,6 +32,7 @@ class PaymentController extends Controller
     public function pay(Request $request)
     {
         $amount = $request->input('credits');
+        $cardid = $request->input('cardid');
         $data = [
             'data' => [
                 'attributes' => [
@@ -45,9 +46,9 @@ class PaymentController extends Controller
                         ]
                     ],
                     'payment_method_types' => [
-                        'card', 'gcash',
+                        'card', 'gcash'
                     ],
-                    'success_url' => 'http://127.0.0.1:8000/success',
+                    'success_url' => route('payment.success', ['cardid' => $cardid, 'credits' => $amount]),
                     'cancel_url' => 'http://127.0.0.1:8000/cancel',
                     'description' => 'text'
                 ],
@@ -68,7 +69,7 @@ class PaymentController extends Controller
         return redirect()->to($response->data->attributes->checkout_url);
     }
 
-    public function success()
+    public function success(Request $request, $cardid)
     {
         // $sessionId = Session::get('session_id');
 
@@ -80,11 +81,29 @@ class PaymentController extends Controller
 
         // dd($response);
 
-        flash()->addSuccess('Credits Transaction Successfull');
 
-        return view('dashboard');
+        $creditsToAdd = $request->input('credits'); // Credits from the request
+
+        // Retrieve the current card_amount from the database
+        $user = User::where('card_id', $cardid)->first();
+
+        if ($user) {
+            // Calculate the new card_amount by adding the existing value to the creditsToAdd
+            $newCardAmount = $user->card_amount + $creditsToAdd;
+
+            // Update the User record with the new card_amount
+            $user->update([
+                'card_amount' => $newCardAmount,
+            ]);
+
+            flash()->addSuccess('Successful Credits Transaction');
+        } else {
+            flash()->addError('User not found'); // Handle the case where the user is not found
+        }
+
+        // Redirect or return a success response
+        return redirect()->route('dashboard');
     }
-
 
     public function cancel()
     {

@@ -37,7 +37,6 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/credits', Credits::class)->name('credits');
-    Route::post('process-payment', Credits::class)->middleware('checkSuccessUrl');
 });
 
 Route::controller(PaymentController::class)
@@ -48,7 +47,7 @@ Route::controller(PaymentController::class)
 ])->group(function () {
     Route::get('pay','pay')->name('pay');
     Route::get('cancel','cancel');
-    Route::get( 'success','success')->name('success');
+    Route::get( '/success/{cardid}','success')->name('payment.success');
     // Route::get('process','process')->name('process');
     // Route::get('link-pay','linkPay')->name('linkPay');
     // Route::get('link-status/{linkid}','linkStatus');

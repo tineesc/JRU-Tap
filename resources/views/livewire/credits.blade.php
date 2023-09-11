@@ -13,15 +13,15 @@
                         <div class="mx-6 py-2">
                             <x-label for="credits" value="{{ __('Credits') }}" />
                             <x-input wire:model="credits" id="credits" class="block mt-1 w-full md:w-92 mx-auto"
-                                type="text" name="credits" :value="old('credits')" required autofocus
+                                type="text" name="credits"  required autofocus
                                 autocomplete="credits" placeholder="amount" required {{-- Numbers only Validation --}}
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
 
                         </div>
                         <div class="mx-6 py-2">
-                            <x-label for="cardID" value="{{ __('Card ID Number') }}" />
-                            <x-input wire:model="cardID" id="cardID" class="block mt-1 w-full md:w-92 mx-auto"
-                                type="text" name="cardID" :value="old('cardID')" required autofocus autocomplete="cardID"
+                            <x-label for="cardid" value="{{ __('Card ID Number') }}" />
+                            <x-input wire:model="cardid" id="cardid" class="block mt-1 w-full md:w-92 mx-auto"
+                                type="text" name="cardid" required autofocus autocomplete="cardid"
                                 placeholder="Card ID Number" required {{-- Numbers only Validation --}}
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
                         </div>
@@ -39,7 +39,7 @@
                         <h2 class="font-semibold text-2xl  text-slate-600 py-2">Card Balance Credits</h2>
                         <p class="font-bold text-xl">
                             @if (Auth::user()->card_amount)
-                                {{ Auth::user()->card_amount }}a
+                                {{ Auth::user()->card_amount }}
                             @else
                                 No Balance to show
                             @endif
