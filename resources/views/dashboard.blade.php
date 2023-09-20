@@ -7,7 +7,7 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('List of all Travel Trips') }}
-            <p class="text-slate-500 text-sm py-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam enim quod necessitatibus optio maxime quisquam sint reprehenderit incidunt deleniti ex!</p>
+            <p class="text-slate-500 text-sm py-2">Point to Point</p>
         </h2>
     </x-slot>
 
