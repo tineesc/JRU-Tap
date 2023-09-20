@@ -132,7 +132,7 @@
                     <div
                         class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
                         <i
-                            class="fa fa-street-view text-[1.8rem] text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300"></i>
+                            class="fa fa-desktop text-[1.8rem] text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300"></i>
                     </div>
                     <h3 class="mb-2 text-xl font-bold dark:text-white">
                         Trip Monitoring
@@ -144,7 +144,7 @@
                 <div data-aos="fade-up" data-aos-duration="2000">
                     <div
                         class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
-                        <i class="fa fa-tasks text-[1.5rem] text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300"></i>
+                        <i class="fa fa-credit-card text-[1.5rem] text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300"></i>
                     </div>
                     <h3 class="mb-2 text-xl font-bold dark:text-white">
                         E-Load 
@@ -157,7 +157,7 @@
                     <div
                         class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
                         <i
-                            class="fa fa-commenting text-[1.5rem] text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300"></i>
+                            class="fa fa-credit-card-alt text-[1.5rem] text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300"></i>
                     </div>
                     <h3 class="mb-2 text-xl font-bold dark:text-white">
                         Tap to pay or Contactless Payment
@@ -337,7 +337,7 @@
                         </button>
                         <div x-show="openFaq3" class="faq-content pl-[62px]">
                             <p class="py-3 text-base leading-relaxed text-body-color">
-                                ----
+                                You can see your load balance in Credits under your Profile Settings.
                             </p>
                         </div>
                     </div>
