@@ -58,7 +58,7 @@ class PaymentController extends Controller
         $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions')
             ->withHeader('Content-Type: application/json')
             ->withHeader('accept: application/json')
-            ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
+            ->withHeader('Authorization: Basic c2tfdGVzdF9xeEdvR3g0dXZycG1yaXJ0VkVpY2lmNGg6')
             ->withData($data)
             ->asJson()
             ->post();
@@ -75,7 +75,7 @@ class PaymentController extends Controller
 
         // $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions/' . $sessionId)
         //     ->withHeader('accept: application/json')
-        //     ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
+        //     ->withHeader('Authorization: Basic c2tfdGVzdF9xeEdvR3g0dXZycG1yaXJ0VkVpY2lmNGg6')
         //     ->asJson()
         //     ->get();
 
@@ -124,7 +124,7 @@ class PaymentController extends Controller
     //     $response = Curl::to('https://api.paymongo.com/v1/links')
     //         ->withHeader('Content-Type: application/json')
     //         ->withHeader('accept: application/json')
-    //         ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
+    //         ->withHeader('Authorization: Basic c2tfdGVzdF9xeEdvR3g0dXZycG1yaXJ0VkVpY2lmNGg6')
     //         ->withData($data)
     //         ->asJson()
     //         ->post();
@@ -138,7 +138,7 @@ class PaymentController extends Controller
     // {
     //     $response = Curl::to('https://api.paymongo.com/v1/links/' . $linkid)
     //         ->withHeader('accept: application/json')
-    //         ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
+    //         ->withHeader('Authorization: Basic c2tfdGVzdF9xeEdvR3g0dXZycG1yaXJ0VkVpY2lmNGg6')
     //         ->asJson()
     //         ->get();
 
@@ -157,7 +157,7 @@ class PaymentController extends Controller
     //     $response = Curl::to('https://api.paymongo.com/refunds')
     //         ->withHeader('Content-Type: application/json')
     //         ->withHeader('accept: application/json')
-    //         ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
+    //         ->withHeader('Authorization: Basic c2tfdGVzdF9xeEdvR3g0dXZycG1yaXJ0VkVpY2lmNGg6')
     //         ->withData($data)
     //         ->asJson()
     //         ->post();
@@ -169,7 +169,7 @@ class PaymentController extends Controller
     // {
     //     $response = Curl::to('https://api.paymongo.com/refunds/' . $id)
     //         ->withHeader('accept: application/json')
-    //         ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
+    //         ->withHeader('Authorization: Basic c2tfdGVzdF9xeEdvR3g0dXZycG1yaXJ0VkVpY2lmNGg6')
     //         ->asJson()
     //         ->get();
 
