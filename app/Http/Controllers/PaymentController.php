@@ -31,8 +31,24 @@ class PaymentController extends Controller
 
     public function pay(Request $request)
     {
-        $amount = $request->input('credits');
         $cardid = $request->input('cardid');
+
+        // Debugging statement
+        // dd($cardid);
+
+        // Check if the cardid exists in the revenue table
+        $revenueRecord = Revenue::where('card_id', $cardid)->first();
+
+        if (!$revenueRecord) {
+            // Cardid does not exist in the revenue table, you can handle this case as per your requirement
+            // For example, redirect back with an error message
+            return redirect()->back()->with('error', 'Card ID not found in the revenue table.');
+        }
+
+        // If the cardid exists, continue with the payment process
+        // Rest of your payment processing code here...
+        $amount = $request->input('credits');
+        // $cardid = $request->input('cardid');
         $data = [
             'data' => [
                 'attributes' => [

@@ -23,6 +23,14 @@
                     <x-nav-link wire:navigate href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    <x-nav-link wire:navigate href="{{ route('credits') }}" :active="request()->routeIs('credits')">
+                        {{ __('Credits') }}
+                    </x-nav-link>
+
+                    <x-nav-link wire:navigate href="{{ route('driver') }}" :active="request()->routeIs('driver')">
+                        {{ __('Driver') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -109,10 +117,6 @@
                             <x-dropdown-link wire:navigate href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
-                           
-                            <x-dropdown-link wire:navigate href="{{ route('credits') }}">
-                                {{ __('Credits') }}
-                            </x-dropdown-link>
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-dropdown-link href="{{ route('api-tokens.index') }}">
@@ -175,11 +179,6 @@
                 <!-- Account Management -->
                 <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
-                </x-responsive-nav-link>
-
-                {{-- Credits --}}
-                <x-responsive-nav-link href="{{ route('credits') }}" :active="request()->routeIs('credits')">
-                    {{ __('Credits') }}
                 </x-responsive-nav-link>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())

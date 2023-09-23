@@ -36,6 +36,16 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+    Route::get('/driver', function () {
+        return view('driver');
+    })->name('driver');
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
     Route::get('/credits', Credits::class)->name('credits');
 });
 
