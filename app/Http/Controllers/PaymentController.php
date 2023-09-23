@@ -37,7 +37,7 @@ class PaymentController extends Controller
         // dd($cardid);
 
         // Check if the cardid exists in the revenue table
-        $revenueRecord = Revenue::where('card_id', $cardid)->first();
+        $revenueRecord = User::where('card_id', $cardid)->first();
 
         if (!$revenueRecord) {
             // Cardid does not exist in the revenue table, you can handle this case as per your requirement
