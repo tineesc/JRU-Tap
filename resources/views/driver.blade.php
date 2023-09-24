@@ -20,7 +20,4 @@
         </div>
     </div>
 
-
-    @livewire('jeeprevenuetable');
-
 </x-app-layout>

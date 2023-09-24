@@ -49,7 +49,6 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/credits', Credits::class)->name('credits');
-    Route::get('/jeep', jeeprevenuetable::class);
     Route::get('/jeep', JeepRevenue::class);
 });
 
