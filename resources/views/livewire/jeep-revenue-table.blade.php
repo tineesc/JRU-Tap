@@ -8,9 +8,12 @@
                             @foreach ($items as $item)
                             <div class="py-2 text-center">
                                 <div class="p-4 bg-slate-50 bg-opacity-75 shadow-lg rounded-md">
-                                    <p class="text-md font-semibold text-red-500">Card Id {{ $item->card_id }}</p>
-                                    <p class="text-md font-semibold text-red-400">Card Amount {{ $item->card_amount }}</p>
-                                    
+                                    <p class="text-md font-semibold text-red-500">ID {{ $item->card_id }}</p>
+                                    <p class="text-md font-semibold text-red-400">Balance {{ $item->card_amount }}</p>
+                                    <p class="text-md font-semibold text-slate-700">Fare {{ $item->fare }}</p>
+                                    <p class="text-md font-semibold text-slate-700">Jeep {{ $item->jnumber }}</p>
+                                    <p class="text-md font-semibold text-slate-700">Payment {{ $item->payment_method }}</p>
+                                    <p class="text-md font-semibold text-slate-700">Status {{ $item->status }}</p>
                                 </div>
                             </div>
                         @endforeach
