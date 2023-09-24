@@ -4,6 +4,8 @@ use App\Livewire\Credits;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentController;
+use App\Livewire\JeepRevenue;
+use App\Livewire\JeepRevenueTable;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +49,8 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/credits', Credits::class)->name('credits');
+    Route::get('/jeep', jeeprevenuetable::class);
+    Route::get('/jeep', JeepRevenue::class);
 });
 
 Route::controller(PaymentController::class)
