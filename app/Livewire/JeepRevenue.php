@@ -39,7 +39,7 @@ class JeepRevenue extends Component
     {
         $items = Revenue::orderBy('id','DESC')->get();
         return view('livewire.jeep-revenue', [
-            'items' => Revenue::paginate(10),
+            'items' => Revenue::paginate(12),
         ],compact('items'));
     }
 }
