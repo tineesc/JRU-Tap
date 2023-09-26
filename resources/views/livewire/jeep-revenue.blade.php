@@ -1,10 +1,18 @@
 <div>
     <form wire:submit.prevent="addRevenue">
-        <div class="p-6">
+        <div class="py-3 px-6">
+            <x-label for="fare" value="{{ __('Fare') }}" />
+            <x-input wire:model="fare" id="fare" class="block mt-1 w-full" type="number" name="fare" :value="old('fare')" placeholder="Fare" 
+            required autofocus autocomplete="fare" />
+        </div>
+        <div class="py-3 px-6">
             <x-label for="carid" value="{{ __('Card ID') }}" />
             <x-input  wire:model="cardid" id="cardid" class="block mt-1 w-full" type="number" name="cardid" :value="old('cardid')" placeholder="Scan ID"
                 required autofocus autocomplete="cardid" />
         </div>
+        
+        <x-input wire:model="user" id="user" class="hidden mt-1 w-full" type="text" name="user" value="{{ Auth::user()->email }}" 
+            required autofocus autocomplete="user" />
         <x-button class="hidden">{{ __('Scan') }}</x-button>
     </form>
 
@@ -21,6 +29,7 @@
                                     <p class="text-md font-semibold text-slate-700">Jeep {{ $item->jnumber }}</p>
                                     <p class="text-md font-semibold text-slate-700">Payment {{ $item->payment_method }}</p>
                                     <p class="text-md font-semibold text-slate-700">Status {{ $item->status }}</p>
+                                    <p class="text-md font-semibold text-slate-700">Driver {{ $item->email }}</p>
                                 </div>
                             </div>
                         @endforeach
