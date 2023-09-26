@@ -2,7 +2,7 @@
     <form wire:submit.prevent="addRevenue">
         <div class="py-3 px-6">
             <x-label for="fare" value="{{ __('Fare') }}" />
-            <x-input wire:model="fare" id="fare" class="block mt-1 w-full" type="number" name="fare" :value="old('fare')" placeholder="Fare" 
+            <x-input wire:model="fare" id="fare" class="block mt-1 w-full" type="number" name="fare" value="{{ $revenue }}" placeholder="Fare" 
             required autofocus autocomplete="fare" />
         </div>
         <div class="py-3 px-6">
@@ -26,7 +26,7 @@
                                     <p class="text-md font-semibold text-red-500">ID {{ $item->card_id }}</p>
                                     <p class="text-md font-semibold text-red-400">Balance {{ $item->card_amount }}</p>
                                     <p class="text-md font-semibold text-slate-700">Fare {{ $item->fare }}</p>
-                                    <p class="text-md font-semibold text-slate-700">Jeep {{ $item->jnumber }}</p>
+                                    {{-- <p class="text-md font-semibold text-slate-700">Jeep {{ $item->jnumber }}</p> --}}
                                     <p class="text-md font-semibold text-slate-700">Payment {{ $item->payment_method }}</p>
                                     <p class="text-md font-semibold text-slate-700">Status {{ $item->status }}</p>
                                     <p class="text-md font-semibold text-slate-700">Driver {{ $item->email }}</p>

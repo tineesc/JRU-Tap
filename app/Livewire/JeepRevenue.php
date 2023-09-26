@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Revenue;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class JeepRevenue extends Component
@@ -48,9 +49,14 @@ class JeepRevenue extends Component
     {
         $user = $this->user = Auth::user()->email;
         $items = Revenue::orderBy('id','DESC')->get();
+
+        $revenue = DB::table('revenues')
+        ->select('revenues.fare')
+        ->where($user = 'revenues.email')
+        ->get();
         
         return view('livewire.jeep-revenue', [
             'items' => Revenue::paginate(12),
-        ],compact('items'));
+        ],compact('items','revenue'));
     }
 }
