@@ -28,7 +28,7 @@ class RevenueResource extends Resource
             ->schema([
                 TextInput::make('email'),
                 TextInput::make('card_id'),
-                TextInput::make('card_amount'),
+                TextInput::make('card_balance'),
                 TextInput::make('fare'),
                 TextInput::make('jnumber'),
                 Select::make('status')->options([

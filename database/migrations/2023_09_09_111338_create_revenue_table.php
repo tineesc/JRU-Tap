@@ -15,9 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('email')->nullable();
             $table->string('card_id')->nullable();
-            $table->string('card_amount')->nullable();
             $table->integer('fare')->nullable();
-            $table->string('jnumber')->nullable();
             $table->string('payment_method')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();

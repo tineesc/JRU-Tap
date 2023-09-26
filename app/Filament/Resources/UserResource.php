@@ -58,10 +58,10 @@ class UserResource extends Resource
                             ->visibleOn(['edit', 'view','create']),
                         TextInput::make('card_id')
                             ->visibleOn(['edit', 'view','create']),
-                        TextInput::make('wallet_amount')
+                        TextInput::make('wallet_balance')
                             ->label('Wallet Balance')
                             ->visibleOn(['edit', 'view','create']),
-                        TextInput::make('card_amount')
+                        TextInput::make('card_balance')
                             ->label('Card Balance')
                             ->visibleOn(['edit', 'view','create']),
                     ])->columns(2),
