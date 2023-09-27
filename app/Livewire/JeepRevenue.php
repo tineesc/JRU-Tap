@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\User;
+use App\Models\Card;
 use App\Models\Revenue;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -27,22 +27,22 @@ class JeepRevenue extends Component
             'fare' => 'required|numeric',
         ]);
     
-        // Find the user with the given card_id
-        $user = User::where('card_id', $this->cardid)->first();
+        // Find the card with the given card_id in the Cards table
+        $card = Card::where('card_id', $this->cardid)->first();
     
-        if (!$user) {
-            // User not found
-            session()->flash('message', 'Error: User with card ID not found.');
+        if (!$card) {
+            // Card not found
+            session()->flash('message', 'Error: Card not registered.');
             return;
         }
     
         // Check if card_balance is enough for fare
-        $isCardBalanceEnough = $user->card_balance >= $this->fare;
+        $isCardBalanceEnough = $card->card_balance >= $this->fare;
     
         if ($isCardBalanceEnough) {
-            // Subtract the fare from card_balance in the users table and update remaining balance
-            $user->card_balance -= $this->fare;
-            $user->save();
+            // Subtract the fare from card_balance in the Cards table and update it
+            $card->card_balance -= $this->fare;
+            $card->save();
         }
     
         // Update the revenues table with status and card_balance
@@ -50,9 +50,9 @@ class JeepRevenue extends Component
             'card_id' => $this->cardid,
             'email' => $this->user,
             'fare' => $this->fare,
-            'payment_method' => ($this->payment = 'card'),
+            'payment_method' => 'card', // Set the payment_method to 'card'
             'status' => $isCardBalanceEnough ? 'true' : 'false', // Set status based on condition
-            'card_balance' => $user->card_balance, // Reflect updated card_balance in the revenues table
+            'card_balance' => $card->card_balance, // Reflect updated card_balance in the revenues table
         ]);
     
         if ($isCardBalanceEnough) {
@@ -68,6 +68,7 @@ class JeepRevenue extends Component
         // return redirect()->to('/your-redirect-url');
     }
     
+
 
     public function render()
     {
