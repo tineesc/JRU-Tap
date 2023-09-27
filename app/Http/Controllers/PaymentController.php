@@ -14,22 +14,7 @@ use Illuminate\Support\Facades\Session;
 
 class PaymentController extends Controller
 {
-    // public function process(Request $request)
-    // {
-    //     $selectedRoute = $request->input('payment');
-
-    //     switch ($selectedRoute) {
-    //         case 'pay':
-    //             return $this->pay($request);
-    //         case 'link':
-    //             return $this->linkPay($request);
-    //             // Add more cases for other routes
-    //         default:
-    //             flash()->addError('Invalid Route');
-    //             return redirect()->back();
-    //     }
-    // }
-
+   
     public function pay(Request $request)
     {
         $cardid = $request->input('cardid');
@@ -75,7 +60,7 @@ class PaymentController extends Controller
         $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions')
             ->withHeader('Content-Type: application/json')
             ->withHeader('accept: application/json')
-            ->withHeader('Authorization: Basic c2tfdGVzdF9xeEdvR3g0dXZycG1yaXJ0VkVpY2lmNGg6')
+            ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
             ->withData($data)
             ->asJson()
             ->post();
@@ -92,7 +77,7 @@ class PaymentController extends Controller
 
         // $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions/' . $sessionId)
         //     ->withHeader('accept: application/json')
-        //     ->withHeader('Authorization: Basic c2tfdGVzdF9xeEdvR3g0dXZycG1yaXJ0VkVpY2lmNGg6')
+        //     ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
         //     ->asJson()
         //     ->get();
 
@@ -106,11 +91,11 @@ class PaymentController extends Controller
 
         if ($user) {
             // Calculate the new card_amount by adding the existing value to the creditsToAdd
-            $newCardAmount = $user->card_amount + $creditsToAdd;
+            $newCardAmount = $user->card_balance + $creditsToAdd;
 
             // Update the User record with the new card_amount
             $user->update([
-                'card_amount' => $newCardAmount,
+                'card_balance' => $newCardAmount,
             ]);
 
             flash()->addSuccess('Successful Credits Transaction');
@@ -141,7 +126,7 @@ class PaymentController extends Controller
     //     $response = Curl::to('https://api.paymongo.com/v1/links')
     //         ->withHeader('Content-Type: application/json')
     //         ->withHeader('accept: application/json')
-    //         ->withHeader('Authorization: Basic c2tfdGVzdF9xeEdvR3g0dXZycG1yaXJ0VkVpY2lmNGg6')
+    //         ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
     //         ->withData($data)
     //         ->asJson()
     //         ->post();
@@ -155,7 +140,7 @@ class PaymentController extends Controller
     // {
     //     $response = Curl::to('https://api.paymongo.com/v1/links/' . $linkid)
     //         ->withHeader('accept: application/json')
-    //         ->withHeader('Authorization: Basic c2tfdGVzdF9xeEdvR3g0dXZycG1yaXJ0VkVpY2lmNGg6')
+    //         ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
     //         ->asJson()
     //         ->get();
 
@@ -174,7 +159,7 @@ class PaymentController extends Controller
     //     $response = Curl::to('https://api.paymongo.com/refunds')
     //         ->withHeader('Content-Type: application/json')
     //         ->withHeader('accept: application/json')
-    //         ->withHeader('Authorization: Basic c2tfdGVzdF9xeEdvR3g0dXZycG1yaXJ0VkVpY2lmNGg6')
+    //         ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
     //         ->withData($data)
     //         ->asJson()
     //         ->post();
@@ -186,7 +171,7 @@ class PaymentController extends Controller
     // {
     //     $response = Curl::to('https://api.paymongo.com/refunds/' . $id)
     //         ->withHeader('accept: application/json')
-    //         ->withHeader('Authorization: Basic c2tfdGVzdF9xeEdvR3g0dXZycG1yaXJ0VkVpY2lmNGg6')
+    //         ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
     //         ->asJson()
     //         ->get();
 
