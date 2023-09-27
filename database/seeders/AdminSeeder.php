@@ -19,7 +19,6 @@ class AdminSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'card_id' => '0363607347',
-            'card_balance' => '100',
         ])->assignRole('Moderator', 'Admin');
     }
 }

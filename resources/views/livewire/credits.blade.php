@@ -13,8 +13,8 @@
                         <div class="mx-6 py-2">
                             <x-label for="credits" value="{{ __('Credits') }}" />
                             <x-input wire:model="credits" id="credits" class="block mt-1 w-full md:w-92 mx-auto"
-                                type="text" name="credits"  required autofocus
-                                autocomplete="credits" placeholder="amount" required {{-- Numbers only Validation --}}
+                                type="text" name="credits" required autofocus autocomplete="credits"
+                                placeholder="amount" required {{-- Numbers only Validation --}}
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
 
                         </div>
@@ -38,17 +38,13 @@
                         <!-- Content -->
                         <h2 class="font-semibold text-2xl  text-slate-600 py-2">Card Balance Credits</h2>
                         <p class="font-bold text-xl">
-                            @php
-                                $userCard = Auth::user()->card; // Assuming 'card' is the relationship to the 'cards' table
-                            @endphp
-                        
-                            @if ($userCard)
-                                {{ $userCard->card_balance }}
+                            @if ($cardBalance !== null)
+                                <p class="semi-bold">{{ $cardBalance }}</p>
                             @else
-                                No Balance to show
+                                <p>No Balance to show</p>
                             @endif
                         </p>
-                        
+
                         <div class="py-5 mx-5 text-center">
                             <x-button>Register Card</x-button>
                         </div>

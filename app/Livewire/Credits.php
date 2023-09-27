@@ -6,6 +6,7 @@ use Closure;
 use App\Models\User;
 use Livewire\Component;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class Credits extends Component
@@ -44,38 +45,20 @@ class Credits extends Component
     }
 
 
-    // public function store()
-    // {
-    //     $this->validate([
-    //         'card_id' => 'required|string|max:255',
-    //     ]);
-
-    //     User::create([
-    //         'card_id'
-    //     ]);
-
-    //     $this->reset('card_id');
-    // }
-
-    // public function update(User $user)
-    // {
-    //     $id = Auth::user()->id;
-    //     $this->user = User::findorFail($id);
-    //     $this->user = $user;
-    //     $this->card_id = $user->card_id; 
-
-    //     $this->validate([
-    //         'card_id' => 'required|string|max:255',
-    //     ]);
-
-    //     $this->user->update(['card_id' => $this->card_id]);
-
-    //     $this->reset('card_id');
-
-    // }
-
     public function render()
     {
-        return view('livewire.credits');
+        $user = Auth::user();
+        $balance = DB::table('users')
+            ->join('cards', 'cards.card_id', '=', 'users.card_id')
+            ->where('users.id', '=', $user->id)
+            ->select('cards.card_balance')
+            ->first();
+            if ($balance) {
+                $cardBalance = $balance->card_balance;
+            } else {
+                $cardBalance = null; // or any default value you want to set when there's no card_balance.
+            }
+            
+        return view('livewire.credits',compact('cardBalance'));
     }
 }

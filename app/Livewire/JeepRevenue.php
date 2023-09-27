@@ -80,17 +80,12 @@ class JeepRevenue extends Component
             ->where($user = 'revenues.name')
             ->get();
 
-        $payment = DB::table('revenues')
-            ->select('revenues.*')
-            ->whereRaw('card_balance < fare')
-            ->get();
-
         return view(
             'livewire.jeep-revenue',
             [
                 'items' => Revenue::orderBy('id', 'desc')->paginate(12),
             ],
-            compact('items', 'revenue','payment'),
+            compact('items', 'revenue',),
         );
     }
 }

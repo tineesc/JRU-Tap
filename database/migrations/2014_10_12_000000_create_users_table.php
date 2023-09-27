@@ -21,9 +21,7 @@ return new class extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->string('wallet_id')->nullable();
-            $table->string('wallet_balance')->nullable();
             $table->string('card_id')->nullable();
-            $table->string('card_balance')->nullable();
             $table->string('remember_token')->nullable();
             $table->timestamps();
         });

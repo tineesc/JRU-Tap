@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('card_id')->nullable();
-            $table->string('card_balance')->nullable();
             $table->integer('fare')->nullable();
             $table->string('payment_method')->nullable();
             $table->string('status')->nullable();
