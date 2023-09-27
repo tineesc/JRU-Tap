@@ -72,12 +72,12 @@ class JeepRevenue extends Component
 
     public function render()
     {
-        $user = $this->user = Auth::user()->email;
+        $user = $this->user = Auth::user()->name;
         $items = Revenue::orderBy('id', 'DESC')->get();
 
         $revenue = DB::table('revenues')
             ->select('revenues.fare')
-            ->where($user = 'revenues.email')
+            ->where($user = 'revenues.name')
             ->get();
 
         $payment = DB::table('revenues')

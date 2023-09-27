@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Ixudra\Curl\Facades\Curl;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Card;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -37,7 +38,7 @@ class PaymentController extends Controller
         // dd($cardid);
 
         // Check if the cardid exists in the revenue table
-        $revenueRecord = User::where('card_id', $cardid)->first();
+        $revenueRecord = Card::where('card_id', $cardid)->first();
 
         if (!$revenueRecord) {
             // Cardid does not exist in the revenue table, you can handle this case as per your requirement
@@ -101,7 +102,7 @@ class PaymentController extends Controller
         $creditsToAdd = $request->input('credits'); // Credits from the request
 
         // Retrieve the current card_amount from the database
-        $user = User::where('card_id', $cardid)->first();
+        $user = Card::where('card_id', $cardid)->first();
 
         if ($user) {
             // Calculate the new card_amount by adding the existing value to the creditsToAdd

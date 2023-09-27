@@ -11,7 +11,7 @@
                 required autofocus autocomplete="cardid" />
         </div>
         
-        <x-input wire:model="user" id="user" class="hidden mt-1 w-full" type="text" name="user" value="{{ Auth::user()->email }}" 
+        <x-input wire:model="user" id="user" class="hidden mt-1 w-full" type="text" name="user" value="{{ Auth::user()->name }}" 
             required autofocus autocomplete="user" />
         <x-button class="hidden">{{ __('Scan') }}</x-button>
     </form>
@@ -27,7 +27,7 @@
                                     <p class="text-md font-semibold text-slate-700">Fare {{ $item->fare }}</p>
                                     <p class="text-md font-semibold text-slate-700">Payment {{ $item->payment_method }}</p>
                                     <p class="text-md font-semibold text-slate-700">Status {{ $item->status }}</p>
-                                    <p class="text-md font-semibold text-slate-700">Driver {{ $item->email }}</p>
+                                    <p class="text-md font-semibold text-slate-700">Driver {{ $item->name }}</p>
                                 </div>
                             </div>
                         @endforeach

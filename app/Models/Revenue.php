@@ -16,6 +16,6 @@ class Revenue extends Model
         'jnumber',
         'payment_method',
         'status',
-        'email',
+        'name',
     ];
 }

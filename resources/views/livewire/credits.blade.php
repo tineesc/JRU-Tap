@@ -38,12 +38,17 @@
                         <!-- Content -->
                         <h2 class="font-semibold text-2xl  text-slate-600 py-2">Card Balance Credits</h2>
                         <p class="font-bold text-xl">
-                            @if (Auth::user()->card_amount)
-                                {{ Auth::user()->card_amount }}
+                            @php
+                                $userCard = Auth::user()->card; // Assuming 'card' is the relationship to the 'cards' table
+                            @endphp
+                        
+                            @if ($userCard)
+                                {{ $userCard->card_balance }}
                             @else
                                 No Balance to show
                             @endif
                         </p>
+                        
                         <div class="py-5 mx-5 text-center">
                             <x-button>Register Card</x-button>
                         </div>
@@ -57,8 +62,8 @@
                             <!-- Content -->
                             <h2 class="font-semibold text-2xl  text-slate-600 py-2">Driver Wallet Balance</h2>
                             <p class="font-bold text-xl">
-                                @if (Auth::user()->wallet_amount)
-                                    {{ Auth::user()->wallet_amount }}
+                                @if (Auth::user()->wallet_balance)
+                                    {{ Auth::user()->wallet_balance }}
                                 @else
                                     No Balance to show
                                 @endif
