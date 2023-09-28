@@ -1,9 +1,41 @@
 <div>
-    @if (session('message'))
-        <div class="alert alert-success">
-            {{ session('message') }}
-        </div>
-    @endif
+    <div x-data="{ showNotification: false, message: '', error: '' }"
+    x-init="() => {
+       showNotification = {{ session('message') || session('error') ? 'true' : 'false' }};
+       message = showNotification && '{{ session('message') }}';
+       error = showNotification && '{{ session('error') }}';
+       if (showNotification) {
+           setTimeout(() => {
+               showNotification = false;
+           }, 2000);
+       }
+    }"
+    x-show="showNotification"
+    x-transition:enter="transition ease-out duration-300 transform"
+    x-transition:enter-start="opacity-0 translate-y-2"
+    x-transition:enter-end="opacity-100 translate-y-0"
+    x-transition:leave="transition ease-in duration-200 transform"
+    x-transition:leave-start="opacity-100 translate-y-0"
+    x-transition:leave-end="opacity-0 translate-y-2"
+    class="fixed bottom-0 right-0 p-4 z-50">
+
+   @if(session('message'))
+   <div class="bg-green-500 text-white px-6 py-3 rounded-lg shadow-md text-lg">
+       <p>{{ session('message') }}</p>
+   </div>
+   @endif
+
+   @if(session('error'))
+   <div class="bg-red-500 text-white px-6 py-3 rounded-lg shadow-md text-lg">
+       <p>{{ session('error') }}</p>
+   </div>
+   @endif
+</div>
+
+
+
+
+    
 
     <form wire:submit.prevent="addRevenue">
         <div class="py-3 px-6">

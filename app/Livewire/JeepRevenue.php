@@ -32,7 +32,7 @@ class JeepRevenue extends Component
     
         if (!$card) {
             // Card not found
-            session()->flash('message', 'Error: Card not registered.');
+            session()->flash('error', 'Error: Card not registered .');
             $this->cardid = null;
             return;
         }
@@ -52,14 +52,14 @@ class JeepRevenue extends Component
             'email' => $this->user,
             'fare' => $this->fare,
             'payment_method' => 'card', // Set the payment_method to 'card'
-            'status' => $isCardBalanceEnough ? 'true' : 'false', // Set status based on condition
+            'status' => $isCardBalanceEnough ? 'success' : 'failed', // Set status based on condition
             'card_balance' => $card->card_balance, // Reflect updated card_balance in the revenues table
         ]);
     
         if ($isCardBalanceEnough) {
-            session()->flash('message', 'Revenue record added successfully with status: true.');
+            session()->flash('message', 'Payment Success');
         } else {
-            session()->flash('message', 'Revenue record added successfully with status: false.');
+            session()->flash('error', 'Unsufficient Funds');
         }
     
         // Clear the input field after successful insertion
@@ -67,6 +67,7 @@ class JeepRevenue extends Component
     
         // You can optionally redirect the user after adding the record
         // return redirect()->to('/your-redirect-url');
+        
     }
     
 
