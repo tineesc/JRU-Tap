@@ -43,7 +43,7 @@ class TripResource extends Resource
                 Select::make('jnumber')
                     ->label('Jeep Plate Number')
                     ->searchable()
-                    ->options(Jeep::all()->pluck('jnumber','id'))
+                    ->options(Jeep::all()->pluck('jnumber','jnumber'))
                     ->required(),
                 Select::make('status')->options([
                     'approve' => 'approve',
