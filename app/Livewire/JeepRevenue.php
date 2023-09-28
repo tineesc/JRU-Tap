@@ -49,7 +49,7 @@ class JeepRevenue extends Component
         // Update the revenues table with status and card_balance
         $revenue = Revenue::create([
             'card_id' => $this->cardid,
-            'email' => $this->user,
+            'name' => $this->user,
             'fare' => $this->fare,
             'payment_method' => 'card', // Set the payment_method to 'card'
             'status' => $isCardBalanceEnough ? 'success' : 'failed', // Set status based on condition
