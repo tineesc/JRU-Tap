@@ -33,6 +33,7 @@ class JeepRevenue extends Component
         if (!$card) {
             // Card not found
             session()->flash('message', 'Error: Card not registered.');
+            $this->cardid = null;
             return;
         }
     
