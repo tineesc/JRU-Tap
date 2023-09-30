@@ -19,6 +19,7 @@ class Trip extends Model
         'time',
         'fare',
         'jnumber',
+        'driver',
         'status',
     ];
 

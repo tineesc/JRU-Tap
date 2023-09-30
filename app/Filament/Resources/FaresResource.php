@@ -23,6 +23,8 @@ class FaresResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
+    protected static ?string $navigationGroup = 'Fare Matrix';
+
     public static function form(Form $form): Form
     {
         return $form->schema([

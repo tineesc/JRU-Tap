@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\Trip;
 use App\Models\User;
 use Filament\Tables;
+use App\Models\Fares;
 use App\Models\Places;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
@@ -30,7 +31,7 @@ class TripResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
-    protected static ?string $navigationGroup = 'Travel';
+    protected static ?string $navigationGroup = 'Trip Monitoring';
 
     public static function form(Form $form): Form
     {
@@ -39,17 +40,19 @@ class TripResource extends Resource
                 Select::make('location')
                 ->label('Location')
                 ->searchable()
-                ->options(Places::all()->pluck('location', 'location'))
+                ->options(Fares::all()->pluck('location', 'location'))
                 ->required(),
             Select::make('destination')
                 ->label('Destination')
                 ->searchable()
-                ->options(Places::all()->pluck('location', 'location'))
+                ->options(Fares::all()->pluck('destination', 'destination'))
                 ->required(),
                 DatePicker::make('date')->required(),
                 TimePicker::make('time')->required(),
-                TextInput::make('fare')
-                ->numeric()
+                Select::make('fare')
+                ->label('Fare')
+                ->searchable()
+                ->options(Fares::all()->pluck('fare', 'fare'))
                 ->required(),
                 Select::make('driver')
             ->label('Driver')
@@ -62,6 +65,8 @@ class TripResource extends Resource
                     ->toArray()
             )
             ->required(),
+            TextInput::make('jnumber')
+            ->label('Plate Number'),
                 Select::make('status')->options([
                     'approve' => 'approve',
                     'pending' => 'pending',
