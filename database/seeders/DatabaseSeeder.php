@@ -16,10 +16,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory(50)->create();
-        \App\Models\Trip::factory(50)->create();
-        \App\Models\Jeep::factory(50)->create();
-        
+        \App\Models\User::factory(10)->create();
+        \App\Models\Trip::factory(10)->create();
+        \App\Models\Jeep::factory(10)->create();
+        \App\Models\Fare::factory(10)->create();
+
         $this->call(RoleSeeder::class);
         $this->call(AdminSeeder::class);
 
