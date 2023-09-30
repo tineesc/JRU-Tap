@@ -11,12 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fares', function (Blueprint $table) {
+        Schema::create('triplog', function (Blueprint $table) {
             $table->id();
             $table->string('location')->nullable();
             $table->string('destination')->nullable();
-            $table->string('fare')->nullable();
-            $table->string('status')->nullable();
+            $table->date('date')->format('d-m-y')->nullable();
+            $table->time('time')->format('H:i')->nullable();
+            $table->time('leave')->format('H:i')->nullable();
+            $table->integer('fare')->nullable();
+            $table->string('jnumber')->nullable();
+            $table->string('driver')->nullable();
+            $table->enum('status', ['approve', 'pending', 'decline']);
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fares');
+        Schema::dropIfExists('triplog');
     }
 };

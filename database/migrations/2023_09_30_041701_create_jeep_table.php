@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('jeeps', function (Blueprint $table) {
             $table->id();
             $table->string('jnumber');
-            $table->time('begin')->nullable(); // Use time data type for time values
-            $table->time('end')->nullable();   // Use time data type for time values
+            $table->time('begin')->format('H:i')->nullable();
+            $table->time('end')->format('H:i')->nullable();
+            $table->enum('status', ['approve', 'pending', 'decline']);
             $table->timestamps();
         }); 
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jeep');
+        Schema::dropIfExists('jeeps');
     }
 };
