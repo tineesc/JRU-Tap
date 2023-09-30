@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\TimePicker;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\JeepResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -49,6 +50,8 @@ class JeepResource extends Resource
                     ->toArray()
             )
             ->required(),
+            TimePicker::make('begin')->required(),
+            TimePicker::make('end')->required(),
         
 
         // Other fields in your form...
@@ -65,6 +68,8 @@ class JeepResource extends Resource
                 TextColumn::make('id'),
                 TextColumn::make('jnumber'),
                 TextColumn::make('driver'),
+                TextColumn::make('begin'),
+                TextColumn::make('end'),
             ])
             ->filters([
                 //
