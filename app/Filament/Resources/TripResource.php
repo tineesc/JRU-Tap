@@ -4,8 +4,11 @@ namespace App\Filament\Resources;
 
 use Filament\Forms;
 use App\Models\Jeep;
+use App\Models\Role;
 use App\Models\Trip;
+use App\Models\User;
 use Filament\Tables;
+use App\Models\Places;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
@@ -33,18 +36,32 @@ class TripResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('location')->required(),
-                TextInput::make('destination')->required(),
+                Select::make('location')
+                ->label('Location')
+                ->searchable()
+                ->options(Places::all()->pluck('location', 'location'))
+                ->required(),
+            Select::make('destination')
+                ->label('Destination')
+                ->searchable()
+                ->options(Places::all()->pluck('location', 'location'))
+                ->required(),
                 DatePicker::make('date')->required(),
                 TimePicker::make('time')->required(),
                 TextInput::make('fare')
                 ->numeric()
                 ->required(),
-                Select::make('jnumber')
-                    ->label('Jeep Plate Number')
-                    ->searchable()
-                    ->options(Jeep::all()->pluck('jnumber','jnumber'))
-                    ->required(),
+                Select::make('driver')
+            ->label('Driver')
+            ->options(
+                // Fetch users with the "Driver" role and create options array
+                User::join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+                    ->where('model_has_roles.model_type', User::class)
+                    ->where('model_has_roles.role_id', Role::where('name', 'Driver')->first()->id)
+                    ->pluck('users.name', 'users.name')
+                    ->toArray()
+            )
+            ->required(),
                 Select::make('status')->options([
                     'approve' => 'approve',
                     'pending' => 'pending',
@@ -82,8 +99,8 @@ class TripResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: false),
-                TextColumn::make('jnumber')
-                    ->label('Plate Number')
+                TextColumn::make('driver')
+                    ->label('Driver')
                     ->toggleable(),
                 TextColumn::make('status')
                     ->sortable()

@@ -75,5 +75,9 @@ class User extends Authenticatable implements  MustVerifyEmail,FilamentUser
         return $this->hasRole([1,2]);
     }
 
+    public function jeep()
+{
+    return $this->hasOne(Jeep::class, 'driver');
+}
 }
 
