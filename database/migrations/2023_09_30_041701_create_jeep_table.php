@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('jeeps', function (Blueprint $table) {
             $table->id();
             $table->string('jnumber');
-            $table->date("h,i"('begin'));
-             $table->date("h,i"('end'));
+            $table->time('begin')->nullable(); // Use time data type for time values
+            $table->time('end')->nullable();   // Use time data type for time values
             $table->timestamps();
-        });
+        }); 
     }
 
     /**
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jeeps');
+        Schema::dropIfExists('jeep');
     }
 };
