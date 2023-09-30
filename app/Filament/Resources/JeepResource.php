@@ -2,18 +2,23 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\JeepResource\Pages;
-use App\Filament\Resources\JeepResource\RelationManagers;
-use App\Models\Jeep;
 use Filament\Forms;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use App\Models\Jeep;
+use App\Models\Role;
+use App\Models\User;
 use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\JeepResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Filament\Resources\JeepResource\RelationManagers;
 
 class JeepResource extends Resource
 {
@@ -28,11 +33,29 @@ class JeepResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                TextInput::make('jnumber')
-                ->label('Plate Number')
-                ->required(),
-            ]);
+    ->schema([
+        TextInput::make('jnumber')
+            ->label('Plate Number')
+            ->required(),
+
+            Select::make('driver')
+            ->label('Driver')
+            ->options(
+                // Fetch users with the "Driver" role and create options array
+                User::join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+                    ->where('model_has_roles.model_type', User::class)
+                    ->where('model_has_roles.role_id', Role::where('name', 'Driver')->first()->id)
+                    ->pluck('users.name', 'users.name')
+                    ->toArray()
+            )
+            ->required(),
+        
+
+        // Other fields in your form...
+    ]);
+    
+
+    
     }
 
     public static function table(Table $table): Table
@@ -41,6 +64,7 @@ class JeepResource extends Resource
             ->columns([
                 TextColumn::make('id'),
                 TextColumn::make('jnumber'),
+                TextColumn::make('driver'),
             ])
             ->filters([
                 //
