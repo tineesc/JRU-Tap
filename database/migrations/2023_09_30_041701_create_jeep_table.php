@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('jeeps', function (Blueprint $table) {
             $table->id();
             $table->string('jnumber');
+            $table->string('driver')->nullable();
             $table->time('begin')->format('H:i')->nullable();
             $table->time('end')->format('H:i')->nullable();
             $table->enum('status', ['approve', 'pending', 'decline']);
