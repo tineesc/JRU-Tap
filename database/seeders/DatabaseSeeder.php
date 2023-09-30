@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Trip::factory(10)->create();
         \App\Models\Jeep::factory(10)->create();
         \App\Models\Fare::factory(10)->create();
+        \App\Models\Places::factory(10)->create();
 
         $this->call(RoleSeeder::class);
         $this->call(AdminSeeder::class);

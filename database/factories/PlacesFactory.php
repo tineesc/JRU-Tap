@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Fare>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Places>
  */
-class FareFactory extends Factory
+class PlacesFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,9 +18,6 @@ class FareFactory extends Factory
     {
         return [
             'location' => $this->faker->country(),
-            'destination' => $this->faker->country(),
-            'fare' => $this->faker->numberBetween(100,999),
-            'status' => $this->faker->randomElement(['approve','pending','decline']),
         ];
     }
 }

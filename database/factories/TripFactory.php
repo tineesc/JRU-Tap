@@ -17,9 +17,9 @@ class TripFactory extends Factory
     public function definition(): array
     {
         return [
-            'location' => $this->faker->name(),
+            'location' => $this->faker->country(),
             'driver' => $this->faker->name(),
-            'destination' => $this->faker->lastName(),
+            'destination' => $this->faker->country(),
             'date' => $this->faker->date(),
             'time' => $this->faker->time('H:i'),
             'fare' => $this->faker->numberBetween(100,999),

@@ -31,6 +31,7 @@ class UserFactory extends Factory
             'wallet_id' => $this->faker->creditCardNumber(),
             'card_id' => $this->faker->creditCardNumber(),
             'two_factor_secret' => null,
+
             'two_factor_recovery_codes' => null,
             'remember_token' => Str::random(10),
             'profile_photo_path' => null,

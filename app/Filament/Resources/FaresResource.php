@@ -1,0 +1,82 @@
+<?php
+
+namespace App\Filament\Resources;
+
+use Filament\Forms;
+use Filament\Tables;
+use App\Models\Fares;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
+use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\FaresResource\Pages;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\FaresResource\RelationManagers;
+
+class FaresResource extends Resource
+{
+    protected static ?string $model = Fares::class;
+
+    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
+
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                TextInput::make('fare')
+                ->numeric()
+                ->required(),
+                Select::make('status')->options([
+                    'approve' => 'approve',
+                    'pending' => 'pending',
+                    'decline' => 'decline',
+                ])->required(),
+            ]);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                TextColumn::make('location'),
+                TextColumn::make('destination'),
+                TextColumn::make('fare'),
+                TextColumn::make('status'),
+            ])
+            ->filters([
+                //
+            ])
+            ->actions([
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
+            ])
+            ->emptyStateActions([
+                Tables\Actions\CreateAction::make(),
+            ]);
+    }
+    
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+    
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListFares::route('/'),
+            'create' => Pages\CreateFares::route('/create'),
+            'edit' => Pages\EditFares::route('/{record}/edit'),
+        ];
+    }    
+}
