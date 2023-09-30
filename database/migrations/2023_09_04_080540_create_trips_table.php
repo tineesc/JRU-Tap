@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
-            $table->string('location');
-            $table->string('destination');
-            $table->date('date')->format('d-m-y');
-            $table->time('time')->format('H:i');
-            $table->integer('fare');
-            $table->string('jnumber');
+            $table->string('location')->nullable();
+            $table->string('destination')->nullable();
+            $table->date('date')->format('d-m-y')->nullable();
+            $table->time('time')->format('H:i')->nullable();
+            $table->integer('fare')->nullable();
+            $table->string('jnumber')->nullable();
             $table->string('driver')->nullable();
             $table->enum('status', ['approve', 'pending', 'decline']);
             $table->timestamps();

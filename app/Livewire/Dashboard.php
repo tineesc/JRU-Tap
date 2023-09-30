@@ -23,10 +23,16 @@ class Dashboard extends Component
    
 
     public function render()
-    {
-        $items = Trip::orderBy('id','DESC')->get(); 
-        return view('livewire.dashboard', [
-            'items' => Trip::where('location', 'like', '%'.$this->query.'%')->paginate(12),
-        ],compact('items'));
-    }
+{
+    $query = '%' . $this->query . '%';
+
+    $items = Trip::where('destination', 'like', $query)
+                 ->orderBy('destination', 'ASC')
+                 ->paginate(12);
+
+    return view('livewire.dashboard', [
+        'items' => $items,
+    ]);
+}
+
 }

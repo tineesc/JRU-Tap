@@ -19,15 +19,18 @@ class CardResource extends Resource
 {
     protected static ?string $model = Card::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-qr-code';
+
+    protected static ?string $navigationGroup = 'RFID | NFC';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 TextInput::make('card_id')
-                ->label('Card Serial')
-                ->required(),
+                ->label('Card Serial'),
+                TextInput::make('wallet_id')
+                ->label('Card Serial'),
             ]);
     }
 
@@ -37,12 +40,16 @@ class CardResource extends Resource
             ->columns([
                 TextColumn::make('card_id'),
                 TextColumn::make('card_balance'),
+                TextColumn::make('wallet_id'),
+                TextColumn::make('wallet_balance'),
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

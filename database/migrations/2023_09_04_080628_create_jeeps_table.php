@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('jeeps', function (Blueprint $table) {
             $table->id();
             $table->string('jnumber');
+            $table->date("h,i"('begin'));
+             $table->date("h,i"('end'));
             $table->timestamps();
         });
     }
