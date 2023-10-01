@@ -84,8 +84,8 @@ class JeepResource extends Resource
                 TextColumn::make('id'),
                 TextColumn::make('jnumber'),
                 TextColumn::make('driver'),
-                TextColumn::make('begin'),
-                TextColumn::make('end'),
+                TextColumn::make('begin')->label('Arrival Time'),
+                TextColumn::make('end')->label('Departure Time'),
             ])
             ->filters([
                 //

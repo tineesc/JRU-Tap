@@ -2,16 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\QueueResource\Pages;
-use App\Filament\Resources\QueueResource\RelationManagers;
-use App\Models\Queue;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\Queue;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\QueueResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\QueueResource\RelationManagers;
 
 class QueueResource extends Resource
 {
@@ -35,7 +36,11 @@ class QueueResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('id'),
+                TextColumn::make('jnumber'),
+                TextColumn::make('driver'),
+                TextColumn::make('begin')->label('Arrival Time'),
+                TextColumn::make('end')->label('Departure Time'),
             ])
             ->filters([
                 //
