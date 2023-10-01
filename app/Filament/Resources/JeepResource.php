@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use Carbon\Carbon;
 use Filament\Forms;
 use App\Models\Jeep;
 use App\Models\Role;
@@ -11,6 +12,8 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
+use Illuminate\Support\Facades\Config;
+use Filament\Forms\Components\Checkbox;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
@@ -50,9 +53,20 @@ class JeepResource extends Resource
                     ->toArray()
             )
             ->required(),
-            TimePicker::make('begin')->required(),
-            TimePicker::make('end')->required(),
-        
+            
+            Select::make('begin')
+            ->label('Time In')
+            ->options([
+                Carbon::now('Asia/Manila')->format('H:i') => 'Time IN'
+                // Add more options if needed
+            ]),
+
+        Select::make('end')
+            ->label('Time Out')
+            ->options([
+                Carbon::now('Asia/Manila')->format('H:i') => 'Time Out'
+                // Add more options if needed
+            ]),
 
         // Other fields in your form...
     ]);
@@ -60,6 +74,8 @@ class JeepResource extends Resource
 
     
     }
+
+   
 
     public static function table(Table $table): Table
     {

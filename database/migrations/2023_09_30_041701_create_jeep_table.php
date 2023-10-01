@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('jnumber');
             $table->string('driver')->nullable();
-            $table->time('begin')->format('H:i')->nullable();
-            $table->time('end')->format('H:i')->nullable();
+            $table->string('begin')->nullable();
+            $table->string('end')->nullable();
             $table->enum('status', ['approve', 'pending', 'decline']);
             $table->timestamps();
         }); 
