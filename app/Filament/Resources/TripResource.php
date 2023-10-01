@@ -50,7 +50,12 @@ class TripResource extends Resource
 
                 Datepicker::make('Select Date')
                 ->minDate(now()) // Set the minimum date
-                ->format('m-d-Y'),
+                ->format('m-d-Y')
+                ->rules([
+                    'required',
+                    'date',
+                    'after_or_equal:now',
+                ]),
                 
                 TimePicker::make('time')->required(),
                 Select::make('fare')
