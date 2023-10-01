@@ -47,7 +47,11 @@ class TripResource extends Resource
                 ->searchable()
                 ->options(Fares::all()->pluck('destination', 'destination'))
                 ->required(),
-                DatePicker::make('date')->required(),
+
+                Datepicker::make('Select Date')
+                ->minDate(now()) // Set the minimum date
+                ->format('m-d-Y'),
+                
                 TimePicker::make('time')->required(),
                 Select::make('fare')
                 ->label('Fare')
@@ -73,7 +77,11 @@ class TripResource extends Resource
                     'decline' => 'decline',
                 ])->required(),
             ]);
+
+          
     }
+
+    
 
     public static function table(Table $table): Table
     {

@@ -17,4 +17,6 @@ class CreateTrip extends CreateRecord
     {
         return 'Trip Created';
     }
+
+    
 }
