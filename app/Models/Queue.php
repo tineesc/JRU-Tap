@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Jeep extends Model
+class Queue extends Model
 {
     use HasFactory;
-
+    
     protected $fillable = [
         'jnumber',
         'driver',
@@ -18,12 +17,4 @@ class Jeep extends Model
         'notification',
         'status',
     ];
-    
-
-    public function driver()
-{
-    return $this->belongsTo(User::class, 'driver');
-}
-
-
 }

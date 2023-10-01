@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jeeps', function (Blueprint $table) {
+        Schema::create('queues', function (Blueprint $table) {
             $table->id();
             $table->string('jnumber');
             $table->string('driver')->nullable();
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('notification')->nullable();
             $table->enum('status', ['approve', 'pending', 'decline']);
             $table->timestamps();
-        }); 
+        });
     }
 
     /**
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jeeps');
+        Schema::dropIfExists('queues');
     }
 };
