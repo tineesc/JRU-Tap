@@ -21,7 +21,7 @@ class FaresResource extends Resource
 {
     protected static ?string $model = Fares::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
+    protected static ?string $navigationIcon = 'heroicon-o-presentation-chart-bar';
 
     protected static ?string $navigationGroup = 'Fare Matrix';
 
