@@ -13,6 +13,7 @@ use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Filament\Notifications\Notification;
 
 class JeepRevenue extends Component
 {
@@ -36,6 +37,10 @@ if ($user) {
         $queueRecord->update([
             'end' => now()->setTimezone('Asia/Manila')->format('H:i'),
         ]);
+
+        Notification::make()
+        ->title('Saved successfully')
+        ->sendToDatabase($user);
 
         flash()->addSuccess('Notify to Queue');
         return redirect()->to('/driver');
