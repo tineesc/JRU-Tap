@@ -55,16 +55,16 @@ class JeepResource extends Resource
             ->required(),
             
             Select::make('begin')
-            ->label('Time In')
+            ->label('Jeep Queue')
             ->options([
-                Carbon::now('Asia/Manila')->format('H:i') => 'Time IN'
+                Carbon::now('Asia/Manila')->format('H:i') => 'Add to Jeep Queue Table'
                 // Add more options if needed
             ]),
 
         Select::make('end')
-            ->label('Time Out')
+            ->label('Driver Notify')
             ->options([
-                Carbon::now('Asia/Manila')->format('H:i') => 'Time Out'
+                Carbon::now('Asia/Manila')->format('H:i') => 'Driver Notify to Add Jeep Queue'
                 // Add more options if needed
             ]),
 
@@ -81,11 +81,10 @@ class JeepResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id'),
-                TextColumn::make('jnumber'),
-                TextColumn::make('driver'),
+                TextColumn::make('driver')->label('Driver'),
+                TextColumn::make('jnumber')->label('Plate Number'),
                 TextColumn::make('begin')->label('Arrival Time'),
-                TextColumn::make('end')->label('Departure Time'),
+                TextColumn::make('end')->label('Driver Notify Time'),
             ])
             ->filters([
                 //

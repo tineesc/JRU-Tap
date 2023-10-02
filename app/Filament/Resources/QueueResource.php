@@ -2,17 +2,29 @@
 
 namespace App\Filament\Resources;
 
+use Carbon\Carbon;
 use Filament\Forms;
+use App\Models\Role;
+use App\Models\User;
 use Filament\Tables;
 use App\Models\Queue;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Filament\Actions\CreateAction;
+use Filament\Actions\DeleteAction;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteBulkAction;
 use App\Filament\Resources\QueueResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\QueueResource\Pages\EditQueue;
+use App\Filament\Resources\QueueResource\Pages\ListQueues;
 use App\Filament\Resources\QueueResource\RelationManagers;
+use App\Filament\Resources\QueueResource\Pages\CreateQueue;
 
 class QueueResource extends Resource
 {
@@ -28,7 +40,41 @@ class QueueResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('jnumber')
+            ->label('Plate Number')
+            ->required()
+            ->visibleOn(['view','edit']),
+
+            Select::make('driver')
+            ->label('Driver')
+            ->options(
+                // Fetch users with the "Driver" role and create options array
+                User::join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+                    ->where('model_has_roles.model_type', User::class)
+                    ->where('model_has_roles.role_id', Role::where('name', 'Driver')->first()->id)
+                    ->pluck('users.name', 'users.name')
+                    ->toArray()
+            )
+            ->required()
+            ->visibleOn(['view','edit']),
+            
+            Select::make('begin')
+            ->label('Jeep Queue')
+            ->options([
+                Carbon::now('Asia/Manila')->format('H:i') => 'Add to Jeep Queue Table'
+                // Add more options if needed
+            ])
+            ->visibleOn(['view','edit']),
+
+        Select::make('end')
+            ->label('Driver Notify')
+            ->options([
+                Carbon::now('Asia/Manila')->format('H:i') => 'Driver Notify to Add Jeep Queue'
+                // Add more options if needed
+            ])
+            ->visibleOn(['view','edit']),
+
+        // Other fields in your form...
             ]);
     }
 
@@ -36,16 +82,17 @@ class QueueResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id'),
-                TextColumn::make('jnumber'),
-                TextColumn::make('driver'),
+                TextColumn::make('driver')->label('Driver'),
+                TextColumn::make('jnumber')->label('Plate Number'),
                 TextColumn::make('begin')->label('Arrival Time'),
-                TextColumn::make('end')->label('Departure Time'),
+                TextColumn::make('end')->label('Driver Notify Time'),
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
