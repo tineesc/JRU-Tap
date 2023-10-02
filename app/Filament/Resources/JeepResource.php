@@ -48,25 +48,15 @@ class JeepResource extends Resource
                     User::join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
                         ->where('model_has_roles.model_type', User::class)
                         ->where('model_has_roles.role_id', Role::where('name', 'Driver')->first()->id)
-                        ->pluck('users.name', 'users.name')
-                        ->toArray(),
+                        ->pluck('users.name', 'users.name')->toArray(),
                 ),
 
             Select::make('begin')
                 ->label('Jeep Queue')
                 ->options([
-                    '' => 'null',
-                    Carbon::now('Asia/Manila')->format('H:i') => 'Add to Jeep Queue Table',
+                    '' => 'Reset',
+                    Carbon::now('Asia/Manila')->format('H:i') => 'Add to Jeep Queue',
                 ]),
-
-            Select::make('end')
-                ->label('Driver Notify')
-                ->options([
-                    Carbon::now('Asia/Manila')->format('H:i') => 'Driver Notify to Add Jeep Queue',
-                    // Add more options if needed
-                ])
-                ->visibleOn('view'),
-
             // Other fields in your form...
         ]);
     }
@@ -74,7 +64,10 @@ class JeepResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([TextColumn::make('driver')->label('Driver'), TextColumn::make('jnumber')->label('Plate Number'), TextColumn::make('begin')->label('Arrival Time'), TextColumn::make('end')->label('Driver Notify Time')])
+            ->columns([TextColumn::make('driver')->label('Driver'),
+             TextColumn::make('jnumber')->label('Plate Number'), 
+             TextColumn::make('begin')->label('Arrival Time'), 
+             ])
             ->filters([
                 //
             ])

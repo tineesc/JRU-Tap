@@ -25,15 +25,28 @@ class JeepRevenue extends Component
 
     public function updateQueue()
     {
-        $user = auth()->user(); // Get the authenticated user's name
+        $user = auth()->user(); // Get the authenticated user
 
-    // Update the Queue table where Auth user's name equals the 'driver' column
-    Queue::where('driver', $user->name)
-        ->update(['end' => now()->setTimezone('Asia/Manila')->format('H:i')]);
+if ($user) {
+    // Check if the user is listed in the Queue table
+    $queueRecord = Queue::where('driver', $user->name)->first();
 
-    session()->flash('message', 'Queue updated successfully.');
+    if ($queueRecord) {
+        // Update the "end" column in the specific record
+        $queueRecord->update([
+            'end' => now()->setTimezone('Asia/Manila')->format('H:i'),
+        ]);
+
+        flash()->addSuccess('Notify to Queue');
+        return redirect()->to('/driver');
+    } else {
+        flash()->addError('Not on Queue Yet');
     }
+}
 
+return redirect()->to('/driver');
+
+    }
 
     public function addRevenue()
     {
