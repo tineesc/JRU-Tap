@@ -2,12 +2,17 @@
 
 namespace App\Livewire;
 
+use Carbon\Carbon;
 use App\Models\Card;
+use App\Models\Role;
+use App\Models\User;
+use App\Models\Queue;
 use App\Models\Revenue;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class JeepRevenue extends Component
 {
@@ -18,6 +23,18 @@ class JeepRevenue extends Component
     public $fare;
     public $payment;
 
+    public function updateQueue()
+    {
+        $user = auth()->user(); // Get the authenticated user's name
+
+    // Update the Queue table where Auth user's name equals the 'driver' column
+    Queue::where('driver', $user->name)
+        ->update(['end' => now()->setTimezone('Asia/Manila')->format('H:i')]);
+
+    session()->flash('message', 'Queue updated successfully.');
+    }
+
+
     public function addRevenue()
     {
         // Validation rules for the cardid field
@@ -26,26 +43,26 @@ class JeepRevenue extends Component
             'user' => 'required',
             'fare' => 'required|numeric',
         ]);
-    
+
         // Find the card with the given card_id in the Cards table
         $card = Card::where('card_id', $this->cardid)->first();
-    
+
         if (!$card) {
             // Card not found
             session()->flash('error', 'Error: Card not registered .');
             $this->cardid = null;
             return;
         }
-    
+
         // Check if card_balance is enough for fare
         $isCardBalanceEnough = $card->card_balance >= $this->fare;
-    
+
         if ($isCardBalanceEnough) {
             // Subtract the fare from card_balance in the Cards table and update it
             $card->card_balance -= $this->fare;
             $card->save();
         }
-    
+
         // Update the revenues table with status and card_balance
         $revenue = Revenue::create([
             'card_id' => $this->cardid,
@@ -55,22 +72,19 @@ class JeepRevenue extends Component
             'status' => $isCardBalanceEnough ? 'success' : 'failed', // Set status based on condition
             'card_balance' => $card->card_balance, // Reflect updated card_balance in the revenues table
         ]);
-    
+
         if ($isCardBalanceEnough) {
             session()->flash('message', 'Payment Success');
         } else {
             session()->flash('error', 'Unsufficient Funds');
         }
-    
+
         // Clear the input field after successful insertion
         $this->cardid = null;
-    
+
         // You can optionally redirect the user after adding the record
         // return redirect()->to('/your-redirect-url');
-        
     }
-    
-
 
     public function render()
     {
@@ -87,7 +101,7 @@ class JeepRevenue extends Component
             [
                 'items' => Revenue::orderBy('id', 'desc')->paginate(12),
             ],
-            compact('items', 'revenue',),
+            compact('items', 'revenue'),
         );
     }
 }
