@@ -43,7 +43,8 @@ class QueueResource extends Resource
                 TextInput::make('jnumber')
             ->label('Plate Number')
             ->required()
-            ->visibleOn(['view','edit']),
+            ->visibleOn(['view','edit'])
+            ->disabledOn(['edit']),
 
             Select::make('driver')
             ->label('Driver')
@@ -54,25 +55,23 @@ class QueueResource extends Resource
                     ->where('model_has_roles.role_id', Role::where('name', 'Driver')->first()->id)
                     ->pluck('users.name', 'users.name')
                     ->toArray()
-            )
-            ->required()
-            ->visibleOn(['view','edit']),
+            )->visibleOn(['view','edit'])
+            ->disabledOn(['edit']),
             
             Select::make('begin')
             ->label('Jeep Queue')
             ->options([
                 Carbon::now('Asia/Manila')->format('H:i') => 'Add to Jeep Queue Table'
                 // Add more options if needed
-            ])
-            ->visibleOn(['view','edit']),
+            ])->visibleOn(['view','edit'])
+            ->disabledOn(['edit']),
 
         Select::make('end')
             ->label('Driver Notify')
             ->options([
                 Carbon::now('Asia/Manila')->format('H:i') => 'Driver Notify to Add Jeep Queue'
                 // Add more options if needed
-            ])
-            ->visibleOn(['view','edit']),
+            ])->visibleOn(['view']),
 
         // Other fields in your form...
             ]);
