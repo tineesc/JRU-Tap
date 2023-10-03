@@ -48,6 +48,16 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+    Route::get('/queue', function () {
+        return view('queue');
+    })->name('queue');
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
     Route::get('/credits', Credits::class)->name('credits');
     Route::get('/jeep', JeepRevenue::class);
 });
