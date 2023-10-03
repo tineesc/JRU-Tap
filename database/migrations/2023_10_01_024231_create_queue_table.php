@@ -18,7 +18,7 @@ return new class extends Migration
             $table->time('begin')->format('H:i')->nullable();
             $table->time('end')->format('H:i')->nullable();
             $table->string('notification')->nullable();
-            $table->enum('status', ['approve', 'pending', 'decline']);
+            $table->enum('status', ['in queue', 'next', 'pending']);
             $table->timestamps();
         });
     }
