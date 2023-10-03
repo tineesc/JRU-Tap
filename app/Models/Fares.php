@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Enums\FareStatus;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Fares extends Model
 {
@@ -14,5 +15,9 @@ class Fares extends Model
         'destination',
         'fare',
         'status',
+    ];
+
+    protected $casts = [
+        'status' => FareStatus::class
     ];
 }
