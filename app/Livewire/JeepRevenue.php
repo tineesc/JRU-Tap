@@ -45,7 +45,7 @@ if ($user) {
         flash()->addSuccess('Notify to Queue');
         return redirect()->to('/driver');
     } else {
-        flash()->addError('Not on Queue Yet');
+        flash()->addError('Not on Queue Yet Report to admin and Time IN first');
     }
 }
 

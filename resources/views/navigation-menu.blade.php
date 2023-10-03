@@ -31,6 +31,10 @@
                     <x-nav-link wire:navigate href="{{ route('driver') }}" :active="request()->routeIs('driver')">
                         {{ __('Driver') }}
                     </x-nav-link>
+
+                    <x-nav-link wire:navigate href="{{ route('queue') }}" :active="request()->routeIs('queue')">
+                        {{ __('Queue') }}
+                    </x-nav-link>
                 </div>
             </div>
 
