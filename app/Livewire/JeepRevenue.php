@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Carbon\Carbon;
 use App\Models\Card;
+use App\Models\Jeep;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Queue;
@@ -30,12 +31,13 @@ class JeepRevenue extends Component
 
 if ($user) {
     // Check if the user is listed in the Queue table
-    $queueRecord = Queue::where('driver', $user->name)->first();
+    $queueRecord = Jeep::where('driver', $user->name)->first();
 
     if ($queueRecord) {
         // Update the "end" column in the specific record
         $queueRecord->update([
             'end' => now()->setTimezone('Asia/Manila')->format('H:i'),
+            'status' => 'pending',
         ]);
 
         Notification::make()

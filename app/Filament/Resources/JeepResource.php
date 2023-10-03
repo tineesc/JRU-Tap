@@ -57,6 +57,7 @@ class JeepResource extends Resource
                     '' => 'Reset',
                     Carbon::now('Asia/Manila')->format('H:i') => 'Add to Jeep Queue',
                 ]),
+
             // Other fields in your form...
         ]);
     }
@@ -67,6 +68,9 @@ class JeepResource extends Resource
             ->columns([TextColumn::make('driver')->label('Driver'),
              TextColumn::make('jnumber')->label('Plate Number'), 
              TextColumn::make('begin')->label('Arrival Time'), 
+             TextColumn::make('end')->label('Driver Request in Queue'), 
+             TextColumn::make('status')->label('Status'), 
+             TextColumn::make('request')->label('Request'), 
              ])
             ->filters([
                 //

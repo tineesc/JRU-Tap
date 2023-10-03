@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('driver')->nullable();
             $table->time('begin')->format('H:i')->nullable();
             $table->time('end')->format('H:i')->nullable();
-            $table->string('notification')->nullable();
-            $table->enum('status', ['approve', 'pending', 'decline']);
+            $table->enum('request', [null,'queue', 'break', 'lunch']);
+            $table->enum('status', [null,'approve', 'pending', 'decline']);
             $table->timestamps();
         }); 
     }
