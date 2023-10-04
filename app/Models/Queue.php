@@ -14,7 +14,7 @@ class Queue extends Model
         'driver',
         'begin',
         'end',
-        'notification',
+        'notify',
         'status',
     ];
 }
