@@ -8,17 +8,17 @@ use Filament\Support\Contracts\HasLabel;
 
 enum TripStatus: string implements HasLabel, HasColor, HasIcon
 {
-    case APPROVE = 'approve';
+    case APPROVE = 'complete';
     case PENDING = 'pending';
-    case DECLINE = 'decline';
+    case DECLINE = 'failed';
     
     public function getLabel(): ?string
     {
         
         return match ($this) {
-            self::APPROVE => 'approve',
+            self::APPROVE => 'complete',
             self::PENDING => 'pending',
-            self::DECLINE => 'decline',
+            self::DECLINE => 'failed',
         };
     }
     public function getColor(): string | array | null
