@@ -14,6 +14,7 @@ use Filament\Resources\Resource;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Checkbox;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
@@ -59,7 +60,7 @@ class QueueResource extends Resource
                 ->disabledOn(['edit']),
             Select::make('status')
                 ->options([
-                    'in queue' => 'in queue',
+                    'queue' => 'queue',
                     'next' => 'next',
                     'pending' => 'pending',
                 ])
@@ -78,7 +79,11 @@ class QueueResource extends Resource
             //         Carbon::now('Asia/Manila')->format('H:i') => 'Driver Notify to Add Jeep Queue'
             //         // Add more options if needed
             //     ])->visibleOn(['view']),
-
+            Select::make('notify')
+            ->label('Notify Queue')
+            ->options([
+                Carbon::now('Asia/Manila')->format('H:i') => 'Notify Jeep Driver',
+            ]),
             // Other fields in your form...
         ]);
     }
