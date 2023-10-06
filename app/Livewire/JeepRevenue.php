@@ -109,16 +109,18 @@ class JeepRevenue extends Component
         ]);
 
         if ($isCardBalanceEnough) {
-            session()->flash('message', 'Payment Success');
+            flash()->addSuccess('Payment Success');
+                return redirect()->to('/driver');
         } else {
-            session()->flash('error', 'Unsufficient Funds');
+            flash()->addError('User not found'); 
+            return redirect()->to('/driver');     
         }
 
         // Clear the input field after successful insertion
         $this->cardid = null;
 
         // You can optionally redirect the user after adding the record
-        // return redirect()->to('/your-redirect-url');
+        return redirect()->to('/driver');
     }
 
     public function render()
