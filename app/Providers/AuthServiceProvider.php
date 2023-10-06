@@ -4,8 +4,28 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 
+use App\Models\Card;
+use App\Models\Fares;
+use App\Models\Jeep;
+use App\Models\Permission;
 use App\Models\User;
+use App\Models\Queue;
+use App\Models\Places;
+use App\Models\Revenue;
+use App\Models\Role;
+use App\Models\Trip;
+use App\Models\Triplog;
+use App\Policies\CardPolicy;
+use App\Policies\FarePolicy;
+use App\Policies\JeepPolicy;
+use App\Policies\PermissionPolicy;
 use App\Policies\UserPolicy;
+use App\Policies\PlacePolicy;
+use App\Policies\QueuePolicy;
+use App\Policies\RevenuePolicy;
+use App\Policies\RolePolicy;
+use App\Policies\TriplogPolicy;
+use App\Policies\TripPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -17,6 +37,16 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         User::class => UserPolicy::class,
+        Role::class => RolePolicy::class,
+        Permission::class => PermissionPolicy::class,
+        Card::class => CardPolicy::class,
+        Jeep::class => JeepPolicy::class,
+        Queue::class => QueuePolicy::class,
+        Revenue::class => RevenuePolicy::class,
+        Places::class => PlacePolicy::class,
+        Fares::class => FarePolicy::class,
+        Trip::class => TripPolicy::class,
+        Triplog::class => TriplogPolicy::class,
     ];
 
     /**
