@@ -7,12 +7,17 @@ use App\Models\Triplog;
 use App\Enums\TripStatus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Trip extends Model
 {
     use HasFactory;
+
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
 
     protected $fillable = ['id', 'location', 'destination', 'date', 'time', 'driver', 'fare', 'departure', 'status'];
 
@@ -46,17 +51,22 @@ class Trip extends Model
                     'driver' => $this->driver,
                     'fare' => $this->fare,
                     'departure' => $this->departure,
-                    'status' => $this->status,
+                    'status' => TripStatus::ARCHIVE, // Set the status to ARCHIVE when archiving
                 ]);
+    
+                // Update the trip status to ARCHIVE (soft delete)
+                $this->status = TripStatus::ARCHIVE;
+                $this->save();
             });
-
+    
             // Redirect to the admin trips page
-            return back()->with('message', 'Trip logged and deleted successfully');
+            return back()->with('message', 'Trip logged and archived successfully');
         } catch (\Exception $e) {
             // Handle the error and redirect to the admin trips page with an error message
             return back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
+    
 
     public function Jeep(): BelongsTo
     {

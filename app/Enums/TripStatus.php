@@ -11,14 +11,16 @@ enum TripStatus: string implements HasLabel, HasColor, HasIcon
     case APPROVE = 'completed';
     case PENDING = 'pending';
     case DECLINE = 'failed';
+    case ARCHIVE = 'archive'; // Add the "ARCHIVE" status
     
     public function getLabel(): ?string
     {
         
         return match ($this) {
-            self::APPROVE => 'completed',
+            self::APPROVE => 'complete',
             self::PENDING => 'pending',
             self::DECLINE => 'failed',
+            self::ARCHIVE => 'archive', // Label for "ARCHIVE" status
         };
     }
     public function getColor(): string | array | null
@@ -27,6 +29,7 @@ enum TripStatus: string implements HasLabel, HasColor, HasIcon
             self::APPROVE => 'success',
             self::PENDING => 'warning',
             self::DECLINE => 'gray',
+            self::ARCHIVE => 'info', // Color for "ARCHIVE" status
         };
     }
     public function getIcon(): ?string
@@ -35,6 +38,7 @@ enum TripStatus: string implements HasLabel, HasColor, HasIcon
             self::APPROVE => 'heroicon-m-bolt',
             self::PENDING => 'heroicon-m-question-mark-circle',
             self::DECLINE => 'heroicon-m-battery-0',
+            self::ARCHIVE => 'heroicon-m-archive', // Icon for "ARCHIVE" status
         };
     }
 }
