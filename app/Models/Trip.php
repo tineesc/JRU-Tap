@@ -23,7 +23,7 @@ class Trip extends Model
     parent::boot();
 
     static::updating(function ($trip) {
-        if ($trip->isDirty('status') && $trip->status === TripStatus::APPROVE) {
+        if ($trip->isDirty('status') && $trip->status === TripStatus::APPROVE && TripStatus::DECLINE) {
             DB::transaction(function () use ($trip) {
                 $trip->logTrip();
                 // $trip->deleteTrip(); // Call the deleteTrip method
