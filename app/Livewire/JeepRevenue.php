@@ -27,48 +27,47 @@ class JeepRevenue extends Component
     public $fare;
     public $payment;
 
-
     public function approveTrip($tripId)
     {
         $trip = Trip::find($tripId);
 
         if ($trip->isDirty('status') && $trip->status === TripStatus::APPROVE) {
             $trip->delete();
-          //   $trip->delete(); // Delete the trip after it has been successfully updated.
+            //   $trip->delete(); // Delete the trip after it has been successfully updated.
         }
-        
 
         // You can also add a success message or a confirmation message here
     }
-    
+
     public function updateQueue()
     {
         $user = auth()->user(); // Get the authenticated user
 
-if ($user) {
-    // Check if the user is listed in the Queue table
-    $queueRecord = Jeep::where('driver', $user->name)->first();
+        if ($user) {
+            // Check if the user is listed in the Queue table
+            $queueRecord = Jeep::where('driver', $user->name)->first();
 
-    if ($queueRecord) {
-        // Update the "end" column in the specific record
-        $queueRecord->update([
-            'end' => now()->setTimezone('Asia/Manila')->format('H:i'),
-            'status' => 'pending',
-        ]);
+            if ($queueRecord) {
+                // Update the "end" column in the specific record
+                $queueRecord->update([
+                    'end' => now()
+                        ->setTimezone('Asia/Manila')
+                        ->format('H:i'),
+                    'status' => 'pending',
+                ]);
 
-        Notification::make()
-        ->title('Saved successfully')
-        ->sendToDatabase($user);
+                Notification::make()
+                    ->title('Saved successfully')
+                    ->sendToDatabase($user);
 
-        flash()->addSuccess('Notify to Queue');
+                flash()->addSuccess('Notify to Queue');
+                return redirect()->to('/driver');
+            } else {
+                flash()->addError('Not on Queue Yet Report to admin and Time IN first');
+            }
+        }
+
         return redirect()->to('/driver');
-    } else {
-        flash()->addError('Not on Queue Yet Report to admin and Time IN first');
-    }
-}
-
-return redirect()->to('/driver');
-
     }
 
     public function addRevenue()
@@ -124,6 +123,15 @@ return redirect()->to('/driver');
 
     public function render()
     {
+        $trips = DB::table('trips')
+    ->join('users', 'trips.driver', '=', 'users.name')
+    ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+    ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+    ->where('roles.name', 'Driver')
+    ->whereColumn('trips.driver', '=', 'users.name') // Add this line
+    ->select('trips.*')
+    ->get();
+
         $user = $this->user = Auth::user()->name;
         $items = Revenue::orderBy('id', 'DESC')->get();
 
@@ -137,7 +145,7 @@ return redirect()->to('/driver');
             [
                 'items' => Revenue::orderBy('id', 'desc')->paginate(12),
             ],
-            compact('items', 'revenue'),
+            compact('items', 'revenue','trips'),
         );
     }
 }

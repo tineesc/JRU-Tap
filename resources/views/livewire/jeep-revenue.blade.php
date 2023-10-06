@@ -1,13 +1,13 @@
 <div>
     <div class="relative p-3 m-5">
         <button type="button" wire:click="driving"
-        class="relative px-5 mr-5 inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        Driving
-    </button>
+            class="relative px-5 mr-5 inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Driving
+        </button>
         <button type="button" wire:click="departure"
-        class="relative px-5 inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        Departure
-    </button>
+            class="relative px-5 inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Departure
+        </button>
         <button type="button" wire:click="updateQueue"
             class="absolute top-0 right-0  inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -19,7 +19,7 @@
             <span class="sr-only">Notifications</span>
             <div
                 class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
-                </div>
+            </div>
         </button>
     </div>
     <div x-data="{ showNotification: false, message: '', error: '' }" x-init="() => {
@@ -32,8 +32,9 @@
             }, 2000);
         }
     }" x-show="showNotification"
-        x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0 translate-y-2"
-        x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-200 transform"
+        x-transition:enter="transition ease-out duration-300 transform"
+        x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition ease-in duration-200 transform"
         x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-2"
         class="fixed bottom-0 right-0 p-4 z-50">
 
@@ -51,11 +52,32 @@
     </div>
 
 
+
+
     <form wire:submit.prevent="addRevenue">
-        <div class="py-3 px-6">
-            <x-label for="fare" value="{{ __('Fare') }}" />
-            <x-input wire:model="fare" id="fare" class="block mt-1 w-full" type="number" name="fare"
-                value="{{ $revenue }}" placeholder="Fare" required autofocus autocomplete="fare" />
+        <div class="py-3 px-6 w-full">
+            @forelse($trips as $trip)
+                <x-label for="Location" value="{{ __('Location') }}" />
+                <input type="text"
+                    class="form-control border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
+                    value="{{ $trip->location }}" readonly>
+
+                <td>
+                    <input type="text"
+                        class="form-control border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
+                        value="{{ $trip->destination }}" readonly>
+                </td>
+                <td wire:model="fare">
+                    <input type="text"
+                        class="form-control border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
+                        value="{{ $trip->fare }}" readonly>
+                </td>
+
+            @empty
+                <tr>
+                    <td colspan="3">No trips found for you.</td>
+                </tr>
+            @endforelse
         </div>
         <div class="py-3 px-6">
             <x-label for="carid" value="{{ __('Card ID') }}" />
