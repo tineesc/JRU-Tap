@@ -35,9 +35,8 @@ class TripResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Select::make('location')
+        return $form->schema([
+            Select::make('location')
                 ->label('Location')
                 ->searchable()
                 ->options(Fares::all()->pluck('location', 'location'))
@@ -48,45 +47,47 @@ class TripResource extends Resource
                 ->options(Fares::all()->pluck('destination', 'destination'))
                 ->required(),
 
-                Datepicker::make('Select Date')
+            Datepicker::make('Select Date')
+                ->native(false)
                 ->minDate(now()) // Set the minimum date
                 ->format('m-d-Y')
-                ->rules([
-                    'required',
-                    'date',
-                    'after_or_equal:now',
-                ]),
-                
-                TimePicker::make('time')->required(),
-                Select::make('fare')
+                ->rules(['date', 'after_or_equal:now'])
+                ->required('create')
+                ->visibleOn('create', 'view'),
+
+            TimePicker::make('time')
+                ->native(false)
+                ->required('create')
+                ->visibleOn('create', 'view'),
+
+            Select::make('fare')
                 ->label('Fare')
                 ->searchable()
-                ->options(Fares::all()->pluck('fare', 'fare'))
-                ->required(),
-                Select::make('driver')
-            ->label('Driver')
-            ->options(
-                // Fetch users with the "Driver" role and create options array
-                User::join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
-                    ->where('model_has_roles.model_type', User::class)
-                    ->where('model_has_roles.role_id', Role::where('name', 'Driver')->first()->id)
-                    ->pluck('users.name', 'users.name')
-                    ->toArray()
-            )
-            ->required(),
+                ->required('create')
+                ->options(Fares::all()->pluck('fare', 'fare')),
+
+            Select::make('driver')
+                ->label('Driver')
+                ->options(
+                    // Fetch users with the "Driver" role and create options array
+                    User::join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+                        ->where('model_has_roles.model_type', User::class)
+                        ->where('model_has_roles.role_id', Role::where('name', 'Driver')->first()->id)
+                        ->pluck('users.name', 'users.name')
+                        ->toArray(),
+                )->required('create'),
+
             TextInput::make('jnumber')
-            ->label('Plate Number'),
-                Select::make('status')->options([
+            ->label('Plate Number')
+            ->required('create'),
+            Select::make('status')
+                ->options([
                     'completed' => 'Complete',
                     'pending' => 'Pending',
                     'failed' => 'Failed',
-                ])->required(),
-            ]);
-
-          
+                ])->required('create'),
+        ]);
     }
-
-    
 
     public static function table(Table $table): Table
     {
@@ -116,11 +117,11 @@ class TripResource extends Resource
                 TextColumn::make('driver')
                     ->label('Driver')
                     ->toggleable(),
-                    TextColumn::make('fare')
+                TextColumn::make('fare')
                     ->sortable()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: false),
-                    TextColumn::make('departure')
+                TextColumn::make('departure')
                     ->sortable()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: false),
@@ -133,25 +134,16 @@ class TripResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ])
-            ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
-            ]);
+            ->actions([Tables\Actions\EditAction::make(), Tables\Actions\DeleteAction::make()])
+            ->bulkActions([Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make()])])
+            ->emptyStateActions([Tables\Actions\CreateAction::make()]);
     }
 
     public static function getRelations(): array
     {
         return [
-            //
-        ];
+                //
+            ];
     }
 
     public static function getPages(): array

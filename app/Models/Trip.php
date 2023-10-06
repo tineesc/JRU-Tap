@@ -19,22 +19,25 @@ class Trip extends Model
     protected $fillable = ['id', 'location', 'destination', 'date', 'time', 'driver', 'fare', 'departure', 'status'];
 
     protected static function boot()
-{
-    parent::boot();
-
-    static::updating(function ($trip) {
-        if ($trip->isDirty('status') && $trip->status === TripStatus::APPROVE && TripStatus::DECLINE) {
-            DB::transaction(function () use ($trip) {
-                $trip->logTrip();
-                // $trip->deleteTrip(); // Call the deleteTrip method
-                // You may return a response here if needed
-            });
-        }
-
-        return true; // Allow the update to proceed
-    });
-}
-
+    {
+        parent::boot();
+    
+        static::updating(function ($trip) {
+            if ($trip->isDirty('status') && in_array($trip->status, [TripStatus::APPROVE, TripStatus::DECLINE])) {
+                try {
+                    DB::transaction(function () use ($trip) {
+                        $trip->logTrip();
+                        // $trip->deleteTrip();
+                    });
+                } catch (\Exception $e) {
+                    // Handle the error and log it
+                    Log::error('Error updating trip: ' . $e->getMessage());
+                    // You can choose to throw the exception here for debugging purposes if needed
+                    // throw $e;
+                }
+            }
+        });
+    }
     
     public function logTrip()
     {
@@ -50,15 +53,16 @@ class Trip extends Model
                     'driver' => $this->driver,
                     'fare' => $this->fare,
                     'departure' => $this->departure,
-                    'status' => $this->status, // Set the status from the current trip
+                    'status' => $this->status,
                 ]);
-                
             });
     
             // Redirect to the admin trips page
-            return back()->with('message', 'Trip logged and archived successfully');
+            return back()->with('message', 'Trip logged successfully');
         } catch (\Exception $e) {
-            // Handle the error and redirect to the admin trips page with an error message
+            // Handle the error and log it
+            Log::error('Error logging trip: ' . $e->getMessage());
+            // Redirect to the admin trips page with an error message
             return back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
@@ -66,18 +70,18 @@ class Trip extends Model
     public function deleteTrip()
     {
         try {
-            // Check if the status is 'approve', and then delete the record
-            if ($this->status === TripStatus::APPROVE) {
+            // Check if the status is 'approve' or 'decline', and then delete the record
+            if (in_array($this->status, [TripStatus::APPROVE, TripStatus::DECLINE])) {
                 $this->delete();
             }
         } catch (\Exception $e) {
-            // Handle the error and log it or display an error message
-            // You can also redirect to a specific page or return a response
-            // For example, log the error and redirect to an error page:
+            // Handle the error and log it
             Log::error('Error deleting trip: ' . $e->getMessage());
+            // Redirect to the admin trips page with an error message
             return back()->with('error', 'An error occurred while deleting the trip: ' . $e->getMessage());
         }
     }
+    
     
 
     public function Jeep(): BelongsTo
