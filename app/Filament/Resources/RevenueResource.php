@@ -22,7 +22,9 @@ class RevenueResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
-    protected static ?string $navigationGroup = 'Revenue';
+    protected static ?int $navigationSort = 3;
+
+    protected static ?string $navigationGroup = 'Jeeps';
 
     public static function form(Form $form): Form
     {

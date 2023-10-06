@@ -23,6 +23,8 @@ class FaresResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-presentation-chart-bar';
 
+    protected static ?int $navigationSort = 2;
+
     protected static ?string $navigationGroup = 'Fare Matrix';
 
     public static function form(Form $form): Form

@@ -41,9 +41,9 @@ class UserResource extends Resource
                             ->email()
                             ->required()
                             ->unique(ignoreRecord: true),
-                        // TextInput::make('password')
-                        //     ->password()
-                        //     ->visibleOn(['create', 'edit']),
+                            TextInput::make('password')
+                            ->password()
+                            ->visibleOn(['create']),                        
                         Select::make('Roles')
                             ->multiple()
                             ->relationship(name: 'roles', titleAttribute: 'name')

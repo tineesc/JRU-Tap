@@ -28,9 +28,10 @@ class CardResource extends Resource
         return $form
             ->schema([
                 TextInput::make('card_id')
-                ->label('Card Serial'),
+                ->label('Card Serial')
+                ->required('create'),
                 TextInput::make('wallet_id')
-                ->label('Card Serial'),
+                ->label('Wallet Serial'),
             ]);
     }
 

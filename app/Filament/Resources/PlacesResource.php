@@ -22,7 +22,9 @@ class PlacesResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-map-pin';
 
-    protected static ?string $navigationGroup = 'Locations';
+    protected static ?int $navigationSort = 1;
+
+    protected static ?string $navigationGroup = 'Fare Matrix';
 
     public static function form(Form $form): Form
     {
