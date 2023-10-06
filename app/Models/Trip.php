@@ -6,6 +6,7 @@ use App\Models\Jeep;
 use App\Models\Triplog;
 use App\Enums\TripStatus;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,27 +16,25 @@ class Trip extends Model
 {
     use HasFactory;
 
-    use SoftDeletes;
-
-    protected $dates = ['deleted_at'];
-
     protected $fillable = ['id', 'location', 'destination', 'date', 'time', 'driver', 'fare', 'departure', 'status'];
 
     protected static function boot()
-    {
-        parent::boot();
-    
-        static::updating(function ($trip) {
-            if ($trip->isDirty('status') && $trip->status === TripStatus::APPROVE) {
-                DB::transaction(function () use ($trip) {
-                    $trip->logTrip();
-                    $trip->deleteTrip(); // Call the deleteTrip method
-                });
-            }
-    
-            return true; // Allow the update to proceed
-        });
-    }
+{
+    parent::boot();
+
+    static::updating(function ($trip) {
+        if ($trip->isDirty('status') && $trip->status === TripStatus::APPROVE) {
+            DB::transaction(function () use ($trip) {
+                $trip->logTrip();
+                // $trip->deleteTrip(); // Call the deleteTrip method
+                // You may return a response here if needed
+            });
+        }
+
+        return true; // Allow the update to proceed
+    });
+}
+
     
     public function logTrip()
     {
@@ -53,6 +52,7 @@ class Trip extends Model
                     'departure' => $this->departure,
                     'status' => $this->status, // Set the status from the current trip
                 ]);
+                
             });
     
             // Redirect to the admin trips page
@@ -65,11 +65,20 @@ class Trip extends Model
     
     public function deleteTrip()
     {
-        // Check if the status is 'complete', and then delete the record
-        if ($this->status === TripStatus::APPROVE) {
-            $this->delete();
+        try {
+            // Check if the status is 'approve', and then delete the record
+            if ($this->status === TripStatus::APPROVE) {
+                $this->delete();
+            }
+        } catch (\Exception $e) {
+            // Handle the error and log it or display an error message
+            // You can also redirect to a specific page or return a response
+            // For example, log the error and redirect to an error page:
+            Log::error('Error deleting trip: ' . $e->getMessage());
+            return back()->with('error', 'An error occurred while deleting the trip: ' . $e->getMessage());
         }
     }
+    
 
     public function Jeep(): BelongsTo
     {
