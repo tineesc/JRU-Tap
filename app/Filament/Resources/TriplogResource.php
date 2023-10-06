@@ -22,7 +22,7 @@ class TriplogResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
-    protected static ?string $navigationGroup = 'Trip Monitoring';
+    protected static ?string $navigationGroup = 'Travel';
 
     public static function form(Form $form): Form
     {

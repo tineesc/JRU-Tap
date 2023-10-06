@@ -24,7 +24,7 @@ class PlacesResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
-    protected static ?string $navigationGroup = 'Fare Matrix';
+    protected static ?string $navigationGroup = 'Metrics';
 
     public static function form(Form $form): Form
     {
