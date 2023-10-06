@@ -6,10 +6,12 @@ use Carbon\Carbon;
 use App\Models\Card;
 use App\Models\Jeep;
 use App\Models\Role;
+use App\Models\Trip;
 use App\Models\User;
 use App\Models\Queue;
 use App\Models\Revenue;
 use Livewire\Component;
+use App\Enums\TripStatus;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +27,20 @@ class JeepRevenue extends Component
     public $fare;
     public $payment;
 
+
+    public function approveTrip($tripId)
+    {
+        $trip = Trip::find($tripId);
+
+        if ($trip->isDirty('status') && $trip->status === TripStatus::APPROVE) {
+            $trip->delete();
+          //   $trip->delete(); // Delete the trip after it has been successfully updated.
+        }
+        
+
+        // You can also add a success message or a confirmation message here
+    }
+    
     public function updateQueue()
     {
         $user = auth()->user(); // Get the authenticated user

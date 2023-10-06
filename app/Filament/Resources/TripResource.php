@@ -29,7 +29,7 @@ class TripResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-currency-euro';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 1;
 
     protected static ?string $navigationGroup = 'Trip Monitoring';
 
@@ -77,9 +77,9 @@ class TripResource extends Resource
             TextInput::make('jnumber')
             ->label('Plate Number'),
                 Select::make('status')->options([
-                    'approve' => 'approve',
-                    'pending' => 'pending',
-                    'decline' => 'decline',
+                    'completed' => 'Complete',
+                    'pending' => 'Pending',
+                    'failed' => 'Failed',
                 ])->required(),
             ]);
 
@@ -113,13 +113,17 @@ class TripResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: false),
-                TextColumn::make('fare')
-                    ->sortable()
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: false),
                 TextColumn::make('driver')
                     ->label('Driver')
                     ->toggleable(),
+                    TextColumn::make('fare')
+                    ->sortable()
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: false),
+                    TextColumn::make('departure')
+                    ->sortable()
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: false),
                 TextColumn::make('status')
                     ->sortable()
                     ->searchable()
