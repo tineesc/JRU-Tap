@@ -24,19 +24,19 @@ class Trip extends Model
     protected static function boot()
     {
         parent::boot();
-
+    
         static::updating(function ($trip) {
             if ($trip->isDirty('status') && $trip->status === TripStatus::APPROVE) {
                 DB::transaction(function () use ($trip) {
                     $trip->logTrip();
-                    $trip->delete();
+                    $trip->deleteTrip(); // Call the deleteTrip method
                 });
             }
-
+    
             return true; // Allow the update to proceed
         });
     }
-
+    
     public function logTrip()
     {
         try {
@@ -51,12 +51,8 @@ class Trip extends Model
                     'driver' => $this->driver,
                     'fare' => $this->fare,
                     'departure' => $this->departure,
-                    'status' => TripStatus::ARCHIVE, // Set the status to ARCHIVE when archiving
+                    'status' => $this->status, // Set the status from the current trip
                 ]);
-    
-                // Update the trip status to ARCHIVE (soft delete)
-                $this->status = TripStatus::ARCHIVE;
-                $this->save();
             });
     
             // Redirect to the admin trips page
@@ -67,6 +63,13 @@ class Trip extends Model
         }
     }
     
+    public function deleteTrip()
+    {
+        // Check if the status is 'complete', and then delete the record
+        if ($this->status === TripStatus::APPROVE) {
+            $this->delete();
+        }
+    }
 
     public function Jeep(): BelongsTo
     {
