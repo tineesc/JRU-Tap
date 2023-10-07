@@ -48,17 +48,17 @@ class TripResource extends Resource
                 ->required(),
 
             Datepicker::make('Select Date')
-                ->native(false)
                 ->minDate(now()) // Set the minimum date
                 ->format('m-d-Y')
                 ->rules(['date', 'after_or_equal:now'])
                 ->required('create')
-                ->visibleOn('create', 'view'),
+                ->visibleOn('create', 'view')
+                ->native(false),
 
             TimePicker::make('time')
-                ->native(false)
                 ->required('create')
-                ->visibleOn('create', 'view'),
+                ->visibleOn('create', 'view')
+                ->native(false),
 
             Select::make('fare')
                 ->label('Fare')
@@ -75,7 +75,8 @@ class TripResource extends Resource
                         ->where('model_has_roles.role_id', Role::where('name', 'Driver')->first()->id)
                         ->pluck('users.name', 'users.name')
                         ->toArray(),
-                )->required('create'),
+                )->required('create')
+                ->native(false),
 
             TextInput::make('jnumber')
             ->label('Plate Number')
@@ -86,7 +87,8 @@ class TripResource extends Resource
                     'completed' => 'Complete',
                     'pending' => 'Pending',
                     'failed' => 'Failed',
-                ])->required('create'),
+                ])->required('create')
+                ->native(false),
         ]);
     }
 

@@ -49,16 +49,14 @@ class JeepResource extends Resource
                         ->where('model_has_roles.model_type', User::class)
                         ->where('model_has_roles.role_id', Role::where('name', 'Driver')->first()->id)
                         ->pluck('users.name', 'users.name')->toArray(),
-                ),
+                )->native(false),
 
             Select::make('begin')
                 ->label('Jeep Queue')
                 ->options([
                     '' => 'Reset',
                     Carbon::now('Asia/Manila')->format('H:i') => 'Add to Jeep Queue',
-                ]),
-
-                
+                ])->native(false),
 
             // Other fields in your form...
         ]);

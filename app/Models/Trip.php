@@ -97,4 +97,6 @@ class Trip extends Model
     protected $casts = [
         'status' => TripStatus::class,
     ];
+
+   
 }
