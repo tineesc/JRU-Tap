@@ -67,7 +67,7 @@ class JeepRevenue extends Component
                 flash()->addSuccess('Notify to Queue');
                 return redirect()->to('/driver');
             } else {
-                flash()->addError('Not on Queue Yet Report to admin and Time IN first');
+                flash()->addError('Time IN first to get assigned Jeep');
             }
         }
 
@@ -118,6 +118,9 @@ class JeepRevenue extends Component
 
     public function render()
     {
+        $user = $this->user = Auth::user()->name;
+        $items = Revenue::orderBy('id', 'DESC')->get();
+
         $trips = DB::table('trips')
             ->join('users', 'trips.driver', '=', 'users.name')
             ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
@@ -131,16 +134,22 @@ class JeepRevenue extends Component
             ->join('cards', 'revenues.card_id', '=', 'cards.card_id')
             ->select('revenues.card_id', 'cards.card_balance')
             ->get();
-
-        $user = $this->user = Auth::user()->name;
-        $items = Revenue::orderBy('id', 'DESC')->get();
+        
+           
+            $jnumber = DB::table('jeeps')
+            ->join('users', 'jeeps.driver', '=', 'users.name')
+            ->where('users.name', '=', $user)
+            ->select('jeeps.*')
+            ->get();
+       
+        
 
         return view(
             'livewire.jeep-revenue',
             [
                 'items' => Revenue::orderBy('id', 'desc')->paginate(12),
             ],
-            compact('items', 'trips','cardData'),
+            compact('items', 'trips','cardData','jnumber'),
         );
     }
 }

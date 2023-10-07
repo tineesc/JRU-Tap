@@ -80,6 +80,7 @@ class TripResource extends Resource
             TextInput::make('jnumber')
             ->label('Plate Number')
             ->required('create'),
+
             Select::make('status')
                 ->options([
                     'completed' => 'Complete',
@@ -116,6 +117,9 @@ class TripResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: false),
                 TextColumn::make('driver')
                     ->label('Driver')
+                    ->toggleable(),
+                TextColumn::make('jnumber')
+                    ->label('Plate Number')
                     ->toggleable(),
                 TextColumn::make('fare')
                     ->sortable()
