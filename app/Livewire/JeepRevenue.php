@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Filament\Notifications\Notification;
+use Filament\Notifications\Actions\Action;
+use Filament\Notifications\Events\DatabaseNotificationsSent;
 
 class JeepRevenue extends Component
 {
@@ -117,9 +119,17 @@ class JeepRevenue extends Component
                     'status' => 'pending',
                 ]);
 
+                
                 Notification::make()
-                    ->title('Saved successfully')
-                    ->sendToDatabase($user);
+                ->success()
+                ->icon('heroicon-o-truck')
+                ->title('Driver notify Queue')
+                ->body(Auth::user()->name . ' Request to add on queue')
+                ->sendToDatabase(User::whereHas('roles', function ($query) {
+                    $query->where('id', [1,2]);
+                })->get());
+             
+            // event(new DatabaseNotificationsSent($user));
 
                 flash()->addSuccess('Notify to Queue');
                 return redirect()->to('/driver');
