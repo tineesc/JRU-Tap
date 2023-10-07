@@ -66,21 +66,19 @@ class TripResource extends Resource
                 ->required('create')
                 ->options(Fares::all()->pluck('fare', 'fare')),
 
-            Select::make('driver')
+                Select::make('driver')
                 ->label('Driver')
-                ->options(
-                    // Fetch users with the "Driver" role and create options array
-                    User::join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
-                        ->where('model_has_roles.model_type', User::class)
-                        ->where('model_has_roles.role_id', Role::where('name', 'Driver')->first()->id)
-                        ->pluck('users.name', 'users.name')
-                        ->toArray(),
-                )->required('create')
+                ->searchable()
+                ->required('create')
+                ->options(Jeep::all()->pluck('driver', 'driver'))
                 ->native(false),
 
-            TextInput::make('jnumber')
-            ->label('Plate Number')
-            ->required('create'),
+                Select::make('jnumber')
+                ->label('Plate Number')
+                ->searchable()
+                ->required('create')
+                ->options(Jeep::all()->pluck('jnumber', 'jnumber'))
+                ->native(false),
 
             Select::make('status')
                 ->options([
@@ -114,6 +112,7 @@ class TripResource extends Resource
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: false),
                 TextColumn::make('time')
+                    ->label('Driving Time')
                     ->sortable()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: false),
@@ -124,10 +123,6 @@ class TripResource extends Resource
                     ->label('Plate Number')
                     ->toggleable(),
                 TextColumn::make('fare')
-                    ->sortable()
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: false),
-                TextColumn::make('departure')
                     ->sortable()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: false),

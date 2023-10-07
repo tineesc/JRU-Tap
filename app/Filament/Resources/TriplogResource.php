@@ -54,6 +54,7 @@ class TriplogResource extends Resource
                 ->searchable()
                 ->toggleable(isToggledHiddenByDefault: false),
             TextColumn::make('time')
+                ->label('Driving Time')
                 ->sortable()
                 ->searchable()
                 ->toggleable(isToggledHiddenByDefault: false),
@@ -65,6 +66,7 @@ class TriplogResource extends Resource
                 ->searchable()
                 ->toggleable(isToggledHiddenByDefault: false),
                 TextColumn::make('departure')
+                ->label('Departure Time')
                 ->sortable()
                 ->searchable()
                 ->toggleable(isToggledHiddenByDefault: false),
