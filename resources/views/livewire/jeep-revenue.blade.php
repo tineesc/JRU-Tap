@@ -71,7 +71,7 @@
                         <x-label for="fare" value="{{ __('Fare') }}" />
                         <input wire:model="fare" type="text" name="fare" id="fare"
                             class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            :value="{{ $trip->fare }}" readonly>
+                            readonly>
                     </div>
                 </div>
             @empty
@@ -100,6 +100,13 @@
                             <p class="text-md font-semibold text-slate-700">Fare {{ $item->fare }}</p>
                             <p class="text-md font-semibold text-slate-700">Payment {{ $item->payment_method }}</p>
                             <p class="text-md font-semibold text-slate-700">Status {{ $item->status }}</p>
+                            <p class="text-md font-semibold text-slate-700">Balance
+                                @foreach ($cardData as $data)
+                                    @if ($data->card_id === $item->card_id)
+                                        {{ $data->card_balance }}
+                                    @endif
+                                @endforeach
+                            </p>
                             <p class="text-md font-semibold text-slate-700">Driver {{ $item->name }}</p>
                         </div>
                     </div>

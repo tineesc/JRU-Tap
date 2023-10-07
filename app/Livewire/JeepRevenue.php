@@ -27,6 +27,22 @@ class JeepRevenue extends Component
     public $fare;
     public $payment;
 
+    public function mount()
+    {
+        $trips = DB::table('trips')
+            ->join('users', 'trips.driver', '=', 'users.name')
+            ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+            ->where('roles.name', 'Driver')
+            ->whereColumn('trips.driver', '=', 'users.name')
+            ->select('trips.fare')
+            ->first();
+
+        if ($trips) {
+            $this->fare = $trips->fare;
+        }
+    }
+
     public function updateQueue()
     {
         $user = auth()->user(); // Get the authenticated user
@@ -70,28 +86,26 @@ class JeepRevenue extends Component
             // Check if card_balance is enough for fare
             $isCardBalanceEnough = $card->card_balance >= $this->fare;
 
-            DB::transaction(function () use ($isCardBalanceEnough, $card) {
-                if ($isCardBalanceEnough) {
+            if ($isCardBalanceEnough) {
+                DB::transaction(function () use ($card) {
                     // Subtract the fare from card_balance in the Cards table and update it
                     $card->card_balance -= $this->fare;
                     $card->save();
-                }
 
-                // Update the revenues table with status and card_balance
-                Revenue::create([
-                    'card_id' => $this->cardid,
-                    'name' => $this->user,
-                    'fare' => $this->fare,
-                    'payment_method' => 'card',
-                    'status' => $isCardBalanceEnough ? 'success' : 'failed',
-                    'card_balance' => $card->card_balance,
-                ]);
-            });
+                    // Update the revenues table with status and card_balance
+                    Revenue::create([
+                        'card_id' => $this->cardid,
+                        'name' => $this->user,
+                        'fare' => $this->fare,
+                        'payment_method' => 'card',
+                        'status' => 'success',
+                        'card_balance' => $card->card_balance,
+                    ]);
+                });
 
-            if ($isCardBalanceEnough) {
                 flash()->addSuccess('Payment Success');
             } else {
-                flash()->addError('User not found');
+                flash()->addError('Insufficient Balance');
             }
         }
 
@@ -113,6 +127,11 @@ class JeepRevenue extends Component
             ->select('trips.*')
             ->get();
 
+        $cardData = DB::table('revenues')
+            ->join('cards', 'revenues.card_id', '=', 'cards.card_id')
+            ->select('revenues.card_id', 'cards.card_balance')
+            ->get();
+
         $user = $this->user = Auth::user()->name;
         $items = Revenue::orderBy('id', 'DESC')->get();
 
@@ -121,7 +140,7 @@ class JeepRevenue extends Component
             [
                 'items' => Revenue::orderBy('id', 'desc')->paginate(12),
             ],
-            compact('items', 'trips'),
+            compact('items', 'trips','cardData'),
         );
     }
 }
