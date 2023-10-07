@@ -27,6 +27,7 @@ class JeepRevenue extends Component
     public $fare;
     public $payment;
 
+
     public function mount()
     {
         $trips = DB::table('trips')
@@ -40,6 +41,62 @@ class JeepRevenue extends Component
 
         if ($trips) {
             $this->fare = $trips->fare;
+        }
+    }
+
+    public function driving()
+    {
+        // Check if the user has an assigned trip and is marked as the driver
+        $trip = Trip::where('driver', Auth::user()->name)->first();
+
+        if ($trip) {
+            // Update the "time" column with the current time
+            $trip->update([
+                'time' => now()
+                    ->setTimezone('Asia/Manila')
+                    ->format('H:i'),
+            ]);
+
+            // You may also update the "status" to mark it as completed or in-progress, as needed
+            // $trip->update(['status' => 'completed']);
+
+            // You can add additional logic here as per your requirements
+
+            // Display a success message
+            flash()->addSuccess('Driving Time updated Successfully');
+            return redirect()->to('/driver');
+        } else {
+            // Display an error message
+            flash()->addError('No assigned trip for you.');
+            return redirect()->to('/driver');
+        }
+    }
+
+    public function departure()
+    {
+        // Check if the user has an assigned trip and is marked as the driver
+        $trip = Trip::where('driver', Auth::user()->name)->first();
+
+        if ($trip) {
+            // Update the "time" column with the current time
+            $trip->update([
+                'departure' => now()
+                    ->setTimezone('Asia/Manila')
+                    ->format('H:i'),
+            ]);
+
+            // You may also update the "status" to mark it as completed or in-progress, as needed
+            $trip->update(['status' => 'completed']);
+
+            // You can add additional logic here as per your requirements
+
+            // Display a success message
+            flash()->addSuccess('Driving Time updated Successfully');
+            return redirect()->to('/driver');
+        } else {
+            // Display an error message
+            flash()->addError('No assigned trip for you.');
+            return redirect()->to('/driver');
         }
     }
 
@@ -134,22 +191,19 @@ class JeepRevenue extends Component
             ->join('cards', 'revenues.card_id', '=', 'cards.card_id')
             ->select('revenues.card_id', 'cards.card_balance')
             ->get();
-        
-           
-            $jnumber = DB::table('jeeps')
+
+        $jnumber = DB::table('jeeps')
             ->join('users', 'jeeps.driver', '=', 'users.name')
             ->where('users.name', '=', $user)
             ->select('jeeps.*')
             ->get();
-       
-        
 
         return view(
             'livewire.jeep-revenue',
             [
                 'items' => Revenue::orderBy('id', 'desc')->paginate(12),
             ],
-            compact('items', 'trips','cardData','jnumber'),
+            compact('items', 'trips', 'cardData', 'jnumber'),
         );
     }
 }
