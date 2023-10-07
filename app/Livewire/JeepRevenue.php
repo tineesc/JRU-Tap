@@ -27,18 +27,6 @@ class JeepRevenue extends Component
     public $fare;
     public $payment;
 
-    public function approveTrip($tripId)
-    {
-        $trip = Trip::find($tripId);
-
-        if ($trip->isDirty('status') && $trip->status === TripStatus::APPROVE) {
-            $trip->delete();
-            //   $trip->delete(); // Delete the trip after it has been successfully updated.
-        }
-
-        // You can also add a success message or a confirmation message here
-    }
-
     public function updateQueue()
     {
         $user = auth()->user(); // Get the authenticated user
@@ -72,51 +60,42 @@ class JeepRevenue extends Component
 
     public function addRevenue()
     {
-        // Validation rules for the cardid field
-        $this->validate([
-            'cardid' => 'required|numeric',
-            'user' => 'required',
-            'fare' => 'required|numeric',
-        ]);
-
         // Find the card with the given card_id in the Cards table
         $card = Card::where('card_id', $this->cardid)->first();
 
         if (!$card) {
             // Card not found
-            session()->flash('error', 'Error: Card not registered .');
-            $this->cardid = null;
-            return;
-        }
-
-        // Check if card_balance is enough for fare
-        $isCardBalanceEnough = $card->card_balance >= $this->fare;
-
-        if ($isCardBalanceEnough) {
-            // Subtract the fare from card_balance in the Cards table and update it
-            $card->card_balance -= $this->fare;
-            $card->save();
-        }
-
-        // Update the revenues table with status and card_balance
-        $revenue = Revenue::create([
-            'card_id' => $this->cardid,
-            'name' => $this->user,
-            'fare' => $this->fare,
-            'payment_method' => 'card', // Set the payment_method to 'card'
-            'status' => $isCardBalanceEnough ? 'success' : 'failed', // Set status based on condition
-            'card_balance' => $card->card_balance, // Reflect updated card_balance in the revenues table
-        ]);
-
-        if ($isCardBalanceEnough) {
-            flash()->addSuccess('Payment Success');
-                return redirect()->to('/driver');
+            flash()->addError('Error: Card not Registered');
         } else {
-            flash()->addError('User not found'); 
-            return redirect()->to('/driver');     
+            // Check if card_balance is enough for fare
+            $isCardBalanceEnough = $card->card_balance >= $this->fare;
+
+            DB::transaction(function () use ($isCardBalanceEnough, $card) {
+                if ($isCardBalanceEnough) {
+                    // Subtract the fare from card_balance in the Cards table and update it
+                    $card->card_balance -= $this->fare;
+                    $card->save();
+                }
+
+                // Update the revenues table with status and card_balance
+                Revenue::create([
+                    'card_id' => $this->cardid,
+                    'name' => $this->user,
+                    'fare' => $this->fare,
+                    'payment_method' => 'card',
+                    'status' => $isCardBalanceEnough ? 'success' : 'failed',
+                    'card_balance' => $card->card_balance,
+                ]);
+            });
+
+            if ($isCardBalanceEnough) {
+                flash()->addSuccess('Payment Success');
+            } else {
+                flash()->addError('User not found');
+            }
         }
 
-        // Clear the input field after successful insertion
+        // Clear the input field after successful insertion or if the card is not found
         $this->cardid = null;
 
         // You can optionally redirect the user after adding the record
@@ -126,28 +105,23 @@ class JeepRevenue extends Component
     public function render()
     {
         $trips = DB::table('trips')
-    ->join('users', 'trips.driver', '=', 'users.name')
-    ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
-    ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
-    ->where('roles.name', 'Driver')
-    ->whereColumn('trips.driver', '=', 'users.name') // Add this line
-    ->select('trips.*')
-    ->get();
+            ->join('users', 'trips.driver', '=', 'users.name')
+            ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+            ->where('roles.name', 'Driver')
+            ->whereColumn('trips.driver', '=', 'users.name') // Add this line
+            ->select('trips.*')
+            ->get();
 
         $user = $this->user = Auth::user()->name;
         $items = Revenue::orderBy('id', 'DESC')->get();
-
-        $revenue = DB::table('revenues')
-            ->select('revenues.fare')
-            ->where($user = 'revenues.name')
-            ->get();
 
         return view(
             'livewire.jeep-revenue',
             [
                 'items' => Revenue::orderBy('id', 'desc')->paginate(12),
             ],
-            compact('items', 'revenue','trips'),
+            compact('items', 'trips'),
         );
     }
 }

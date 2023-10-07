@@ -51,45 +51,44 @@
         @endif
     </div>
 
-
-
-
     <form wire:submit.prevent="addRevenue">
         <div class="py-3 px-6 w-full">
             @forelse($trips as $trip)
-                <x-label for="Location" value="{{ __('Location') }}" />
-                <input type="text"
-                    class="form-control border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
-                    value="{{ $trip->location }}" readonly>
-
-                <td>
-                    <input type="text"
-                        class="form-control border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
-                        value="{{ $trip->destination }}" readonly>
-                </td>
-                <td>
-                    <input wire:model="fare" type="text"
-                        class="form-control border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
-                        :value="{{ $trip->fare }}" readonly>
-                </td>
-
+                <div class="grid grid-cols-3 gap-3 mx-3">
+                    <div>
+                        <x-label for="Location" value="{{ __('Location') }}" />
+                        <input type="text"
+                            class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            value="{{ $trip->location }}" readonly>
+                    </div>
+                    <div>
+                        <x-label for="destination" value="{{ __('Destination') }}" />
+                        <input type="text"
+                            class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            value="{{ $trip->destination }}" readonly>
+                    </div>
+                    <div>
+                        <x-label for="fare" value="{{ __('Fare') }}" />
+                        <input wire:model="fare" type="text" name="fare" id="fare"
+                            class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            :value="{{ $trip->fare }}" readonly>
+                    </div>
+                </div>
             @empty
-                <tr>
+                <div>
                     <td colspan="3">No trips found for you.</td>
-                </tr>
+                </div>
             @endforelse
         </div>
-        <div class="py-3 px-6">
-            <x-label for="carid" value="{{ __('Card ID') }}" />
+        <div class="py-3 px-6 mx-3">
+            <x-label for="cardid" value="{{ __('Card ID') }}" />
             <x-input wire:model="cardid" id="cardid" class="block mt-1 w-full" type="number" name="cardid"
-                :value="old('cardid')" placeholder="Scan ID" required autofocus autocomplete="cardid" />
+                placeholder="Scan ID" required autofocus autocomplete="cardid" />
         </div>
-
         <x-input wire:model="user" id="user" class="hidden mt-1 w-full" type="text" name="user"
             value="{{ Auth::user()->name }}" required autofocus autocomplete="user" />
-        <x-button class="hidden">{{ __('Scan') }}</x-button>
+        <x-button class="hidden" type="submit">{{ __('Scan') }}</x-button>
     </form>
-
 
     <div>
         <div class="max-w-6xl mx-auto mt-4">
