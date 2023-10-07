@@ -63,7 +63,14 @@ class JeepRevenue extends Component
             // $trip->update(['status' => 'completed']);
 
             // You can add additional logic here as per your requirements
-
+            Notification::make()
+            ->success()
+            ->icon('heroicon-o-megaphone')
+            ->title('Driver Driving Notification')
+            ->body(Auth::user()->name . 'Leave the Terminal Start Driving')
+            ->sendToDatabase(User::whereHas('roles', function ($query) {
+                $query->where('id', [1,2]);
+            })->get());
             // Display a success message
             flash()->addSuccess('Driving Time updated Successfully');
             return redirect()->to('/driver');
@@ -91,7 +98,14 @@ class JeepRevenue extends Component
             $trip->update(['status' => 'completed']);
 
             // You can add additional logic here as per your requirements
-
+            Notification::make()
+            ->success()
+            ->icon('heroicon-o-check-badge')
+            ->title('Driver Departure Notification')
+            ->body(Auth::user()->name . 'Arrive on Departure Destination')
+            ->sendToDatabase(User::whereHas('roles', function ($query) {
+                $query->where('id', [1,2]);
+            })->get());
             // Display a success message
             flash()->addSuccess('Driving Time updated Successfully');
             return redirect()->to('/driver');
@@ -123,7 +137,7 @@ class JeepRevenue extends Component
                 Notification::make()
                 ->success()
                 ->icon('heroicon-o-truck')
-                ->title('Driver notify Queue')
+                ->title('Driver Queue Notification')
                 ->body(Auth::user()->name . ' Request to add on queue')
                 ->sendToDatabase(User::whereHas('roles', function ($query) {
                     $query->where('id', [1,2]);
