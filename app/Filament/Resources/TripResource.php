@@ -10,9 +10,12 @@ use App\Models\User;
 use Filament\Tables;
 use App\Models\Fares;
 use App\Models\Places;
+use Filament\Forms\Set;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
 use Filament\Resources\Resource;
+use Illuminate\Support\Facades\DB;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
@@ -71,22 +74,32 @@ class TripResource extends Resource
                 ->searchable()
                 ->required('create')
                 ->options(Jeep::all()->pluck('driver', 'driver'))
-                ->native(false),
-
-                Select::make('jnumber')
+                ->native(false)
+                ->live()
+                ->afterStateUpdated(function (Set $set, ?string $state) {
+                    $jeep = Jeep::where('driver', $state)->first();
+                    if ($jeep) {
+                        $set('jnumber', $jeep->jnumber);
+                    }
+                }),
+            
+            TextInput::make('jnumber')
                 ->label('Plate Number')
-                ->searchable()
-                ->required('create')
-                ->options(Jeep::all()->pluck('jnumber', 'jnumber'))
-                ->native(false),
+                ->rules('required'),
+            
 
             Select::make('status')
                 ->options([
                     'completed' => 'Complete',
                     'on going' => 'on going',
                     'failed' => 'Failed',
-                ])->required('create')
+                ])
+                ->required('create')
                 ->native(false),
+
+                
+            
+                
         ]);
     }
 

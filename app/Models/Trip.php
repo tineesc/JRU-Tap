@@ -85,6 +85,7 @@ class Trip extends Model
         return $this->belongsTo(Jeep::class);
     }
 
+    
     /**
      * The attributes that should be cast.
      *
