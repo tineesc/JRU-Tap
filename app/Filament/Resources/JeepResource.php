@@ -49,14 +49,30 @@ class JeepResource extends Resource
                         ->where('model_has_roles.model_type', User::class)
                         ->where('model_has_roles.role_id', Role::where('name', 'Driver')->first()->id)
                         ->pluck('users.name', 'users.name')->toArray(),
-                )->native(false),
+                )->required()->native(false),
 
-            Select::make('begin')
-                ->label('Jeep Queue')
+            Select::make('queue')
+                ->label('Add to Queue')
                 ->options([
                     '' => 'Reset',
                     Carbon::now('Asia/Manila')->format('H:i') => 'Add to Jeep Queue',
                 ])->native(false),
+
+                Select::make('begin')
+                ->label('Time In')
+                ->options([
+                    '' => 'Reset',
+                    Carbon::now('Asia/Manila')->format('H:i') => 'Time IN',
+                ])->native(false),
+
+                Select::make('end')
+                ->label('Time Out')
+                ->options([
+                    '' => 'Reset',
+                    Carbon::now('Asia/Manila')->format('H:i') => 'Time Out',
+                ])->native(false),
+
+
 
             // Other fields in your form...
         ]);
@@ -67,8 +83,10 @@ class JeepResource extends Resource
         return $table
             ->columns([TextColumn::make('driver')->label('Driver'),
              TextColumn::make('jnumber')->label('Plate Number'), 
-             TextColumn::make('begin')->label('Arrival Time'), 
-             TextColumn::make('end')->label('Driver Request in Queue'), 
+             TextColumn::make('begin')->label('Time IN'), 
+             TextColumn::make('end')->label('Time Out'), 
+             TextColumn::make('queue')->label('Add on Queue'), 
+             TextColumn::make('notify')->label('Request on Queue'), 
              TextColumn::make('status')->label('Status'), 
              TextColumn::make('request')->label('Request'), 
              ])

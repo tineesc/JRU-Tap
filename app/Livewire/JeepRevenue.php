@@ -45,6 +45,48 @@ class JeepRevenue extends Component
             $this->fare = $trips->fare;
         }
     }
+    
+    public function break()
+    {
+        $user = Auth::user();
+
+        if ($user) {
+            $jeep = Jeep::where('driver', $user->name)->first();
+
+            if ($jeep) {
+                $jeep->request = 'break';
+                $jeep->status = 'pending';
+                $jeep->save();
+                flash()->addSuccess('Request Sent Successfully');
+                return redirect()->to('/driver');
+            }
+            else {
+                flash()->addError('Something went wrong!');
+                return redirect()->to('/driver');
+            }
+          
+        }
+    }
+
+    public function lunch()
+    {
+        $user = Auth::user();
+
+        if ($user) {
+            $jeep = Jeep::where('driver', $user->name)->first();
+
+            if ($jeep) {
+                $jeep->request = 'lunch';
+                $jeep->status = 'pending';
+                $jeep->save();
+                flash()->addSuccess('Request Sent Successfully');
+                return redirect()->to('/driver');
+            }  else {
+                flash()->addError('Something went wrong!');
+                return redirect()->to('/driver');
+            }
+        }
+    }
 
     public function driving()
     {
@@ -127,7 +169,7 @@ class JeepRevenue extends Component
             if ($queueRecord) {
                 // Update the "end" column in the specific record
                 $queueRecord->update([
-                    'end' => now()
+                    'notify' => now()
                         ->setTimezone('Asia/Manila')
                         ->format('H:i'),
                     'status' => 'pending',
@@ -148,7 +190,7 @@ class JeepRevenue extends Component
                 flash()->addSuccess('Notify to Queue');
                 return redirect()->to('/driver');
             } else {
-                flash()->addError('Time IN first to get assigned Jeep');
+                flash()->addError('No Jeep Assign!');
             }
         }
 

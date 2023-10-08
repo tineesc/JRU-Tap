@@ -60,25 +60,13 @@ class QueueResource extends Resource
                 ->disabledOn(['edit']),
             Select::make('status')
                 ->options([
-                    'queue' => 'queue',
-                    'next' => 'next',
-                    'pending' => 'pending',
+                    'loading' => 'loading',
+                    'next in line' => 'next in line',
+                    'assigning' => 'assigning',
                 ])
                 ->required()
                 ->visibleOn(['view', 'edit']),
-            //     Select::make('begin')
-            //     ->label('Jeep Queue')
-            //     ->options([
-            //         Carbon::now('Asia/Manila')->format('H:i') => 'Add to Jeep Queue Table'
-            //         // Add more options if needed
-            //     ])->visibleOn(['view']),
-
-            // Select::make('end')
-            //     ->label('Driver Notify')
-            //     ->options([
-            //         Carbon::now('Asia/Manila')->format('H:i') => 'Driver Notify to Add Jeep Queue'
-            //         // Add more options if needed
-            //     ])->visibleOn(['view']),
+                
             Select::make('notify')
             ->label('Notify Queue')
             ->options([

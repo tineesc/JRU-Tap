@@ -15,7 +15,7 @@
                             Arrival
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Action
+                            Status
                         </th>
                     </tr>
                 </thead>

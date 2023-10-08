@@ -10,7 +10,7 @@ class Jeep extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['jnumber', 'driver', 'begin', 'end', 'notification', 'status'];
+    protected $fillable = ['jnumber', 'driver', 'begin', 'end', 'notify', 'status', 'notify','queue'];
 
     public function driver()
     {
@@ -20,14 +20,20 @@ class Jeep extends Model
     protected static function booted()
     {
         static::updated(function ($jeep) {
-            // Create a new Queue record when Jeep is updated
-            \App\Models\Queue::create([
-                'driver' => $jeep->driver,
-                'jnumber' => $jeep->jnumber,
-                'begin' => $jeep->begin,
-                'end' => $jeep->end,
-                // Add any additional fields you want to copy from Jeep to Queue
-            ]);
+            if ($jeep->isDirty('queue')) {
+                // Create a new Queue record when the 'queue' field is updated
+                \App\Models\Queue::create([
+                    'driver' => $jeep->driver,
+                    'jnumber' => $jeep->jnumber,
+                    'queue' => $jeep->queue, // Use the updated 'queue' value
+                    'end' => $jeep->end,
+                    'status' => 'assigning',
+                    // Add any additional fields you want to copy from Jeep to Queue
+                ]);
+            }
         });
     }
+    
+
+    
 }

@@ -83,7 +83,7 @@ class TripResource extends Resource
             Select::make('status')
                 ->options([
                     'completed' => 'Complete',
-                    'pending' => 'Pending',
+                    'on going' => 'on going',
                     'failed' => 'Failed',
                 ])->required('create')
                 ->native(false),

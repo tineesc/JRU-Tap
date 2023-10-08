@@ -7,9 +7,17 @@
                     Driving
                 </button>
                 <button type="button" wire:click="departure" onclick="return confirm('Are you sure you want to remove the user from this group?');"
-                    class="relative px-5 inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    class="relative px-5 mr-5 inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Departure
                 </button>
+                <button type="button" wire:click="break" onclick="return confirm('Confirm your Request for Break?');"
+                class="relative px-5 mr-5 inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Break
+            </button>
+            <button type="button" wire:click="lunch" onclick="return confirm('Confirm your Request for Lunch?');"
+            class="relative px-5 inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Lunch
+        </button>
             </div>
             <div>
                 <div id="toast-simple"
