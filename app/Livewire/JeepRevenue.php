@@ -107,7 +107,7 @@ class JeepRevenue extends Component
                 $query->where('id', [1,2]);
             })->get());
             // Display a success message
-            flash()->addSuccess('Driving Time updated Successfully');
+            flash()->addSuccess('Departure Time updated Successfully');
             return redirect()->to('/driver');
         } else {
             // Display an error message

@@ -28,7 +28,7 @@ class PaymentController extends Controller
         if (!$revenueRecord) {
             // Cardid does not exist in the revenue table, you can handle this case as per your requirement
             // For example, redirect back with an error message
-            return redirect()->back()->with('error', 'Card ID not found in the revenue table.');
+            return redirect()->back()->with('error', 'Card ID not found in Database.');
         }
 
         // If the cardid exists, continue with the payment process

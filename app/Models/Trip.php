@@ -27,7 +27,7 @@ class Trip extends Model
                 try {
                     DB::transaction(function () use ($trip) {
                         $trip->logTrip();
-                       
+                        $trip->deleteTrip();
                     });
                 } catch (\Exception $e) {
                     return back()->with('message', 'Trip Successfully Arrive');
@@ -55,11 +55,26 @@ class Trip extends Model
             });
 
             $this->delete();
-    
+
             // Redirect to the admin trips page
             return back()->with('message', 'Trip logged successfully');
         } catch (\Exception $e) {
             return back()->with('message', 'Trip Successfully Arrive');
+        }
+    }
+
+    public function deleteTrip()
+    {
+        try {
+            // Check if the status is 'approve' or 'decline', and then delete the record
+            if (in_array($this->status, [TripStatus::APPROVE, TripStatus::DECLINE])) {
+                $this->delete();
+            }
+        } catch (\Exception $e) {
+            // Handle the error and log it
+            Log::error('Error deleting trip: ' . $e->getMessage());
+            // Redirect to the admin trips page with an error message
+            return back()->with('error', 'An error occurred while deleting the trip: ' . $e->getMessage());
         }
     }
      
