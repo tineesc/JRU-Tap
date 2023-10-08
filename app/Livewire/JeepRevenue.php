@@ -158,6 +158,41 @@ class JeepRevenue extends Component
         }
     }
 
+    public function failed()
+    {
+        // Check if the user has an assigned trip and is marked as the driver
+        $trip = Trip::where('driver', Auth::user()->name)->first();
+
+        if ($trip) {
+            // Update the "time" column with the current time
+            $trip->update([
+                'departure' => now()
+                    ->setTimezone('Asia/Manila')
+                    ->format('H:i'),
+            ]);
+
+            // You may also update the "status" to mark it as completed or in-progress, as needed
+            $trip->update(['status' => 'failed']);
+
+            // You can add additional logic here as per your requirements
+            Notification::make()
+            ->success()
+            ->icon('heroicon-o-check-badge')
+            ->title('Driver Failure Notification')
+            ->body(Auth::user()->name . 'Failure on Departure Destination')
+            ->sendToDatabase(User::whereHas('roles', function ($query) {
+                $query->where('id', [1,2]);
+            })->get());
+            // Display a success message
+            flash()->addSuccess('Failure Departure Time updated Successfully');
+            return redirect()->to('/driver');
+        } else {
+            // Display an error message
+            flash()->addError('No assigned trip for you.');
+            return redirect()->to('/driver');
+        }
+    }
+
     public function updateQueue()
     {
         $user = auth()->user(); // Get the authenticated user
