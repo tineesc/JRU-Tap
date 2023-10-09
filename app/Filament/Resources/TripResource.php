@@ -70,28 +70,26 @@ class TripResource extends Resource
                 ->required('create')
                 ->options(Fares::all()->pluck('fare', 'fare')),
 
-               Select::make('driver')
-    ->label('Driver')
-    ->searchable()
-    ->required('create')
-    ->options(Jeep::all()->pluck('driver', 'driver'))
-    ->native(false)
-    ->live()
-    ->afterStateUpdated(function (Set $set, ?string $state) {
-        $jeep = Jeep::where('driver', $state)->first();
-        if ($jeep) {
-            // Delete the data from the 'queue' table with the matching 'driver' value
-            Queue::where('driver', $state)->delete();
-            
-            $set('jnumber', $jeep->jnumber);
-        }
-    }),
+            Select::make('driver')
+                ->label('Driver')
+                ->searchable()
+                ->required('create')
+                ->options(Queue::all()->pluck('driver', 'driver'))
+                ->native(false)
+                ->live()
+                ->afterStateUpdated(function (Set $set, ?string $state) {
+                    $jeep = Queue::where('driver', $state)->first();
+                    if ($jeep) {
+                        // Delete the data from the 'queue' table with the matching 'driver' value
+                        Queue::where('driver', $state)->delete();
 
-TextInput::make('jnumber')
-    ->label('Plate Number')
-    ->rules('required'),
+                        $set('jnumber', $jeep->jnumber);
+                    }
+                }),
 
-            
+            TextInput::make('jnumber')
+                ->label('Plate Number')
+                ->rules('required'),
 
             Select::make('status')
                 ->options([
@@ -101,10 +99,6 @@ TextInput::make('jnumber')
                 ])
                 ->required('create')
                 ->native(false),
-
-                
-            
-                
         ]);
     }
 
