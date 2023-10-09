@@ -29,7 +29,6 @@ class JeepRevenue extends Component
     public $fare;
     public $payment;
 
-
     public function mount()
     {
         $trips = DB::table('trips')
@@ -45,7 +44,7 @@ class JeepRevenue extends Component
             $this->fare = $trips->fare;
         }
     }
-    
+
     public function break()
     {
         $user = Auth::user();
@@ -59,12 +58,10 @@ class JeepRevenue extends Component
                 $jeep->save();
                 flash()->addSuccess('Request Sent Successfully');
                 return redirect()->to('/driver');
-            }
-            else {
+            } else {
                 flash()->addError('Something went wrong!');
                 return redirect()->to('/driver');
             }
-          
         }
     }
 
@@ -81,7 +78,7 @@ class JeepRevenue extends Component
                 $jeep->save();
                 flash()->addSuccess('Request Sent Successfully');
                 return redirect()->to('/driver');
-            }  else {
+            } else {
                 flash()->addError('Something went wrong!');
                 return redirect()->to('/driver');
             }
@@ -106,13 +103,15 @@ class JeepRevenue extends Component
 
             // You can add additional logic here as per your requirements
             Notification::make()
-            ->success()
-            ->icon('heroicon-o-megaphone')
-            ->title('Driver Driving Notification')
-            ->body(Auth::user()->name . 'Leave the Terminal Start Driving')
-            ->sendToDatabase(User::whereHas('roles', function ($query) {
-                $query->where('id', [1,2]);
-            })->get());
+                ->success()
+                ->icon('heroicon-o-megaphone')
+                ->title('Driver Driving Notification')
+                ->body(Auth::user()->name . 'Leave the Terminal Start Driving')
+                ->sendToDatabase(
+                    User::whereHas('roles', function ($query) {
+                        $query->where('id', [1, 2]);
+                    })->get(),
+                );
             // Display a success message
             flash()->addSuccess('Driving Time updated Successfully');
             return redirect()->to('/driver');
@@ -141,13 +140,15 @@ class JeepRevenue extends Component
 
             // You can add additional logic here as per your requirements
             Notification::make()
-            ->success()
-            ->icon('heroicon-o-check-badge')
-            ->title('Driver Departure Notification')
-            ->body(Auth::user()->name . 'Arrive on Departure Destination')
-            ->sendToDatabase(User::whereHas('roles', function ($query) {
-                $query->where('id', [1,2]);
-            })->get());
+                ->success()
+                ->icon('heroicon-o-check-badge')
+                ->title('Driver Departure Notification')
+                ->body(Auth::user()->name . 'Arrive on Departure Destination')
+                ->sendToDatabase(
+                    User::whereHas('roles', function ($query) {
+                        $query->where('id', [1, 2]);
+                    })->get(),
+                );
             // Display a success message
             flash()->addSuccess('Departure Time updated Successfully');
             return redirect()->to('/driver');
@@ -176,13 +177,15 @@ class JeepRevenue extends Component
 
             // You can add additional logic here as per your requirements
             Notification::make()
-            ->success()
-            ->icon('heroicon-o-check-badge')
-            ->title('Driver Failure Notification')
-            ->body(Auth::user()->name . 'Failure on Departure Destination')
-            ->sendToDatabase(User::whereHas('roles', function ($query) {
-                $query->where('id', [1,2]);
-            })->get());
+                ->success()
+                ->icon('heroicon-o-check-badge')
+                ->title('Driver Failure Notification')
+                ->body(Auth::user()->name . 'Failure on Departure Destination')
+                ->sendToDatabase(
+                    User::whereHas('roles', function ($query) {
+                        $query->where('id', [1, 2]);
+                    })->get(),
+                );
             // Display a success message
             flash()->addSuccess('Failure Departure Time updated Successfully');
             return redirect()->to('/driver');
@@ -210,17 +213,18 @@ class JeepRevenue extends Component
                     'status' => 'pending',
                 ]);
 
-                
                 Notification::make()
-                ->success()
-                ->icon('heroicon-o-truck')
-                ->title('Driver Queue Notification')
-                ->body(Auth::user()->name . ' Request to add on queue')
-                ->sendToDatabase(User::whereHas('roles', function ($query) {
-                    $query->where('id', [1,2]);
-                })->get());
-             
-            // event(new DatabaseNotificationsSent($user));
+                    ->success()
+                    ->icon('heroicon-o-truck')
+                    ->title('Driver Queue Notification')
+                    ->body(Auth::user()->name . ' Request to add on queue')
+                    ->sendToDatabase(
+                        User::whereHas('roles', function ($query) {
+                            $query->where('id', [1, 2]);
+                        })->get(),
+                    );
+
+                // event(new DatabaseNotificationsSent($user));
 
                 flash()->addSuccess('Notify to Queue');
                 return redirect()->to('/driver');
@@ -279,12 +283,15 @@ class JeepRevenue extends Component
         $user = $this->user = Auth::user()->name;
         $items = Revenue::orderBy('id', 'DESC')->get();
 
+        $user = Auth::user();
+        $driverName = $user->name;
+
         $trips = DB::table('trips')
             ->join('users', 'trips.driver', '=', 'users.name')
             ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
             ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
             ->where('roles.name', 'Driver')
-            ->whereColumn('trips.driver', '=', 'users.name') // Add this line
+            ->where('trips.driver', $driverName) // Filter by the current driver's name
             ->select('trips.*')
             ->get();
 
