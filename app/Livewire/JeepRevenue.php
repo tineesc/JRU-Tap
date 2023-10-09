@@ -280,7 +280,7 @@ class JeepRevenue extends Component
 
     public function render()
     {
-        $user = $this->user = Auth::user()->name;
+        $userName = $this->user = Auth::user()->name;
         $items = Revenue::orderBy('id', 'DESC')->get();
 
         $user = Auth::user();
@@ -302,7 +302,7 @@ class JeepRevenue extends Component
 
         $jnumber = DB::table('jeeps')
             ->join('users', 'jeeps.driver', '=', 'users.name')
-            ->where('users.name', '=', $user)
+            ->where('users.name', '=', $userName)
             ->select('jeeps.*')
             ->get();
 
