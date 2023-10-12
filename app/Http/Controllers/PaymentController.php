@@ -42,7 +42,7 @@ class PaymentController extends Controller
                         [
                             'currency'      => 'PHP',
                             'amount'        => $amount * 100,
-                            'description'   => 'text',
+                            'description'   => 'Top Up',
                             'name'          => 'Add Credits',
                             'quantity'      => 1,
                         ]
@@ -52,7 +52,7 @@ class PaymentController extends Controller
                     ],
                     'success_url' => route('payment.success', ['cardid' => $cardid, 'credits' => $amount]),
                     'cancel_url' => 'http://127.0.0.1:8000/cancel',
-                    'description' => 'text'
+                    'description' => 'Top Up'
                 ],
             ]
         ];

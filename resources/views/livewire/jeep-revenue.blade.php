@@ -1,33 +1,8 @@
 <div>
     <div class="relative p-3 m-5">
         <div class="flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-3 md:mb-0"> <!-- Add margin bottom on mobile screens -->
-                <button type="button" wire:click="driving"
-                    class="relative px-4 md:px-5 inline-flex items-center p-2 md:p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Driving
-                </button>
-                <button type="button" wire:click="departure"
-                    onclick="return confirm('Are you sure you want to perform this action?');"
-                    class="relative px-5 mr-5 inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Departure
-                </button>
-
-                <button type="button" wire:click="failed"
-                    onclick="return confirm('Are you sure you want to perform this action?');"
-                    class="relative px-5 mr-5 inline-flex items-center p-3 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                    Failed
-                </button>
-
-                <button type="button" wire:click="break" onclick="return confirm('Confirm your Request for Break?');"
-                    class="relative px-5 mr-5 inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Break
-                </button>
-                <button type="button" wire:click="lunch" onclick="return confirm('Confirm your Request for Lunch?');"
-                    class="relative px-5 inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Lunch
-                </button>
-                <!-- Add similar adjustments for other buttons -->
-            </div>
+            
+            
             <div>
                 <div id="toast-simple"
                     class="flex items-center w-full max-w-xs p-2 md:p-4 space-x-2 md:space-x-4 text-gray-500 bg-white divide-x divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800"
@@ -43,6 +18,41 @@
                         @empty
                             <p>Plate Number: No Assign Jeep</p>
                         @endforelse
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative inline-block text-left" x-data="{ open: false }">
+                <button type="button" @click="open = !open"
+                    class="relative px-4 md:px-5 inline-flex items-center p-2 md:p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    {{ $selectedOption ?? 'Select Action' }}
+                    <span class="ml-2">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            viewBox="0 0 24 24" class="w-4 h-4">
+                            <path d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </span>
+                </button>
+                <div x-show="open" @click.away="open = false"
+                    class="origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                    <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                        <a wire:click="driving" type="button"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                            role="menuitem">Driving</a>
+                        <a wire:click="departure" type="button"
+                            onclick="return confirm('Are you sure you want to perform this action?');"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                            role="menuitem">Departure</a>
+                        <a wire:click="failed" type="button"
+                            onclick="return confirm('Are you sure you want to perform this action?');"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                            role="menuitem">Failed</a>
+                        <a wire:click="break" type="button" onclick="return confirm('Confirm your Request for Break?');"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                            role="menuitem">Break</a>
+                        <a wire:click="lunch" type="button" onclick="return confirm('Confirm your Request for Lunch?');"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                            role="menuitem">Lunch</a>
                     </div>
                 </div>
             </div>
