@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Revenue;
+use App\Models\Topup;
 use Illuminate\Http\Request;
 use Ixudra\Curl\Facades\Curl;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +15,6 @@ use Illuminate\Support\Facades\Session;
 
 class PaymentController extends Controller
 {
-   
     public function pay(Request $request)
     {
         $cardid = $request->input('cardid');
@@ -28,7 +28,9 @@ class PaymentController extends Controller
         if (!$revenueRecord) {
             // Cardid does not exist in the revenue table, you can handle this case as per your requirement
             // For example, redirect back with an error message
-            return redirect()->back()->with('error', 'Card ID not found in Database.');
+            return redirect()
+                ->back()
+                ->with('error', 'Card ID not found in Database.');
         }
 
         // If the cardid exists, continue with the payment process
@@ -40,21 +42,19 @@ class PaymentController extends Controller
                 'attributes' => [
                     'line_items' => [
                         [
-                            'currency'      => 'PHP',
-                            'amount'        => $amount * 100,
-                            'description'   => 'Top Up',
-                            'name'          => 'Add Credits',
-                            'quantity'      => 1,
-                        ]
+                            'currency' => 'PHP',
+                            'amount' => $amount * 100,
+                            'description' => 'Top Up',
+                            'name' => 'Add Credits',
+                            'quantity' => 1,
+                        ],
                     ],
-                    'payment_method_types' => [
-                        'card', 'gcash'
-                    ],
+                    'payment_method_types' => ['card', 'gcash'],
                     'success_url' => route('payment.success', ['cardid' => $cardid, 'credits' => $amount]),
                     'cancel_url' => 'http://127.0.0.1:8000/cancel',
-                    'description' => 'Top Up'
+                    'description' => 'Top Up',
                 ],
-            ]
+            ],
         ];
 
         $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions')
@@ -83,6 +83,7 @@ class PaymentController extends Controller
 
         // dd($response);
 
+        $users = Auth::user(); // Retrieve the logged-in user
 
         $creditsToAdd = $request->input('credits'); // Credits from the request
 
@@ -98,6 +99,15 @@ class PaymentController extends Controller
                 'card_balance' => $newCardAmount,
             ]);
 
+            // Create a new TopUp record to store payment details
+            TopUp::create([
+                'name' => $users->name,
+                'email' => $users->email,
+                'card_id' => $cardid,
+                'amount' => $creditsToAdd,
+                'status' => 'complete',
+            ]);
+
             flash()->addSuccess('Successful Credits Transaction');
         } else {
             flash()->addError('User not found'); // Handle the case where the user is not found
@@ -107,15 +117,23 @@ class PaymentController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function cancel()
+    public function cancel(Request $request, $cardid)
     {
+        $user = Auth::user(); // Retrieve the logged-in user
+        $creditsToAdd = $request->input('credits'); // Credits from the request
+        // Create a new TopUp record for failed payment
+        TopUp::create([
+            'name' => $user->name,
+            'email' => $user->email,
+            'card_id' => $cardid, // Replace $cardid with the appropriate value
+            'amount' => $creditsToAdd, // Replace $creditsToAdd with the appropriate value
+            'status' => 'failed',
+        ]);
+
         flash()->addError('Unsuccessfull Credits Transaction');
 
         return view('dashboard');
     }
-
-
-
 
     // public function linkPay(Request $request)
     // {
@@ -147,7 +165,6 @@ class PaymentController extends Controller
     //     // dd($response);
     //     dd($response);
     // }
-
 
     // public function refund()
     // {
