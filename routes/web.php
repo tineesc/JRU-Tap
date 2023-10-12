@@ -69,7 +69,7 @@ Route::controller(PaymentController::class)
     'verified',
 ])->group(function () {
     Route::get('pay','pay')->name('pay');
-    Route::get('cancel','cancel');
+    Route::get( '/cancel/{cardid}','cancel')->name('payment.cancel');
     Route::get( '/success/{cardid}','success')->name('payment.success');
     // Route::get('process','process')->name('process');
     // Route::get('link-pay','linkPay')->name('linkPay');

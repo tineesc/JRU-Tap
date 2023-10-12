@@ -44,15 +44,15 @@ class PaymentController extends Controller
                         [
                             'currency' => 'PHP',
                             'amount' => $amount * 100,
-                            'description' => 'Top Up',
+                            'description' => Auth::user()->name,
                             'name' => 'Add Credits',
                             'quantity' => 1,
                         ],
                     ],
                     'payment_method_types' => ['card', 'gcash'],
                     'success_url' => route('payment.success', ['cardid' => $cardid, 'credits' => $amount]),
-                    'cancel_url' => 'http://127.0.0.1:8000/cancel',
-                    'description' => 'Top Up',
+                    'cancel_url' => route('payment.cancel', ['cardid' => $cardid, 'credits' => $amount]),
+                    'description' => Auth::user()->name,
                 ],
             ],
         ];
