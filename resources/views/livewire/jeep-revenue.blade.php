@@ -170,6 +170,65 @@
             </div>
         @endforeach
     </div>
+
+
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="p-5 uppercase text-lg font-semibold">Trip logs</div>
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Location
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Destination
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Date
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Jeep
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Trip
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Status
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($triplogs as $triplog)
+            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                   {{ $triplog->location }}
+                </th>
+                <td class="px-6 py-4">
+                    {{ $triplog->destination }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ $triplog->date }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ $triplog->jnumber }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ $triplog->trips }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ $triplog->status }}
+                </td>
+            </tr>
+            @empty
+            <div>
+                <td colspan="3">No trips found for you.</td>
+            </div>
+        @endforelse
+        </tbody>
+    </table>
+</div>
+
     
 
 

@@ -10,6 +10,7 @@ use App\Models\Trip;
 use App\Models\User;
 use App\Models\Queue;
 use App\Models\Revenue;
+use App\Models\Triplog;
 use Livewire\Component;
 use App\Enums\TripStatus;
 use Livewire\WithPagination;
@@ -296,6 +297,8 @@ class JeepRevenue extends Component
         $userName = $this->user = Auth::user()->name;
         $items = Revenue::orderBy('id', 'DESC')->get();
 
+        $triplogs = Triplog::where('driver', $userName)->get();
+
         $user = Auth::user();
         $driverName = $user->name;
 
@@ -324,7 +327,7 @@ class JeepRevenue extends Component
             [
                 'items' => Revenue::orderBy('id', 'desc')->paginate(10),
             ],
-            compact('items', 'trips', 'cardData', 'jnumber'),
+            compact('items', 'trips','triplogs','cardData', 'jnumber'),
         );
     }
 }

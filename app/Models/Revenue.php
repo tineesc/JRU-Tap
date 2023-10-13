@@ -17,5 +17,6 @@ class Revenue extends Model
         'payment_method',
         'status',
         'name',
+        'discount'
     ];
 }
