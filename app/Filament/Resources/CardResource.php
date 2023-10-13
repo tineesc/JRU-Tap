@@ -21,6 +21,8 @@ class CardResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-qr-code';
 
+    protected static ?int $navigationSort = 1;
+
     protected static ?string $navigationGroup = 'Cards';
 
     public static function form(Form $form): Form

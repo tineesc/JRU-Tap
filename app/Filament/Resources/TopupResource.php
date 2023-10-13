@@ -18,7 +18,11 @@ class TopupResource extends Resource
 {
     protected static ?string $model = Topup::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
+
+    protected static ?int $navigationSort = 2;
+
+    protected static ?string $navigationGroup = 'Cards';
 
     public static function form(Form $form): Form
     {

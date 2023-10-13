@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Enums\TripStatus;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Topup extends Model
 {
@@ -11,5 +12,9 @@ class Topup extends Model
 
     protected $fillable = [
         'name','email','card_id','amount','status'
+    ];
+
+    protected $casts = [
+        'status' => TripStatus::class,
     ];
 }
