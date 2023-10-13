@@ -154,32 +154,23 @@
         @foreach ($items as $item)
             <div class="py-2 text-center">
                 <div class="p-4 bg-slate-50 bg-opacity-75 shadow-lg rounded-md uppercase">
-                    @foreach ($items as $item)
-                        <div class="py-2 text-center">
-                            <div class="p-4 bg-slate-50 bg-opacity-75 shadow-lg rounded-md uppercase">
-                                <p class="text-md font-semibold text-red-500">ID {{ $item->card_id }}</p>
-                                <p class="text-md font-semibold text-slate-700">Fare {{ $item->fare }}</p>
-                                <p class="text-md font-semibold text-slate-700">Payment {{ $item->payment_method }}
-                                </p>
-                                <p class="text-md font-semibold text-slate-700">Status {{ $item->status }}</p>
-                                <p class="text-md font-semibold text-slate-700">Balance
-                                    @foreach ($cardData as $data)
-                                        @if ($data->card_id === $item->card_id)
-                                            {{ $data->card_balance }}
-                                        @endif
-                                    @endforeach
-                                </p>
-                                <p class="text-md font-semibold text-slate-700">Driver {{ $item->name }}</p>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-                <div class="py-2 z-10">
-                    {{ $items->links() }}
+                    <p class="text-md font-semibold text-red-500">ID {{ $item->card_id }}</p>
+                    <p class="text-md font-semibold text-slate-700">Fare {{ $item->fare }}</p>
+                    <p class="text-md font-semibold text-slate-700">Payment {{ $item->payment_method }}</p>
+                    <p class="text-md font-semibold text-slate-700">Status {{ $item->status }}</p>
+                    <p class="text-md font-semibold text-slate-700">Balance
+                        @foreach ($cardData as $data)
+                            @if ($data->card_id === $item->card_id)
+                                {{ $data->card_balance }}
+                            @endif
+                        @endforeach
+                    </p>
+                    <p class="text-md font-semibold text-slate-700">Driver {{ $item->name }}</p>
                 </div>
             </div>
         @endforeach
     </div>
+    
 
 
 </div>

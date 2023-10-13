@@ -322,7 +322,7 @@ class JeepRevenue extends Component
         return view(
             'livewire.jeep-revenue',
             [
-                'items' => Revenue::orderBy('id', 'desc')->paginate(12),
+                'items' => Revenue::orderBy('id', 'desc')->paginate(10),
             ],
             compact('items', 'trips', 'cardData', 'jnumber'),
         );
