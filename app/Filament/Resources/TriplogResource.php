@@ -73,6 +73,10 @@ class TriplogResource extends Resource
                 ->sortable()
                 ->searchable()
                 ->toggleable(isToggledHiddenByDefault: false),
+                TextColumn::make('trips')
+                ->sortable()
+                ->searchable()
+                ->toggleable(isToggledHiddenByDefault: false),
             TextColumn::make('status')
                 ->sortable()
                 ->searchable()

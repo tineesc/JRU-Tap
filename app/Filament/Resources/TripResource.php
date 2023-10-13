@@ -17,6 +17,7 @@ use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Resources\Resource;
 use Illuminate\Support\Facades\DB;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
@@ -93,6 +94,13 @@ class TripResource extends Resource
                 ->label('Plate Number')
                 ->rules('required'),
 
+            Radio::make('trips')
+            ->label("Trip Jeep Status")
+            ->options([
+                'oneway' => 'One way',
+                'roundtrip' => 'Round Trip'
+            ])->required(),
+
             Select::make('status')
                 ->options([
                     'completed' => 'Complete',
@@ -137,6 +145,10 @@ class TripResource extends Resource
                     ->label('Plate Number')
                     ->toggleable(),
                 TextColumn::make('fare')
+                    ->sortable()
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: false),
+                    TextColumn::make('trips')
                     ->sortable()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: false),

@@ -16,7 +16,7 @@ class Trip extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'location', 'destination', 'date', 'time', 'driver', 'fare', 'departure', 'status', 'jnumber','count'];
+    protected $fillable = ['id', 'location', 'destination', 'date', 'time', 'driver', 'fare', 'departure', 'status', 'jnumber','count','trips'];
 
     protected static function boot()
     {
@@ -51,6 +51,7 @@ class Trip extends Model
                     'fare' => $this->fare,
                     'jnumber' => $this->jnumber,
                     'departure' => $this->departure,
+                    'trips' => $this->trips,
                     'status' => $this->status,
                 ]);
             });
