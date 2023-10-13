@@ -159,11 +159,15 @@
                     <p class="text-md font-semibold text-slate-700">Payment {{ $item->payment_method }}</p>
                     <p class="text-md font-semibold text-slate-700">Status {{ $item->status }}</p>
                     <p class="text-md font-semibold text-slate-700">Balance
-                        @foreach ($cardData as $data)
-                            @if ($data->card_id === $item->card_id)
-                                {{ $data->card_balance }}
-                            @endif
-                        @endforeach
+                        @php
+                        $cardBalance = null;
+                        foreach ($cardData as $data) {
+                            if ($data->card_id === $item->card_id) {
+                                $cardBalance = $data->card_balance;
+                                break; // Exit the loop once a match is found
+                            }
+                        }
+                    @endphp
                     </p>
                     <p class="text-md font-semibold text-slate-700">Driver {{ $item->name }}</p>
                 </div>
