@@ -19,6 +19,7 @@ return new class extends Migration
             $table->time('time')->format('H:i')->nullable();
             $table->time('departure')->format('H:i')->nullable();
             $table->integer('fare')->nullable();
+            $table->integer('count')->nullable();
             $table->string('jnumber')->nullable();
             $table->string('driver')->nullable();
             $table->string('status')->nullable();

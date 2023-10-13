@@ -61,6 +61,9 @@ class TriplogResource extends Resource
             TextColumn::make('driver')
                 ->label('Driver')
                 ->toggleable(),
+                TextColumn::make('jnumber')
+                ->label('Plate Number')
+                ->toggleable(),
                 TextColumn::make('fare')
                 ->sortable()
                 ->searchable()

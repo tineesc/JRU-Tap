@@ -80,6 +80,8 @@ class TripResource extends Resource
                 ->afterStateUpdated(function (Set $set, ?string $state) {
                     $jeep = Queue::where('driver', $state)->first();
                     if ($jeep) {
+                        // Update the 'queue' column in the 'Jeep' table to null
+                        Jeep::where('driver', $state)->update(['queue' => null]);
                         // Delete the data from the 'queue' table with the matching 'driver' value
                         Queue::where('driver', $state)->delete();
 

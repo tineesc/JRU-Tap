@@ -28,6 +28,7 @@ class JeepRevenue extends Component
     public $user;
     public $fare;
     public $payment;
+    public $count;
 
     public function mount()
     {
@@ -43,6 +44,7 @@ class JeepRevenue extends Component
         if ($trips) {
             $this->fare = $trips->fare;
         }
+
     }
 
     public function break()
@@ -133,7 +135,17 @@ class JeepRevenue extends Component
                 'departure' => now()
                     ->setTimezone('Asia/Manila')
                     ->format('H:i'),
+                    'count' => 1,
             ]);
+
+            // Increment the "count" attribute by 1
+        $trip->increment('count');
+
+        // Check if 24 hours have passed since the count was last reset
+        $resetTime = now()->subHours(24);
+        if ($trip->updated_at <= $resetTime) {
+            $trip->update(['count' => 0]); // Reset count to 0
+        }
 
             // You may also update the "status" to mark it as completed or in-progress, as needed
             $trip->update(['status' => 'completed']);
@@ -211,6 +223,7 @@ class JeepRevenue extends Component
                         ->setTimezone('Asia/Manila')
                         ->format('H:i'),
                     'status' => 'pending',
+                    
                 ]);
 
                 Notification::make()

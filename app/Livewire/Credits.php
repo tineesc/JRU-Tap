@@ -56,6 +56,13 @@ class Credits extends Component
         
         $cards = Topup::where('email', $user->email)->paginate(10);
 
+         // Calculate the total amount for each user
+         $totalAmounts = Topup::select('email')
+         ->selectRaw('SUM(amount) as total_amount')
+         ->groupBy('email')
+         ->get();
+         
+
         $balance = DB::table('users')
             ->join('cards', 'cards.card_id', '=', 'users.card_id')
             ->where('users.id', '=', $user->id)
@@ -67,6 +74,6 @@ class Credits extends Component
                 $cardBalance = null; // or any default value you want to set when there's no card_balance.
             }
             
-        return view('livewire.credits',compact('cardBalance','cards'));
+        return view('livewire.credits',compact('cardBalance','cards','totalAmounts'));
     }
 }

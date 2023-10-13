@@ -11,7 +11,7 @@ class Triplog extends Model
     use HasFactory;
 
 
-    protected $fillable = ['id', 'location', 'destination', 'date', 'time', 'driver', 'fare', 'departure', 'status'];
+    protected $fillable = ['id', 'location', 'destination', 'date', 'time', 'driver', 'fare', 'departure', 'status','jnumber','count'];
 
  
     protected $casts = [
