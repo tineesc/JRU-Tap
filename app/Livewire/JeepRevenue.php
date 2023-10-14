@@ -252,22 +252,28 @@ class JeepRevenue extends Component
 
     public function addRevenue()
     {
+        // Check if there is no fare or assigned trip
+        if (!$this->fare || !$this->assignedTrip) {
+            flash()->addError('Error: No assigned trip or fare detected');
+            return redirect()->to('/driver');
+        }
+    
         // Find the card with the given card_id in the Cards table
         $card = Card::where('card_id', $this->cardid)->first();
-
+    
         if (!$card) {
             // Card not found
             flash()->addError('Error: Card not Registered');
         } else {
             // Check if card_balance is enough for fare
             $isCardBalanceEnough = $card->card_balance >= $this->fare;
-
+    
             if ($isCardBalanceEnough) {
                 DB::transaction(function () use ($card) {
                     // Subtract the fare from card_balance in the Cards table and update it
                     $card->card_balance -= $this->fare;
                     $card->save();
-
+    
                     // Update the revenues table with status and card_balance
                     Revenue::create([
                         'card_id' => $this->cardid,
@@ -278,19 +284,20 @@ class JeepRevenue extends Component
                         'card_balance' => $card->card_balance,
                     ]);
                 });
-
+    
                 flash()->addSuccess('Payment Success');
             } else {
                 flash()->addError('Insufficient Balance');
             }
         }
-
+    
         // Clear the input field after successful insertion or if the card is not found
         $this->cardid = null;
-
+    
         // You can optionally redirect the user after adding the record
         return redirect()->to('/driver');
     }
+    
 
     public function render()
     {
