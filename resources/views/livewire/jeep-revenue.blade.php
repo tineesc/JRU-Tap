@@ -144,6 +144,12 @@
                 <x-button class="hidden w-full sm:w-48 md:w-64" type="submit">{{ __('Scan') }}</x-button>
             </div>
 
+            <div class="py-3 px-6">
+                <x-button class="hidden w-full sm:w-48 md:w-64" type="submit" wire:loading.attr="disabled">
+                    {{ __('Scan') }}
+                </x-button>
+            </div>
+
         </form>
     </div>
 
@@ -167,6 +173,8 @@
                                 break; // Exit the loop once a match is found
                             }
                         }
+                        // Display card balance
+                        echo isset($cardBalance) ? $cardBalance : "N/A"; // Show "N/A" if balance is not found
                     @endphp
                     </p>
                     <p class="text-md font-semibold text-slate-700">Driver {{ $item->name }}</p>
