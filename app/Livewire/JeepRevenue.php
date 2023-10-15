@@ -31,6 +31,7 @@ class JeepRevenue extends Component
     public $payment;
     public $count;
     public $assignedTrip;
+    public $discount = 'standard';
 
     public function mount()
     {
@@ -256,31 +257,42 @@ class JeepRevenue extends Component
         } else {
             // Find the card with the given card_id in the Cards table
             $card = Card::where('card_id', $this->cardid)->first();
-
+    
             if (!$card) {
                 // Card not found
                 flash()->addError('Error: Card not Registered');
             } else {
                 // Check if card_balance is enough for fare
                 $isCardBalanceEnough = $card->card_balance >= $this->fare;
-
+    
                 if ($isCardBalanceEnough) {
-                    DB::transaction(function () use ($card) {
+                    // Determine the discount based on the selected radio button option
+                    $discountPercentage = 0;
+                    if ($this->discount === 'student') {
+                        $discountPercentage = 0.1; // 10% discount for students
+                    } elseif ($this->discount === 'senior') {
+                        $discountPercentage = 0.2; // 20% discount for seniors
+                    }
+    
+                    // Calculate the discounted fare
+                    $discountedFare = $this->fare * (1 - $discountPercentage);
+    
+                    DB::transaction(function () use ($card, $discountedFare) {
                         // Subtract the fare from card_balance in the Cards table and update it
-                        $card->card_balance -= $this->fare;
+                        $card->card_balance -= $discountedFare;
                         $card->save();
-
+    
                         // Update the revenues table with status and card_balance
                         Revenue::create([
                             'card_id' => $this->cardid,
                             'name' => $this->user,
-                            'fare' => $this->fare,
+                            'fare' => $discountedFare,
                             'payment_method' => 'card',
                             'status' => 'success',
                             'card_balance' => $card->card_balance,
                         ]);
                     });
-
+    
                     flash()->addSuccess('Payment Success');
                 } else {
                     flash()->addError('Insufficient Balance');
@@ -289,10 +301,11 @@ class JeepRevenue extends Component
         }
         // Clear the input field after successful insertion or if the card is not found
         $this->cardid = null;
-
+    
         // You can optionally redirect the user after adding the record
         return redirect()->to('/driver');
     }
+    
 
     public function render()
     {

@@ -1,8 +1,8 @@
 <div>
     <div class="relative p-3 m-5">
         <div class="flex flex-col md:flex-row justify-between items-center">
-            
-            
+
+
             <div>
                 <div id="toast-simple"
                     class="flex items-center w-full max-w-xs p-2 md:p-4 space-x-2 md:space-x-4 text-gray-500 bg-white divide-x divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800"
@@ -27,8 +27,8 @@
                     class="relative px-4 md:px-5 inline-flex items-center p-2 md:p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     {{ $selectedOption ?? 'Select Action' }}
                     <span class="ml-2">
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            viewBox="0 0 24 24" class="w-4 h-4">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" viewBox="0 0 24 24" class="w-4 h-4">
                             <path d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </span>
@@ -47,10 +47,12 @@
                             onclick="return confirm('Are you sure you want to perform this action?');"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                             role="menuitem">Failed</a>
-                        <a wire:click="break" type="button" onclick="return confirm('Confirm your Request for Break?');"
+                        <a wire:click="break" type="button"
+                            onclick="return confirm('Confirm your Request for Break?');"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                             role="menuitem">Break</a>
-                        <a wire:click="lunch" type="button" onclick="return confirm('Confirm your Request for Lunch?');"
+                        <a wire:click="lunch" type="button"
+                            onclick="return confirm('Confirm your Request for Lunch?');"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                             role="menuitem">Lunch</a>
                     </div>
@@ -126,6 +128,20 @@
                                 value="{{ $trip->trips }}" readonly>
                         </div>
                     </div>
+                    <div class="p-4 mx-auto max-w-md space-y-4">
+                        <label>
+                            <input type="radio" wire:model="discount" value="standard">
+                            Standard
+                        </label>
+                        <label>
+                            <input type="radio" wire:model="discount" value="student">
+                            Student
+                        </label>
+                        <label>
+                            <input type="radio" wire:model="discount" value="senior">
+                            Senior
+                        </label>
+                    </div>
                 @empty
                     <div>
                         <td colspan="3">No trips found for you.</td>
@@ -166,16 +182,16 @@
                     <p class="text-md font-semibold text-slate-700">Status {{ $item->status }}</p>
                     <p class="text-md font-semibold text-slate-700">Balance
                         @php
-                        $cardBalance = null;
-                        foreach ($cardData as $data) {
-                            if ($data->card_id === $item->card_id) {
-                                $cardBalance = $data->card_balance;
-                                break; // Exit the loop once a match is found
+                            $cardBalance = null;
+                            foreach ($cardData as $data) {
+                                if ($data->card_id === $item->card_id) {
+                                    $cardBalance = $data->card_balance;
+                                    break; // Exit the loop once a match is found
+                                }
                             }
-                        }
-                        // Display card balance
-                        echo isset($cardBalance) ? $cardBalance : "N/A"; // Show "N/A" if balance is not found
-                    @endphp
+                            // Display card balance
+                            echo isset($cardBalance) ? $cardBalance : 'N/A'; // Show "N/A" if balance is not found
+                        @endphp
                     </p>
                     <p class="text-md font-semibold text-slate-700">Driver {{ $item->name }}</p>
                 </div>
@@ -185,63 +201,64 @@
 
 
 
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <div class="p-5 uppercase text-lg font-semibold">Trip logs</div>
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    Location
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Destination
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Date
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Jeep
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Trip
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Status
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($triplogs as $triplog)
-            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                   {{ $triplog->location }}
-                </th>
-                <td class="px-6 py-4">
-                    {{ $triplog->destination }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ $triplog->date }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ $triplog->jnumber }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ $triplog->trips }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ $triplog->status }}
-                </td>
-            </tr>
-            @empty
-            <div>
-                <td colspan="3">No trips found for you.</td>
-            </div>
-        @endforelse
-        </tbody>
-    </table>
-</div>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="p-5 uppercase text-lg font-semibold">Trip logs</div>
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Location
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Destination
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Date
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Jeep
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Trip
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Status
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($triplogs as $triplog)
+                    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                        <th scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ $triplog->location }}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{ $triplog->destination }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $triplog->date }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $triplog->jnumber }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $triplog->trips }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $triplog->status }}
+                        </td>
+                    </tr>
+                @empty
+                    <div>
+                        <td colspan="3">No trips found for you.</td>
+                    </div>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 
-    
+
 
 
 </div>
