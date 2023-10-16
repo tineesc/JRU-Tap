@@ -25,7 +25,7 @@ class Jeep extends Model
                 \App\Models\Queue::create([
                     'driver' => $jeep->driver,
                     'jnumber' => $jeep->jnumber,
-                    'queue' => $jeep->queue, // Use the updated 'queue' value
+                    'begin' => $jeep->begin, // Use the updated 'queue' value
                     'end' => $jeep->end,
                     'status' => 'assigning',
                     // Add any additional fields you want to copy from Jeep to Queue
