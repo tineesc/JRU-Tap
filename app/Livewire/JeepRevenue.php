@@ -312,7 +312,7 @@ class JeepRevenue extends Component
         $userName = $this->user = Auth::user()->name;
         $items = Revenue::orderBy('id', 'DESC')->get();
 
-        $triplogs = Triplog::where('driver', $userName)->get();
+        $triplogs = Triplog::where('driver', $userName)->paginate(5);
 
         $user = Auth::user();
         $driverName = $user->name;
@@ -340,7 +340,7 @@ class JeepRevenue extends Component
         return view(
             'livewire.jeep-revenue',
             [
-                'items' => Revenue::orderBy('id', 'desc')->paginate(10),
+                'items' => Revenue::orderBy('id', 'desc')->paginate(5),
             ],
             compact('items', 'trips', 'triplogs', 'cardData', 'jnumber'),
         );

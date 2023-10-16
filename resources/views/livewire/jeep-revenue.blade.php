@@ -172,7 +172,7 @@
 
 
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    {{-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         @foreach ($items as $item)
             <div class="py-2 text-center">
                 <div class="p-4 bg-slate-50 bg-opacity-75 shadow-lg rounded-md uppercase">
@@ -197,68 +197,187 @@
                 </div>
             </div>
         @endforeach
-    </div>
+    </div> --}}
 
-
-
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <div class="p-5 uppercase text-lg font-semibold">Trip logs</div>
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Location
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Destination
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Date
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Jeep
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Trip
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Status
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($triplogs as $triplog)
-                    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                        <th scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $triplog->location }}
+    <div class="hidden sm:max-w:block md:hidden lg:block xl:block">
+        <!-- Content for Laptop and Desktop View -->
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Card ID
                         </th>
-                        <td class="px-6 py-4">
-                            {{ $triplog->destination }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $triplog->date }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $triplog->jnumber }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $triplog->trips }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $triplog->status }}
-                        </td>
+                        <th scope="col" class="px-6 py-3">
+                            Fare
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Payment
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Status
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Balance
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Driver
+                        </th>
                     </tr>
-                @empty
-                    <div>
-                        <td colspan="3">No trips found for you.</td>
-                    </div>
-                @endforelse
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach ($items as $item)
+                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                            <th class="px-6 py-4">
+                                {{ $item->card_id }}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{ $item->fare }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $item->payment_method }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $item->status }}
+                            </td>
+                            <td class="px-6 py-4">
+                                @php
+                                    $cardBalance = null;
+                                    foreach ($cardData as $data) {
+                                        if ($data->card_id === $item->card_id) {
+                                            $cardBalance = $data->card_balance;
+                                            break; // Exit the loop once a match is found
+                                        }
+                                    }
+                                    // Display card balance
+                                    echo isset($cardBalance) ? $cardBalance : 'N/A'; // Show "N/A" if balance is not found
+                                @endphp
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $item->name }}
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 
+    <div class="block sm:max-w:hidden md:block lg:hidden xl:hidden">
+        <!-- Content for Mobile and Tablet View -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            @foreach ($items as $item)
+                <div class="py-2 text-center">
+                    <div class="py-2 text-center">
+                        <div class="p-4 bg-slate-50 bg-opacity-75 shadow-lg rounded-md">
+                            <p class="text-md font-semibold text-red-500">Date {{ $item->card_id }}</p>
+                            <p class="text-md font-semibold text-red-400">Time {{ $item->fare }}</p>
+                            <h2 class="text-lg font-normal text-slate-500 mb-2 "> {{ $item->payment_method }}</h2>
+                            <p class="grid justify-items-center">location {{ $item->status }}</p>
+                            <h2 class="text-xl font-medium text-slate-700 mb-2"> @php
+                                $cardBalance = null;
+                                foreach ($cardData as $data) {
+                                    if ($data->card_id === $item->card_id) {
+                                        $cardBalance = $data->card_balance;
+                                        break; // Exit the loop once a match is found
+                                    }
+                                }
+                                // Display card balance
+                                echo isset($cardBalance) ? $cardBalance : 'N/A'; // Show "N/A" if balance is not found
+                            @endphp</h2>
+                            <p class="text-md font-semibold text-slate-700">Plate Number {{ $item->name }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
 
+    <div class="mx-5 my-4 z-10">
+        {{ $items->links() }}
+    </div>
+    
+    <div class="hidden sm:max-w:block md:hidden lg:block xl:block">
+        <!-- Content for Laptop and Desktop View -->
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Location
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Destination
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Date
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Jeep
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Trip
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Status
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($triplogs as $triplog)
+                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                            <th class="px-6 py-4">
+                                {{ $triplog->location }}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{ $triplog->destination }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $triplog->date }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $triplog->jnumber }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $triplog->trips }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $triplog->status }}
+                            </td>
+                        </tr>
+                    @empty
+                        <div>
+                            <td colspan="3">No logs found for you.</td>
+                        </div>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
 
+    <div class="block sm:max-w:hidden md:block lg:hidden xl:hidden">
+        <!-- Content for Mobile and Tablet View -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            @foreach ($triplogs as $triplog)
+                <div class="py-2 text-center">
+                    <div class="py-2 text-center">
+                        <div class="p-4 bg-slate-50 bg-opacity-75 shadow-lg rounded-md">
+                            <p class="text-md font-semibold text-red-500">Date {{ $triplog->location }}</p>
+                            <p class="text-md font-semibold text-red-400">Time {{ $triplog->destination }}</p>
+                            <h2 class="text-lg font-normal text-slate-500 mb-2 "> {{ $triplog->date }}</h2>
+                            <p class="grid justify-items-center">location {{ $triplog->jnumber }}</p>
+                            <h2 class="text-xl font-medium text-slate-700 mb-2">{{ $triplog->trips }}</h2>
+                            <p class="text-md font-semibold text-slate-700">Plate Number {{ $triplog->status }}</p>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+    <div class="mx-5 my-4 z-10">
+        {{ $triplogs->links() }}
+    </div>
 
 </div>
