@@ -14,7 +14,6 @@ class Dashboard extends Component
     public $query = '';
     public $locationFilter = '';
     public $destinationFilter = '';
-    public $showAvailable = false;
 
     public function search()
     {
@@ -43,21 +42,13 @@ class Dashboard extends Component
             $items->where('destination', $this->destinationFilter);
         }
 
-        // Apply status filter if checkbox is checked
-        if ($this->showAvailable) {
-            $items->where('status', 'approve');
-        }
 
         $items = $items->orderBy('destination', 'ASC')
-                       ->paginate(12);
+                       ->paginate(5);
 
         $locations = Trip::select('location')->distinct()->get();
         $destinations = Trip::select('destination')->distinct()->get();
 
-        return view('livewire.dashboard', [
-            'items' => $items,
-            'locations' => $locations,
-            'destinations' => $destinations,
-        ]);
+        return view('livewire.dashboard',compact('items','destinations','locations'));
     }
 }
