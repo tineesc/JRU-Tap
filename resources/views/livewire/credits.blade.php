@@ -95,8 +95,9 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-3 gap-4 relative overflow-x-auto">
-                <div class="col-span-2">
+            <div class="hidden sm:max-w:hidden md:block lg:block xl:block">
+                <!-- Content for Laptop and Desktop View -->
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
@@ -114,7 +115,7 @@
                         <tbody>
                             @forelse ($cards as $card)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-
+            
                                     <th scope="row"
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $card->card_id }}
@@ -130,22 +131,33 @@
                                 <th class="uppercase text-lg font-semibold">No Data Found</th>
                             @endforelse
                         </tbody>
-
                     </table>
-                    <div class="py-2 px-3">
-                        {{ $cards->links() }}
-                    </div>
-                </div>
-                <div class="grid place-content-center">
-                    <th class="uppercase font-bold text-lg">Total Payments</th>
-                    @foreach ($totalAmounts as $total)
-                        @if ($total->email === $card->email)
-                            {{ $total->total_amount }}
-                        @endif
-                    @endforeach
-                   
                 </div>
             </div>
+            
+            <div class="block sm:max-w:hidden md:block lg:hidden xl:hidden">
+                <!-- Content for Mobile and Tablet View -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                    <!-- Your mobile and tablet content here -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                        @foreach ($cards as $card)
+                        <div class="py-2 text-center">
+                            <div class="py-2 text-center">
+                                <div class="p-4 bg-slate-50 bg-opacity-75 shadow-lg rounded-md">
+                                    <p class="text-md font-semibold text-red-500">Date {{ $card->card_id }}</p>
+                                    <p class="text-md font-semibold text-red-400">Time {{ $card->amount }}</p>
+                                    <p class="text-md font-semibold text-red-500">Price {{ $card->status }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    </div>
+                </div>
+                <div class="py-2 px-3">
+                    {{ $cards->links() }}
+                </div>
+            </div>
+            
 
         </div>
     </div>

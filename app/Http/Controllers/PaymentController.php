@@ -105,7 +105,7 @@ class PaymentController extends Controller
                 'email' => $users->email,
                 'card_id' => $cardid,
                 'amount' => $creditsToAdd,
-                'status' => 'completedw',
+                'status' => 'completed',
             ]);
 
             flash()->addSuccess('Successful Credits Transaction');
