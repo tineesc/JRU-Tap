@@ -1,8 +1,9 @@
 <div>
+    
+        
+   
     <div class="relative p-3 m-5">
         <div class="flex flex-col md:flex-row justify-between items-center">
-
-
             <div>
                 <div id="toast-simple"
                     class="flex items-center w-full max-w-xs p-2 md:p-4 space-x-2 md:space-x-4 text-gray-500 bg-white divide-x divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800"
@@ -297,7 +298,7 @@
     <div class="mx-5 my-4 z-10">
         {{ $items->links() }}
     </div>
-    
+
     <div class="hidden sm:max-w:block md:hidden lg:block xl:block">
         <!-- Content for Laptop and Desktop View -->
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">

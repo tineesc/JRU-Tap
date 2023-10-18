@@ -60,14 +60,14 @@
     <div class="py-4">
         <div class="mx-auto px-4 sm:px-6 lg:px-8"> <!-- Added responsive padding -->
             <div class="image dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="px-5 mx-auto mt-4 bg-sky-400 pt-4 rounded-lg">
+                <div class="px-5 mx-auto mt-4pt-4 rounded-lg bg-top bg-[url('https://res.cloudinary.com/drcyxqm6p/image/upload/v1683475050/samples/landscapes/nature-mountains.jpg')]">
 
                     <div class="hidden sm:max-w:block md:hidden lg:block xl:block">
                         <!-- Content for Laptop and Desktop View -->
-                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg pt-6">
+                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 rounded-lg">
                                 <thead
-                                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                    class="text-xs uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 rounded-lg text-slate-950 bg-opacity-90">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
                                             Date
@@ -91,7 +91,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($items as $item)
-                                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 bg-opacity-80 text-slate-950 font-semibold text-md font-arial">
                                             <th class="px-6 py-4">
                                                 {{ $item->date }}
                                             </th>
@@ -149,7 +149,7 @@
                         </div>
                     </div>
 
-                    <div class="py-2 z-10">
+                    <div class="text-white py-2 z-10">
                         {{ $items->links() }}
                     </div>
 
