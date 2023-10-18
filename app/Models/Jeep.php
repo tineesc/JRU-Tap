@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Queue;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -22,7 +23,7 @@ class Jeep extends Model
         static::updated(function ($jeep) {
             if ($jeep->isDirty('queue')) {
                 // Create a new Queue record when the 'queue' field is updated
-                \App\Models\Queue::create([
+                Queue::create([
                     'driver' => $jeep->driver,
                     'jnumber' => $jeep->jnumber,
                     'begin' => $jeep->begin, // Use the updated 'queue' value
