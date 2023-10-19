@@ -99,17 +99,17 @@
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex h-[32rem]">
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2 rounded py-1 px-5">
                     <div data-aos="fade-left" data-aos-duration="1000" class="container auto">
-                        <img src="https://scontent-mnl1-1.xx.fbcdn.net/v/t39.30808-6/334279344_238422045200772_3053131718637249176_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=49d041&_nc_eui2=AeG_fhDc0-p43wZsEZlhRExKRgvffPCuhI5GC9988K6EjhXOYujP22m_ExmVBIcNtqle7r3xYgAGryt6q1uMRB_g&_nc_ohc=PuSzZQhXtYAAX8S6NPX&_nc_oc=AQnV5e-5YZsOMAPQcUn8T3tzJfVLmF2ld1tdW7IyHW9eYkFs5pTD61Iay00GrQyAPJc&_nc_ht=scontent-mnl1-1.xx&oh=00_AfBelepPrl1QaKuswAJHdzD2RdO6ohZexEUTKSU9v4cIbg&oe=6506D0AE"
+                        <img src="https://res.cloudinary.com/drcyxqm6p/image/upload/v1692721042/171023135755-jeepney-philippines-6_edyr28.jpg"
                             alt="" class="rounded h-40 w-full object-cover sm:h-56 md:h-full skew-y-6" />
                     </div>
                     <div data-aos="fade-left" data-aos-duration="2000"
                         class="grid grid-cols-2 gap-4 md:grid-cols-1 lg:grid-cols-2">
                         <img alt=""
-                            src="https://scontent-mnl1-1.xx.fbcdn.net/v/t39.30808-6/334551070_1160675574611740_6406215164534286574_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=49d041&_nc_eui2=AeE1ddL61VkScv1mFeHqi8ymI2DCpCvOQnojYMKkK85CeoUAX2oWQb9xsozrCXuJjVdNNWeQltKUZCr4zW8T01mq&_nc_ohc=6prFy-4W_xkAX-_f2bt&_nc_ht=scontent-mnl1-1.xx&oh=00_AfBFs1NVAGimLVjBOT-6Ay2llBi5DpIZ_XKqDl5OBvDOFA&oe=6506E17B"
+                            src="https://res.cloudinary.com/drcyxqm6p/image/upload/v1692721211/hino_modern_philippine_jeepney_class_ii_by_hardrocker78_dfqbv71-pre.jpg_x8fbnt.jpg"
                             class="rounded h-40 w-full object-cover object- sm:h-56 md:h-full skew-y-6" />
 
                         <img alt=""
-                            src="https://scontent-mnl1-1.xx.fbcdn.net/v/t39.30808-6/334281641_531275852479913_7137890184412317179_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=49d041&_nc_eui2=AeGXNcCo7qN9sYVJ-orjQA5CIB53DKSS5HogHncMpJLkeodeQp0QovFaZQaHdHp5EXJlU4ddu8-m7oHkUXdP1eqG&_nc_ohc=ORd8o2IFitgAX8OEpon&_nc_ht=scontent-mnl1-1.xx&oh=00_AfBZfwgIB42CPX3WA6iL6qZwUxh-J-tbHgrjlxsIxtBQ6A&oe=65064331"
+                            src="https://res.cloudinary.com/drcyxqm6p/image/upload/v1692721210/modern-jeepney_2019-10-04_02-53-09_cbcvtx.jpg"
                             class="rounded h-40 w-full object-cover object-left sm:h-56 md:h-full skew-y-6" />
                     </div>
                 </div>
@@ -193,10 +193,10 @@
             </div>
             <div data-aos="fade-down" data-aos-duration="1000" class="grid grid-cols-2 gap-4 mt-8">
                 <img class="w-full rounded-lg"
-                    src="https://scontent-mnl1-1.xx.fbcdn.net/v/t39.30808-6/334551070_1160675574611740_6406215164534286574_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=49d041&_nc_eui2=AeE1ddL61VkScv1mFeHqi8ymI2DCpCvOQnojYMKkK85CeoUAX2oWQb9xsozrCXuJjVdNNWeQltKUZCr4zW8T01mq&_nc_ohc=6prFy-4W_xkAX-_f2bt&_nc_ht=scontent-mnl1-1.xx&oh=00_AfBFs1NVAGimLVjBOT-6Ay2llBi5DpIZ_XKqDl5OBvDOFA&oe=6506E17B"
+                    src="https://res.cloudinary.com/drcyxqm6p/image/upload/v1692721210/modern-jeepney_2019-10-04_02-53-09_cbcvtx.jpg"
                     alt="office content 1" />
                 <img class="mt-4 w-full rounded-lg lg:mt-10"
-                    src="https://scontent-mnl1-1.xx.fbcdn.net/v/t39.30808-6/334510486_585140826833308_7615562879999791277_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=49d041&_nc_eui2=AeFfAwNVufrKtXUU051tSPp5c8jetD2Z6vVzyN60PZnq9aeDgqUvw9Pf4iLiYhfTYZwsbfDGlR0WAqYvDcyuXeq3&_nc_ohc=vCp4TwA6Wq8AX-YyDCK&_nc_ht=scontent-mnl1-1.xx&oh=00_AfCXucEOdGi5hVqeKq3_an_Z9DDsRCBebUZKC8hWl-OsBg&oe=65068BD5"
+                    src="https://res.cloudinary.com/drcyxqm6p/image/upload/v1692721211/Prototype_Isuzu_Modern_Jeepney_2_i7j8a0.jpg"
                     alt="office content 2" />
             </div>
         </div>
@@ -263,7 +263,7 @@
                                 role="button">Schedule your Day</a>
                         </div>
                         <div class="mb-12 lg:mb-0">
-                            <img src="https://scontent.fmnl17-4.fna.fbcdn.net/v/t39.30808-6/334955113_580134760815579_1270975772860956598_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=8bfeb9&_nc_eui2=AeGqTKEesrljAM6fN14SQmSmJrVAAs7fU_EmtUACzt9T8ZTPndhm2W5m1qVt0B9y-2Sey2d08VILLo5z1TjN-a0P&_nc_ohc=DIcYUcWHxv0AX-AH-Ts&_nc_ht=scontent.fmnl17-4.fna&oh=00_AfBo0aJqWz2cjD1qBHlt4rtAmh3EkcEZ4F6cBXH3rG9CVw&oe=64F26618"
+                            <img src="https://res.cloudinary.com/drcyxqm6p/image/upload/v1692721211/Prototype_Isuzu_Modern_Jeepney_2_i7j8a0.jpg"
                                 class="w-full rounded-lg shadow-lg" alt="" />
                         </div>
                     </div>
