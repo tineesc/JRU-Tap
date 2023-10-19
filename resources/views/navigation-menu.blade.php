@@ -28,13 +28,17 @@
                         {{ __('Credits') }}
                     </x-nav-link>
 
+                    @role(4)
                     <x-nav-link wire:navigate href="{{ route('driver') }}" :active="request()->routeIs('driver')">
                         {{ __('Driver') }}
                     </x-nav-link>
+                    @endrole
 
+                    @role(4)
                     <x-nav-link wire:navigate href="{{ route('queue') }}" :active="request()->routeIs('queue')">
                         {{ __('Queue') }}
                     </x-nav-link>
+                    @endrole
                 </div>
             </div>
 
@@ -167,13 +171,17 @@
                 {{ __('Credits') }}
             </x-responsive-nav-link>
 
+            @role(4)
             <x-responsive-nav-link href="{{ route('driver') }}" :active="request()->routeIs('driver')">
                 {{ __('Driver') }}
             </x-responsive-nav-link>
+            @endrole
 
+            @role(4)
             <x-responsive-nav-link href="{{ route('queue') }}" :active="request()->routeIs('queue')">
                 {{ __('Queue') }}
             </x-responsive-nav-link>
+            @endrole
         </div>
 
         <!-- Responsive Settings Options -->

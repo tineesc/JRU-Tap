@@ -20,7 +20,7 @@
     @livewire('database-notifications')
     
     <div class="py-6">
-        <div class="max-w-fit mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-md sm:rounded-lg">
 
                 <livewire:JeepRevenue />
@@ -28,6 +28,8 @@
             </div>
         </div>
     </div>
+
+    
     <script>
         document.addEventListener('livewire:load', function () {
             Livewire.on('updateSuccess', message => {
