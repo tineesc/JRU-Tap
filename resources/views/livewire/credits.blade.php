@@ -147,6 +147,7 @@
                 <div class="hidden sm:max-w:hidden md:block lg:block xl:block">
                     <!-- Content for Laptop and Desktop View -->
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                        <h2 class="font-semibold text-md capitalize p-5">History</h2>
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -188,6 +189,7 @@
                 <div class="block sm:max-w:hidden md:block lg:hidden xl:hidden">
                     <!-- Content for Mobile and Tablet View -->
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                        <h2 class="font-semibold text-md capitalize px-2 text-lg">History</h2>
                         <!-- Your mobile and tablet content here -->
                         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
                             @foreach ($cards as $card)

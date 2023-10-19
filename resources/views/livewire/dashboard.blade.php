@@ -13,12 +13,13 @@
                             class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Location</label>
                         <select wire:model="locationFilter" id="location"
                             class="block w-full p-4 text-sm text-slate-950 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option  class="text-slate-950" value="">Locations</option>
+                            <option class="text-slate-950" value="">Locations</option>
                             @foreach ($locations as $loc)
-                                <option class="text-lg text-slate-950" value="{{ $loc->location }}">• {{ $loc->location }}</option>
+                                <option class="text-lg text-slate-950" value="{{ $loc->location }}">•
+                                    {{ $loc->location }}</option>
                             @endforeach
                         </select>
-                    </div>  
+                    </div>
 
                     {{-- Destination Button --}}
                     <div class="flex flex-1 mx-2">
@@ -28,7 +29,8 @@
                             class="block w-full p-4 text-sm text-slate-950 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option class="text-slate-950">Destinations</option>
                             @foreach ($destinations as $dest)
-                                <option class="text-lg text-slate-950" value="{{ $dest->destination }}">• {{ $dest->destination }}</option>
+                                <option class="text-lg text-slate-950" value="{{ $dest->destination }}">•
+                                    {{ $dest->destination }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -37,7 +39,7 @@
                     {{-- Filter Search Button --}}
                     <button type="submit"
                         class="p-2.5 ml-2 text-sm font-medium text-white bg-transparent rounded-lg border border-stone-100 hover:bg-stone-400 focus:ring-w-4 focus:outline-none focus:ring-stone-100 dark:bg-stone-400 dark:hover:bg-stone-500 dark:focus:ring-stone-600">
-                    
+
 
                         <span class="capitalize font-semibold text-lg">Search</span>
                     </button>
@@ -60,14 +62,16 @@
     <div class="py-4">
         <div class="mx-auto px-4 sm:px-6 lg:px-8"> <!-- Added responsive padding -->
             <div class="image dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="px-5 mx-auto mt-4pt-4 rounded-lg bg-top bg-[url('https://res.cloudinary.com/drcyxqm6p/image/upload/v1683475050/samples/landscapes/nature-mountains.jpg')]">
+                <div
+                    class="px-5 mx-auto rounded-lg bg-top bg-[url('https://res.cloudinary.com/drcyxqm6p/image/upload/v1683475050/samples/landscapes/nature-mountains.jpg')]">
 
                     <div class="hidden sm:max-w:block md:hidden lg:block xl:block">
                         <!-- Content for Laptop and Desktop View -->
-                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg pt-6">
+                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                            <h2 class="font-semibold text-md capitalize px-3 py-2 text-white text-xl">Travel</h2>
                             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 rounded-lg">
                                 <thead
-                                    class="text-xs uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 rounded-lg text-slate-950 bg-opacity-90">
+                                    class="text-xs uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 rounded-xl text-slate-950 bg-opacity-90">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
                                             Date
@@ -91,7 +95,8 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($items as $item)
-                                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 bg-opacity-80 text-slate-950 font-semibold text-md font-arial">
+                                        <tr
+                                            class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 bg-opacity-80 text-slate-950 font-semibold text-md font-arial">
                                             <th class="px-6 py-4">
                                                 {{ $item->date }}
                                             </th>
