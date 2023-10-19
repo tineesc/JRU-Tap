@@ -1,9 +1,66 @@
 <div>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Title for Credits') }}
-            <p class="text-slate-500 text-sm py-2">Additional Subtitle here</p>
-        </h2>
+        <div class="flex justify-between">
+            <div>
+                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                {{ __('Title for Credits') }}
+                <p class="text-slate-500 text-sm py-2">Additional Subtitle here</p>
+            </h2>
+        </div>
+        @role(4)
+        <div class="order-last" x-data="{ open: false }">
+            <a @click="open = ! open" 
+            class="bg-yellow-500 p-2 rounded-md shadow-md hover:bg-yellow-400">Driver Virtual Card</a>
+
+            @teleport('body')
+            <div x-show="open" @click="open = false" x-cloak class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
+                <!-- Virtual Card Section -->
+                <div class="flex justify-center">
+                    <div class="block w-full rounded-lg bg-slate-700 p-5">
+                        <!-- Content -->
+                       <div class="flex justify-between">
+                        <div class="block">
+                            <h2 class="font-semibold text-2xl">Driver Virtual Card</h2>
+                            <h2 class="font-semibold text-2xl">(ACTONA)</h2>
+                        </div>
+                        <div class="flex order-last">
+                            <div class="block">
+                                <p >Balance</p> 
+                            <h2 class="font-bold text-xl">
+                                @if (Auth::user()->wallet_balance)
+                                {{ Auth::user()->wallet_balance }}
+                            @else
+                                No Balance
+                            @endif
+                            </h2>
+                            </div>
+                        </div>
+                       </div>
+                        <div class="pt-16 pb-10 flex flex-col md:flex-row justify-between items-center">
+                            <img src="/image/chip.png" alt=""
+                                class="max-w-full h-10 md:w-20 md:h-12  mb-4 md:mb-0" />
+                            <h2 class="font-semibold text-2xl">{{ Auth::user()->name }}</h2>
+                        </div>
+                        <div class="flex justify-between">
+                            <p class="text-3xl pt-6 font-bold mr-36" id="myText">
+                                @if (Auth::user()->wallet_id)
+                                    {{ Auth::user()->wallet_id }}
+                                @else
+                                    No Register Card ID
+                                @endif
+                            </p>
+                            <button id="copy-button"
+                                class="onclick:text-red-200 rounded-md text-white p-2 mt-2 z-10"
+                                onclick="copyContent()">Copy to Clipboard
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endteleport
+        </div>
+        @endrole
+        </div>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -81,47 +138,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Balance Credits -->
-                    {{-- <div class="grid place-content-center bg-purple-50 text-center">
-                        <form action="">
-                            <!-- Content -->
-                            <h2 class="font-semibold text-2xl  text-slate-600 py-2">Card Balance Credits</h2>
-                            <p class="font-bold text-xl">
-                                @if ($cardBalance !== null)
-                                    <p class="semi-bold">{{ $cardBalance }}</p>
-                                @else
-                                    <p>No Balance to show</p>
-                                @endif
-                            </p>
-    
-                            <div class="py-5 mx-5 text-center">
-                                <x-button>Register Card</x-button>
-                            </div>
-                        </form>
-                    </div> --}}
-
-                    <!-- Driver Wallet Balance (Only for Role 4) -->
-                    {{-- @role(4)
-                        <div class="grid place-content-center bg-purple-50 text-center">
-                            <form>
-                                <!-- Content -->
-                                <h2 class="font-semibold text-2xl  text-slate-600 py-2">Driver Wallet Balance</h2>
-                                <p class="font-bold text-xl">
-                                    @if (Auth::user()->wallet_balance)
-                                        {{ Auth::user()->wallet_balance }}
-                                    @else
-                                        No Balance to show
-                                    @endif
-                                </p>
-                                <div class="py-5 mx-5 text-center">
-                                    <x-button>Send</x-button>
-                                    <x-button>Withdraw</x-button>
-                                </div>
-                            </form>
-                        </div>
-                    @endrole --}}
-
 
                 </div>
 
