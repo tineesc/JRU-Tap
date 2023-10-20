@@ -2,17 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Card extends Model
 {
     use HasFactory;
-    
-    protected $fillable = [
-        'name',
-        'card_id',
-        'card_balance',
-        'payment_method',
-    ];
+
+    protected $fillable = ['name', 'card_id', 'card_balance', 'payment_method', 'name', 'email'];
+
 }

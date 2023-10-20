@@ -54,16 +54,6 @@ class UserResource extends Resource
                             ->relationship(name: 'permissions', titleAttribute: 'name')
                             ->searchable()
                             ->preload(),
-                        TextInput::make('wallet_id')
-                            ->visibleOn(['edit', 'view','create']),
-                        TextInput::make('card_id')
-                            ->visibleOn(['edit', 'view','create']),
-                        TextInput::make('wallet_balance')
-                            ->label('Wallet Balance')
-                            ->visibleOn(['edit', 'view','create']),
-                        TextInput::make('card_balance')
-                            ->label('Card Balance')
-                            ->visibleOn(['edit', 'view','create']),
                     ])->columns(2),
             ]);
     }
@@ -84,18 +74,6 @@ class UserResource extends Resource
                 TextColumn::make('email')
                     ->searchable()
                     ->toggleable(),
-                TextColumn::make('wallet_id')
-                    ->label('Wallet ID')
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('wallet_amount')
-                    ->label('Wallet Balance')
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('card_id')
-                    ->label('Card ID')
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('card_amount')
-                    ->label('Card Amount')
-                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->searchable()
                     ->date('M Y')

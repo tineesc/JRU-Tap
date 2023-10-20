@@ -2,19 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-
 use Filament\Panel;
+
+use App\Models\Card;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
 use Laravel\Fortify\TwoFactorAuthenticatable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements  MustVerifyEmail,FilamentUser
+class User extends Authenticatable implements MustVerifyEmail, FilamentUser
 {
     use HasApiTokens;
     use HasFactory;
@@ -28,28 +29,14 @@ class User extends Authenticatable implements  MustVerifyEmail,FilamentUser
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'card_id',
-        'card_amount',
-        'wallet_id',
-        'wallet_amount',
-        'recaptcha_token',
-    ];
+    protected $fillable = ['name', 'email', 'password', 'card_id', 'card_amount', 'wallet_id', 'wallet_amount', 'recaptcha_token'];
 
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-        'two_factor_recovery_codes',
-        'two_factor_secret',
-    ];
+    protected $hidden = ['password', 'remember_token', 'two_factor_recovery_codes', 'two_factor_secret'];
 
     /**
      * The attributes that should be cast.
@@ -66,18 +53,16 @@ class User extends Authenticatable implements  MustVerifyEmail,FilamentUser
      *
      * @var array<int, string>
      */
-    protected $appends = [
-        'profile_photo_url',
-    ];
+    protected $appends = ['profile_photo_url'];
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->hasRole([1,2]);
+        return $this->hasRole([1, 2]);
     }
 
     public function jeep()
-{
-    return $this->hasOne(Jeep::class, 'driver');
-}
-}
+    {
+        return $this->hasOne(Jeep::class, 'driver');
+    }
 
+}

@@ -27,11 +27,11 @@
                             <div class="block">
                                 <p >Balance</p> 
                             <h2 class="font-bold text-xl">
-                                @if (Auth::user()->wallet_balance)
-                                {{ Auth::user()->wallet_balance }}
-                            @else
-                                No Balance
-                            @endif
+                                @if ($walletBalance !== null)
+                                        <p class="semi-bold">{{ $walletBalance }}</p>
+                                    @else
+                                        <p>No Balance</p>
+                                    @endif
                             </h2>
                             </div>
                         </div>
@@ -43,11 +43,11 @@
                         </div>
                         <div class="flex justify-between">
                             <p class="text-3xl pt-6 font-bold mr-36" id="myText">
-                                @if (Auth::user()->wallet_id)
-                                    {{ Auth::user()->wallet_id }}
-                                @else
-                                    No Register Card ID
-                                @endif
+                                @if ($walletSerial !== null)
+                                        {{ $walletSerial }}
+                                    @else
+                                        No Register ID
+                                    @endif
                             </p>
                             <button id="copy-button"
                                 class="onclick:text-red-200 rounded-md text-white p-2 mt-2 z-10"
@@ -125,10 +125,10 @@
                             </div>
                             <div class="flex justify-between">
                                 <p class="text-3xl pt-6 font-bold" id="myText">
-                                    @if (Auth::user()->card_id)
-                                        {{ Auth::user()->card_id }}
+                                    @if ($cardSerial !== null)
+                                        {{ $cardSerial }}
                                     @else
-                                        No Register Card ID
+                                        No Register ID
                                     @endif
                                 </p>
                                 <button id="copy-button"
