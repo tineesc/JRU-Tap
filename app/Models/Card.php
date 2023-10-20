@@ -10,6 +10,6 @@ class Card extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'card_id', 'card_balance', 'payment_method', 'name', 'email'];
+    protected $fillable = ['name', 'card_id', 'card_balance', 'payment_method', 'name', 'email','wallet_id','wallet_balance'];
 
 }
