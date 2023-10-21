@@ -15,7 +15,7 @@ class JeepStatsOverview extends BaseWidget
         $jeep = DB::select('SELECT COUNT(*) as count FROM jeeps')[0]->count;
         $queue = DB::select('SELECT COUNT(*) as count FROM queues')[0]->count;
         $usersWithDriverRole = User::whereHas('roles', function ($query) {
-            $query->where('name', 'driver');
+            $query->where('id', 4);
         })->count();
         return [
             Card::make('Total Jeeps', $jeep),
