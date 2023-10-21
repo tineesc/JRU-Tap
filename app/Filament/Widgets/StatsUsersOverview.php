@@ -15,11 +15,11 @@ class StatsUsersOverview extends BaseWidget
                 ->description('32k increase')
                 ->descriptionIcon('heroicon-s-arrow-trending-up')
                 ->color('success'),
-            Card::make('Total Credits Payments', '21%')
-                ->description('7% increase')
+            Card::make('Total Credits Payments', '212k')
+                ->description('7% decrease')
                 ->descriptionIcon('heroicon-s-arrow-trending-down')
                 ->color('danger'),
-            Card::make('Average Total Credits Payment', '3:12')
+            Card::make('Average Total Credits Payment', '32%')
                 ->description('3% increase')
                 ->descriptionIcon('heroicon-s-arrow-trending-up')
                 ->color('success'),

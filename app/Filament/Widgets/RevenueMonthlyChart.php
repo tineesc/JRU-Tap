@@ -6,7 +6,7 @@ use Filament\Widgets\ChartWidget;
 
 class RevenueMonthlyChart extends ChartWidget
 {
-    protected static ?string $heading = 'Chart';
+    protected static ?string $heading = 'Monthly Revenue';
 
     protected function getData(): array
     {
