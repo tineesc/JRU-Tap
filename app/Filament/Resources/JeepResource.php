@@ -87,8 +87,8 @@ class JeepResource extends Resource
              TextColumn::make('end')->label('Time Out'), 
              TextColumn::make('queue')->label('Add on Queue'), 
              TextColumn::make('notify')->label('Request on Queue'), 
-             TextColumn::make('status')->label('Status'), 
-             TextColumn::make('request')->label('Request'), 
+            //  TextColumn::make('status')->label('Status'), 
+            //  TextColumn::make('request')->label('Request'), 
              ])
             ->filters([
                 //

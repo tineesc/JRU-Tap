@@ -1,7 +1,7 @@
 <div>
 
     {{-- Action Buttons --}}
-    {{-- <div class="relative p-3 m-5">
+    <div class="relative p-3 m-5">
         <div class="flex flex-col md:flex-row justify-between items-center">
             
             <div>
@@ -72,7 +72,7 @@
                 </button>
             </div>
         </div>
-    </div> --}}
+    </div>
 
     {{-- Notification --}}
     <div x-data="{ showNotification: false, message: '', error: '' }" x-init="() => {

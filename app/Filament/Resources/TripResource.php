@@ -62,8 +62,7 @@ class TripResource extends Resource
 
             TimePicker::make('time')
                 ->required('create')
-                ->visibleOn('create', 'view')
-                ->native(false),
+                ->visibleOn('create', 'view'),
 
             Select::make('fare')
                 ->label('Fare')
