@@ -71,7 +71,10 @@ class Credits extends Component
             $walletSerial = $balance->wallet_id;
             $walletBalance = $balance->wallet_balance;
         } else {
-            $cardBalance = null; // or any default value you want to set when there's no card_balance.
+            $cardBalance = null; 
+            $cardSerial = null;
+            $walletSerial = null;
+            $walletBalance = null;
         }
 
         return view('livewire.credits', compact('cardBalance', 'cardSerial', 'walletSerial','walletBalance' ,'cards', 'totalAmounts'));

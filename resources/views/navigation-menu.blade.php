@@ -28,13 +28,13 @@
                         {{ __('Credits') }}
                     </x-nav-link>
 
-                    @role(4)
+                    @role(3)
                     <x-nav-link wire:navigate href="{{ route('driver') }}" :active="request()->routeIs('driver')">
                         {{ __('Driver') }}
                     </x-nav-link>
                     @endrole
 
-                    @role(4)
+                    @role(3)
                     <x-nav-link wire:navigate href="{{ route('queue') }}" :active="request()->routeIs('queue')">
                         {{ __('Queue') }}
                     </x-nav-link>
