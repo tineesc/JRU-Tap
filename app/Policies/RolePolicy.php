@@ -34,6 +34,9 @@ class RolePolicy
     public function create(User $user)
     {
         return $user->hasRole(1);
+        if($user->hasPermissionTo(4)) {
+            return true;
+        }
         
     }
 
@@ -43,6 +46,9 @@ class RolePolicy
     public function update(User $user, Role $role)
     {
         return $user->hasRole(1);
+        if($user->hasPermissionTo(5)) {
+            return true;
+        }
     }
 
     /**
@@ -51,6 +57,9 @@ class RolePolicy
     public function delete(User $user, Role $role)
     {
         return $user->hasRole(1);
+        if($user->hasPermissionTo(6)) {
+            return true;
+        }
     }
 
     /**

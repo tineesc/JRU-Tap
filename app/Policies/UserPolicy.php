@@ -29,9 +29,9 @@ class UserPolicy
     public function create(User $user)
     {
         return $user->hasRole(1);
-        // if($user->hasPermissionTo('Create Users')) {
-        //         return true;
-        //     }
+        if($user->hasPermissionTo(1)) {
+                return true;
+            }
     }
 
     /**
@@ -40,6 +40,9 @@ class UserPolicy
     public function update(User $user, User $model)
     {
         return $user->hasRole(1);
+        if($user->hasPermissionTo(2)) {
+            return true;
+        }
     }
 
     /**
@@ -48,6 +51,9 @@ class UserPolicy
     public function delete(User $user, User $model)
     {
         return $user->hasRole(1);
+        if($user->hasPermissionTo(3)) {
+            return true;
+        }
     }
 
     /**

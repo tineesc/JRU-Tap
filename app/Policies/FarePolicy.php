@@ -30,6 +30,9 @@ class FarePolicy
     public function create(User $user)
     {
         return $user->hasRole([1]);
+        if($user->hasPermissionTo(16)) {
+            return true;
+        }
     }
 
     /**
@@ -38,6 +41,9 @@ class FarePolicy
     public function update(User $user, Fares $fares)
     {
         return $user->hasRole([1]);
+        if($user->hasPermissionTo(17)) {
+            return true;
+        }
     }
 
     /**
@@ -46,6 +52,9 @@ class FarePolicy
     public function delete(User $user, Fares $fares)
     {
         return $user->hasRole([1]);
+        if($user->hasPermissionTo(18)) {
+            return true;
+        }
     }
 
     /**

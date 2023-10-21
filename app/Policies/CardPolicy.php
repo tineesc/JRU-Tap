@@ -30,6 +30,9 @@ class CardPolicy
     public function create(User $user)
     {
         return $user->hasRole(1);
+        if($user->hasPermissionTo(22)) {
+            return true;
+        }
     }
 
     /**
@@ -38,6 +41,9 @@ class CardPolicy
     public function update(User $user, Card $card)
     {
         return $user->hasRole(1);
+        if($user->hasPermissionTo(23)) {
+            return true;
+        }
     }
 
     /**
@@ -46,6 +52,9 @@ class CardPolicy
     public function delete(User $user, Card $card)
     {
         return $user->hasRole(1);
+        if($user->hasPermissionTo(24)) {
+            return true;
+        }
     }
 
     /**

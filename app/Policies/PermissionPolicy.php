@@ -30,6 +30,9 @@ class PermissionPolicy
     public function create(User $user)
     {
         return $user->hasRole(1);
+        if($user->hasPermissionTo(7)) {
+            return true;
+        }
     }
 
     /**
@@ -38,6 +41,9 @@ class PermissionPolicy
     public function update(User $user, Permission $permission)
     {
         return $user->hasRole(1);
+        if($user->hasPermissionTo(8)) {
+            return true;
+        }
     }
 
     /**
@@ -46,6 +52,9 @@ class PermissionPolicy
     public function delete(User $user, Permission $permission)
     {
         return $user->hasRole(1);
+        if($user->hasPermissionTo(9)) {
+            return true;
+        }
     }
 
     /**

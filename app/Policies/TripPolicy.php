@@ -30,6 +30,9 @@ class TripPolicy
     public function create(User $user)
     {
         return $user->hasRole([1]);
+        if($user->hasPermissionTo(10)) {
+            return true;
+        }
     }
 
     /**
@@ -38,6 +41,9 @@ class TripPolicy
     public function update(User $user, Trip $trip)
     {
         return $user->hasRole([1]);
+        if($user->hasPermissionTo(11)) {
+            return true;
+        }
     }
 
     /**
@@ -46,6 +52,9 @@ class TripPolicy
     public function delete(User $user, Trip $trip)
     {
         return $user->hasRole([1]);
+        if($user->hasPermissionTo(12)) {
+            return true;
+        }
     }
 
     /**

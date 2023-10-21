@@ -13,7 +13,7 @@ class RevenueMonthlyChart extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Blog posts created',
+                    'label' => 'Monthly Revenue in All Jeepny Fares',
                     'data' => [0, 10, 5, 2, 21, 32, 45, 74, 65, 45, 77, 200],
                 ],
             ],
