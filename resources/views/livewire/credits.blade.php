@@ -7,7 +7,7 @@
                 <p class="text-slate-500 text-sm py-2">Additional Subtitle here</p>
             </h2>
         </div>
-        @role(4)
+        @role(3)
         <div class="order-last" x-data="{ open: false }">
             <a @click="open = ! open" 
             class="bg-yellow-500 p-2 rounded-md shadow-md hover:bg-yellow-400">Driver Virtual Card</a>
