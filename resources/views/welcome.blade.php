@@ -31,7 +31,8 @@
             <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                 <a href="#home" class="flex items-center">
                     <img src="./image/acebedo_logo_orig.png" class="mr-3 h-6 sm:h-9" alt="" />
-                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Modern Jeepneys(ACTONA)</span>
+                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Modern
+                        Jeepneys(ACTONA)</span>
                 </a>
                 <div class="flex items-center lg:order-2">
                     @if (Route::has('login'))
@@ -63,14 +64,14 @@
                             <a href="#about"
                                 class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">About</a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="#complain"
                                 class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Complain</a>
-                        </li>
-                        <li>
+                        </li> --}}
+                        {{-- <li>
                             <a href="#faq"
                                 class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">FAQ</a>
-                        </li>
+                        </li> --}}
                         <li>
                             <a href="#contact"
                                 class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
@@ -88,7 +89,7 @@
                     Modern Jeepneys (ACTONA)
                 </h1>
                 <p class="mb-6 max-w-2xl font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-                    
+
                 </p>
                 <a href=""
                     class="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
@@ -125,32 +126,35 @@
                     Services
                 </h2>
                 <p class="text-gray-500 text-center sm:text-xl dark:text-gray-400">
-                    Our Cooperative offers a wide range of services to help you reach your destination safe and hassle free.
+                    Our Cooperative offers a wide range of services to help you reach your destination safe and hassle
+                    free.
             </div>
             <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
                 <div data-aos="fade-up" data-aos-duration="1000">
                     <div
                         class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
-                        <i
-                            class="fa fa-desktop text-[1.8rem] text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300"></i>
+                        <i class="fa fa-desktop text-[1.8rem] text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300"></i>
                     </div>
                     <h3 class="mb-2 text-xl font-bold dark:text-white">
                         Trip Monitoring
                     </h3>
                     <p class="text-gray-500 dark:text-gray-400">
-                        our automated fare collection system, will easily let you see the list of available trips including their schedules and fare
+                        our automated fare collection system, will easily let you see the list of available trips
+                        including their schedules and fare
                     </p>
                 </div>
                 <div data-aos="fade-up" data-aos-duration="2000">
                     <div
                         class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
-                        <i class="fa fa-credit-card text-[1.5rem] text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300"></i>
+                        <i
+                            class="fa fa-credit-card text-[1.5rem] text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300"></i>
                     </div>
                     <h3 class="mb-2 text-xl font-bold dark:text-white">
-                        E-Load 
+                        E-Load
                     </h3>
                     <p class="text-gray-500 dark:text-gray-400">
-                        Top-up anywhere using the app, we provide instant load to your account by using our app loading system.
+                        Top-up anywhere using the app, we provide instant load to your account by using our app loading
+                        system.
                     </p>
                 </div>
                 <div data-aos="fade-up" data-aos-duration="3000">
@@ -163,7 +167,8 @@
                         Tap to pay or Contactless Payment
                     </h3>
                     <p class="text-gray-500 dark:text-gray-400">
-                        We provide contactless payment to ensure the safetyness of our passengers, you can board the jeepney by simply tapping the card to the device without hassle.
+                        We provide contactless payment to ensure the safetyness of our passengers, you can board the
+                        jeepney by simply tapping the card to the device without hassle.
                     </p>
                 </div>
             </div>
@@ -184,11 +189,16 @@
                     Modern Jeepneys
                 </h2>
                 <p class="mb-4">
-                ACTONA has the largest franchise in the NCR. A transportation company offered an alternative upgraded jeepney that it claimed was less expensive than the government's proposed imported minibus.
-                 The version displayed by the Association of Committed Transport Organizations Nationwide Corporation (ACTONA) still has the recognizable appearance of the conventional jeepney but has more modern amenities. The organization's prototype incorporates handrails, an elevated ceiling that allows standing passengers, security cameras that are integrated into the design, and an eco-friendly Euro 5 engine.
+                    ACTONA has the largest franchise in the NCR. A transportation company offered an alternative
+                    upgraded jeepney that it claimed was less expensive than the government's proposed imported minibus.
+                    The version displayed by the Association of Committed Transport Organizations Nationwide Corporation
+                    (ACTONA) still has the recognizable appearance of the conventional jeepney but has more modern
+                    amenities. The organization's prototype incorporates handrails, an elevated ceiling that allows
+                    standing passengers, security cameras that are integrated into the design, and an eco-friendly Euro
+                    5 engine.
                 </p>
                 <p>
-                   
+
                 </p>
             </div>
             <div data-aos="fade-down" data-aos-duration="1000" class="grid grid-cols-2 gap-4 mt-8">
@@ -207,17 +217,17 @@
             class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
             <div class="max-w-screen-lg text-gray-500 sm:text-lg dark:text-gray-400">
                 <h2 class="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
-                Modern Jeepneys is a technology-driven solution that aims to empower
+                    Modern Jeepneys is a technology-driven solution that aims to empower
                     people by providing them with easy travel services.
                     <span class="font-extrabold">Modern Jeepneys</span>.
                 </h2>
                 <p class="mb-4 font-light">
                     Overall, the Modern Jeepneys is an innovative solution that can empower
                     people by providing them with easy access to comprehensive travel services.
-            
+
                 </p>
                 <p class="mb-4 font-medium">
-                     Use the Automated Fare Collection and ride Modern Jeepneys for your travel plans here are secured.
+                    Use the Automated Fare Collection and ride Modern Jeepneys for your travel plans here are secured.
                 </p>
                 <a href="{{ route('login') }}"
                     class="inline-flex items-center font-medium text-primary-600 hover:text-primary-800 dark:text-primary-500 dark:hover:text-primary-700">
@@ -275,7 +285,7 @@
     <!-- Container for demo purpose -->
 
     <!-- ====== FAQ Section Start -->
-    <section id="faq" x-data="{
+    {{-- <section id="faq" x-data="{
         openFaq1: false,
         openFaq2: false,
         openFaq3: false,
@@ -402,9 +412,10 @@ behind the sunshine mall
                 </defs>
             </svg>
         </div>
-    </section>
+    </section> --}}
     <!-- ====== FAQ Section End -->
-    <section id="contact" class="bg-white dark:bg-gray-900">
+    {{-- Complaint --}}
+    {{-- <section id="contact" class="bg-white dark:bg-gray-900">
         <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
             <div data-aos="fade-up" data-aos-duration="2000" class="mx-auto max-w-screen-sm text-center">
                 <h2 class="mb-4 text-4xl font-extrabold leading-tight text-gray-900 dark:text-white">
@@ -419,15 +430,16 @@ behind the sunshine mall
                     Message</a>
             </div>
         </div>
-    </section>
-
-    <footer class="p-4 bg-gray-50 sm:p-6 dark:bg-gray-800">
+    </section> --}}
+    {{-- End of Complaint --}}
+    <footer id="contact" class="p-4 bg-gray-50 sm:p-6 dark:bg-gray-800">
         <div class="mx-auto max-w-screen-xl">
             <div class="md:flex md:justify-between">
                 <div class="mb-6 md:mb-0">
                     <a href="https://flowbite.com" class="flex items-center">
                         <img src="./image/acebedo_logo_orig.png" class="mr-3 h-8" alt="" />
-                        <span class="self-center text-2xl font-semibold whitespace-wrap dark:text-white">Modern E-Jeep</span>
+                        <span class="self-center text-2xl font-semibold whitespace-wrap dark:text-white">Modern
+                            E-Jeep</span>
                     </a>
                 </div>
                 <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
