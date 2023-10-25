@@ -91,7 +91,8 @@ class TripResource extends Resource
 
             TextInput::make('jnumber')
                 ->label('Plate Number')
-                ->rules('required'),
+                ->rules('required')
+                ->readOnly(),
 
             Radio::make('trips')
             ->label("Trip Jeep Status")
@@ -100,14 +101,18 @@ class TripResource extends Resource
                 'roundtrip' => 'Round Trip'
             ])->required(),
 
-            Select::make('status')
-                ->options([
-                    'completed' => 'Complete',
-                    'on going' => 'on going',
-                    'failed' => 'Failed',
-                ])
-                ->required('create')
-                ->native(false),
+            // Select::make('status')
+            //     ->options([
+            //         'completed' => 'Complete',
+            //         'on going' => 'on going',
+            //         'failed' => 'Failed',
+            //     ])
+            //     ->required('create')
+            //     ->native(false),
+
+            TextInput::make('status')
+            ->default('on going')
+            ->hidden(),
         ]);
     }
 
