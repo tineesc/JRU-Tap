@@ -53,16 +53,18 @@ class TripResource extends Resource
                 ->required(),
 
             Datepicker::make('Select Date')
-                ->minDate(now()) // Set the minimum date
-                ->format('m-d-Y')
-                ->rules(['date', 'after_or_equal:now'])
-                ->required('create')
-                ->visibleOn('create', 'view')
-                ->native(false),
+    ->minDate(now()->format('Y-m-d')) // Set the minimum date in 'Y-m-d' format
+    ->format('m-d-Y')
+    ->rules(['date', 'after_or_equal:' . now()->format('Y-m-d')])
+    ->required('create')
+    ->visibleOn('create', 'view')
+    ->native(false),
+
 
             TimePicker::make('time')
                 ->required('create')
-                ->visibleOn('create', 'view'),
+                ->visibleOn('create', 'view')
+                ->native(false),
 
             Select::make('fare')
                 ->label('Fare')
@@ -111,8 +113,9 @@ class TripResource extends Resource
             //     ->native(false),
 
             TextInput::make('status')
-            ->default('on going')
-            ->hidden(),
+            ->label('Status')
+            ->default('pending')
+            ->readOnly(),
         ]);
     }
 
