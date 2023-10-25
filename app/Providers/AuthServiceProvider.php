@@ -5,27 +5,29 @@ namespace App\Providers;
 // use Illuminate\Support\Facades\Gate;
 
 use App\Models\Card;
-use App\Models\Fares;
 use App\Models\Jeep;
-use App\Models\Permission;
-use App\Models\User;
-use App\Models\Queue;
-use App\Models\Places;
-use App\Models\Revenue;
 use App\Models\Role;
 use App\Models\Trip;
+use App\Models\User;
+use App\Models\Fares;
+use App\Models\Queue;
+use App\Models\Topup;
+use App\Models\Places;
+use App\Models\Revenue;
 use App\Models\Triplog;
+use App\Models\Permission;
 use App\Policies\CardPolicy;
 use App\Policies\FarePolicy;
 use App\Policies\JeepPolicy;
-use App\Policies\PermissionPolicy;
+use App\Policies\RolePolicy;
+use App\Policies\TripPolicy;
 use App\Policies\UserPolicy;
 use App\Policies\PlacePolicy;
 use App\Policies\QueuePolicy;
+use App\Policies\TopupPolicy;
 use App\Policies\RevenuePolicy;
-use App\Policies\RolePolicy;
 use App\Policies\TriplogPolicy;
-use App\Policies\TripPolicy;
+use App\Policies\PermissionPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -47,6 +49,7 @@ class AuthServiceProvider extends ServiceProvider
         Fares::class => FarePolicy::class,
         Trip::class => TripPolicy::class,
         Triplog::class => TriplogPolicy::class,
+        Topup::class => TopupPolicy::class,
     ];
 
     /**
