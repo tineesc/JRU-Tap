@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
@@ -17,6 +18,7 @@ use Filament\Tables\Columns\TextInputColumn;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserResource\RelationManagers;
+use Filament\Tables\Columns\ToggleColumn;
 
 class UserResource extends Resource
 {
@@ -30,32 +32,32 @@ class UserResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Section::make('User')
-                    ->description('User Page')
-                    ->schema([
-                        TextInput::make('name')
-                            ->required(),
-                        TextInput::make('email')
-                            ->email()
-                            ->required()
-                            ->unique(ignoreRecord: true),
-                            TextInput::make('password')
-                            ->password()
-                            ->visibleOn(['create']),                        
-                        Select::make('Roles')
-                            ->multiple()
-                            ->relationship(name: 'roles', titleAttribute: 'name')
-                            ->searchable()
-                            ->preload(),
-                        Select::make('Permissions')
-                            ->multiple()
-                            ->relationship(name: 'permissions', titleAttribute: 'name')
-                            ->searchable()
-                            ->preload(),
-                    ])->columns(2),
-            ]);
+        return $form->schema([
+            Section::make('User')
+                ->description('User Page')
+                ->schema([
+                    TextInput::make('name')->required(),
+                    TextInput::make('email')
+                        ->email()
+                        ->required()
+                        ->unique(ignoreRecord: true),
+                    TextInput::make('password')
+                        ->password()
+                        ->visibleOn(['create']),
+                    Select::make('Roles')
+                        ->multiple()
+                        ->relationship(name: 'roles', titleAttribute: 'name')
+                        ->searchable()
+                        ->preload(),
+                    Select::make('Permissions')
+                        ->multiple()
+                        ->relationship(name: 'permissions', titleAttribute: 'name')
+                        ->searchable()
+                        ->preload(),
+                   
+                ])
+                ->columns(2),
+        ]);
     }
 
     public static function table(Table $table): Table
@@ -83,30 +85,24 @@ class UserResource extends Resource
                     ->label('Last update')
                     ->date('M Y : H m')
                     ->toggleable(isToggledHiddenByDefault: true),
+                     ToggleColumn::make('email_activate')
+                        ->label('Activate')
+                        ->onColor('success')
+                        ->offColor('danger'),
             ])
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ])
-            ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
-            ]);
+            ->actions([Tables\Actions\ViewAction::make(), Tables\Actions\EditAction::make(), Tables\Actions\DeleteAction::make()])
+            ->bulkActions([Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make()])])
+            ->emptyStateActions([Tables\Actions\CreateAction::make()]);
     }
 
     public static function getRelations(): array
     {
         return [
-            //
-        ];
+                //
+            ];
     }
 
     public static function getPages(): array

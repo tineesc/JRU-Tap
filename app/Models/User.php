@@ -31,12 +31,13 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
      */
     protected $fillable = ['name', 'email', 'password', 'card_id', 'card_amount', 'wallet_id', 'wallet_amount', 'recaptcha_token'];
 
+    
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
      */
-    protected $hidden = ['password', 'remember_token', 'two_factor_recovery_codes', 'two_factor_secret'];
+    protected $hidden = ['password', 'remember_token', 'two_factor_recovery_codes', 'two_factor_secret','email_verified_at','email_activate'];
 
     /**
      * The attributes that should be cast.
@@ -46,6 +47,7 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'email_activate' => 'boolean',
     ];
 
     /**
