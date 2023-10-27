@@ -3,8 +3,8 @@
     {{-- Action Buttons --}}
     <div class="relative p-3 m-5">
         <div class="flex flex-col md:flex-row justify-between items-center">
-            
-            <div>
+
+            <div class="grid grid-cols-3 gap-3">
                 <div id="toast-simple"
                     class="flex items-center w-full max-w-xs p-2 md:p-4 space-x-2 md:space-x-4 text-gray-500 bg-white divide-x divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800"
                     role="alert">
@@ -15,14 +15,56 @@
                     </svg>
                     <div class="pl-2 md:pl-4 text-sm font-normal">
                         @forelse ($jnumber as $jeep)
-                            <p>Plate Number: {{ $jeep->jnumber }}</p>
+                            <p>{{ $jeep->jnumber }}</p>
                         @empty
-                            <p>Plate Number: No Assign Jeep</p>
+                            <p>No Assign Jeep</p>
                         @endforelse
                     </div>
                 </div>
+
+                <div id="toast-simple"
+                    class="flex items-center w-full max-w-xs p-2 md:p-4 space-x-2 md:space-x-4 text-gray-500 bg-white divide-x divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800"
+                    role="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+
+                    <div class="pl-2 md:pl-4 text-sm font-normal">
+                        @forelse ($jnumber as $jeep)
+                        @if($jeep->begin === null)
+                        No Time IN
+                        @else
+                       Time IN {{ $jeep->begin }}
+                        @endif
+                        @empty
+                         No Time IN
+                        @endforelse
+                    </div>
+                </div>
+
+                <div id="toast-simple"
+                    class="flex items-center w-full max-w-xs p-2 md:p-4 space-x-2 md:space-x-4 text-gray-500 bg-white divide-x divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800"
+                    role="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+                      </svg>
+                                          
+                    <div class="pl-2 md:pl-4 text-sm font-normal">
+                        @forelse ($jnumber as $jeep)
+                        @if($jeep->end === null)
+                        No Time Out
+                        @else
+                       Time Out {{ $jeep->end }}
+                        @endif
+                       @empty
+                        No Time Out 
+                       @endforelse
+                    </div>
+                </div>
             </div>
-            
+
             <div class="relative inline-block text-left" x-data="{ open: false }">
                 <button type="button" @click="open = !open"
                     class="relative px-4 md:px-5 inline-flex items-center p-2 md:p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -59,8 +101,8 @@
                     </div>
                 </div>
             </div>
-               
-            <div class="order-last mt-3 md:mt-0"> 
+
+            <div class="order-last mt-3 md:mt-0">
                 <button type="button" wire:click="updateQueue"
                     class=" inline-flex items-center p-2 md:p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -85,8 +127,9 @@
             }, 2000);
         }
     }" x-show="showNotification"
-        x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0 translate-y-2"
-        x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-200 transform"
+        x-transition:enter="transition ease-out duration-300 transform"
+        x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition ease-in duration-200 transform"
         x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-2"
         class="fixed bottom-0 right-0 p-4 z-50">
 
@@ -108,11 +151,11 @@
         <form wire:submit.prevent="addRevenue">
             <div class="py-3 px-6">
                 @forelse($trips as $trip)
-                <div class="py-3 mx-2">
-                    <x-label for="cardid" value="{{ __('Card ID') }}" />
-                    <x-input wire:model="cardid" id="cardid" class="block mt-1 w-full " type="number" name="cardid"
-                        placeholder="Scan ID" required autofocus autocomplete="cardid" />
-                </div>
+                    <div class="py-3 mx-2">
+                        <x-label for="cardid" value="{{ __('Card ID') }}" />
+                        <x-input wire:model="cardid" id="cardid" class="block mt-1 w-full " type="number"
+                            name="cardid" placeholder="Scan ID" required autofocus autocomplete="cardid" />
+                    </div>
                     <div class="flex flex-col lg:flex-row my-3">
                         <div class="flex-1 mx-2">
                             <x-label for="Location" class="uppercase" value="{{ __('Location') }}" />

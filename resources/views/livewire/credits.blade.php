@@ -161,6 +161,9 @@
                                     <th scope="col" class="px-6 py-3">
                                         Status
                                     </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Date and Time
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -176,6 +179,9 @@
                                         </td>
                                         <td class="px-6 py-4">
                                             {{ $card->status }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ $card->created_at }}
                                         </td>
                                     </tr>
                                 @empty

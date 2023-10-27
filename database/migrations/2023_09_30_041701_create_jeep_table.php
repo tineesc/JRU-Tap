@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('jnumber');
             $table->string('driver')->nullable();
             $table->time('queue')->format('H:i')->nullable();
-            $table->time('begin')->format('H:i')->nullable();
-            $table->time('end')->format('H:i')->nullable();
+            $table->datetime('begin')->format('Y-m-d H:i')->nullable();
+            $table->datetime('end')->format('Y-m-d H:i')->nullable();
             $table->time('notify')->format('H:i')->nullable();
             $table->string('request')->nullable();
             $table->string('status')->nullable();

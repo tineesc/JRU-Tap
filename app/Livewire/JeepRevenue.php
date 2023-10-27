@@ -88,6 +88,7 @@ class JeepRevenue extends Component
             }
         }
     }
+    
 
     public function driving()
     {
@@ -224,7 +225,8 @@ class JeepRevenue extends Component
                     'notify' => now()
                         ->setTimezone('Asia/Manila')
                         ->format('H:i'),
-                    'status' => 'pending',
+                    'status' => 'Avail',
+                    'request' => null,
                 ]);
 
                 Notification::make()

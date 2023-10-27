@@ -84,7 +84,7 @@
 
     <section id="home" class="bg-white dark:bg-gray-900">
         <div class="grid py-20 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-[8.4rem] lg:grid-cols-12">
-            <div data-aos="fade-right" data-aos-duration="1000" class="place-self-center mr-auto lg:col-span-7">
+            <div data-aos="fade-right" data-aos-duration="1000" class="mt-10 place-self-center mr-auto lg:col-span-7">
                 <h1 class="mb-4 max-w-2xl text-4xl font-extrabold leading-none md:text-5xl xl:text-6xl dark:text-white">
                     Modern Jeepneys (ACTONA)
                 </h1>
@@ -449,10 +449,10 @@ behind the sunshine mall
                         </h2>
                         <ul class="text-gray-600 dark:text-gray-400">
                             <li class="mb-4">
-                                <a href="#complain" class="hover:underline">File Complain</a>
+                                <a href="mailto:help@actonacloud.online" class="hover:underline">File Complain</a>
                             </li>
                             <li>
-                                <a href="#contact" class="hover:underline">Message Us</a>
+                                <a href="https://www.facebook.com/messages/t/100005497698072" class="hover:underline">Message Us</a>
                             </li>
                         </ul>
                     </div>
@@ -462,10 +462,10 @@ behind the sunshine mall
                         </h2>
                         <ul class="text-gray-600 dark:text-gray-400">
                             <li class="mb-4">
-                                <a href="https://github.com/themesberg/flowbite" class="hover:underline">Facebook</a>
+                                <a href="https://www.facebook.com/ACTONACorp" class="hover:underline">Facebook</a>
                             </li>
                             <li>
-                                <a href="https://discord.gg/4eeurUVvTy" class="hover:underline">Instagram</a>
+                                <a href="https://www.instagram.com/actonagroup/" class="hover:underline">Instagram</a>
                             </li>
                         </ul>
                     </div>
@@ -491,21 +491,21 @@ behind the sunshine mall
                     All Rights Reserved.
                 </span>
                 <div class="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
-                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                    <a href="https://www.facebook.com/ACTONACorp" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
                         <i class="fa fa-facebook-official text-[1.2rem]" aria-hidden="true"></i>
                     </a>
-                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                    <a href="https://www.instagram.com/actonagroup/" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
                         <i class="fa fa-instagram text-[1.2rem]" aria-hidden="true"></i>
                     </a>
-                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                    {{-- <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
                         <i class="fa fa-twitter text-[1.2rem]" aria-hidden="true"></i>
-                    </a>
-                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                    </a> --}}
+                    <a href="mailto:help@actonacloud.online" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
                         <i class="fa fa-envelope text-[1.2rem]" aria-hidden="true"></i>
                     </a>
-                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                    {{-- <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
                         <i class="fa fa-dribbble text-[1.2rem]" aria-hidden="true"></i>
-                    </a>
+                    </a> --}}
                 </div>
             </div>
         </div>

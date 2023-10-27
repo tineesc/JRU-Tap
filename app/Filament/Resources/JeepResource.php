@@ -62,7 +62,7 @@ class JeepResource extends Resource
                 ->label('Time In')
                 ->options([
                     '' => 'Reset',
-                    Carbon::now('Asia/Manila')->format('H:i') => 'Time IN',
+                    Carbon::now('Asia/Manila')->format('Y-m-d H:i') => 'Time IN',
                 ])->native(false),
 
                 Select::make('end')
@@ -87,8 +87,8 @@ class JeepResource extends Resource
              TextColumn::make('end')->label('Time Out'), 
              TextColumn::make('queue')->label('Add on Queue'), 
              TextColumn::make('notify')->label('Request on Queue'), 
-            //  TextColumn::make('status')->label('Status'), 
-            //  TextColumn::make('request')->label('Request'), 
+             TextColumn::make('status')->label('Status'), 
+             TextColumn::make('request')->label('Request'), 
              ])
             ->filters([
                 //

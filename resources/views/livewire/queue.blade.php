@@ -61,10 +61,10 @@
                                 Jeep
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Arrival
+                                Status
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Status
+                                DateTime
                             </th>
                         </tr>
                     </thead>
@@ -78,10 +78,10 @@
                                     {{ $item->jnumber }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $item->begin }}
+                                    {{ $item->status }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $item->status }}
+                                    {{ $item->updated_at }}
                                 </td>
                             </tr>
                         @endforeach
@@ -99,8 +99,8 @@
                         <div class="p-4 bg-slate-50 bg-opacity-75 shadow-lg rounded-md">
                             <p class="text-md font-semibold text-red-500">Date {{ $item->driver }}</p>
                             <p class="text-md font-semibold text-red-400">Time {{ $item->jnumber }}</p>
-                            <h2 class="text-lg font-normal text-slate-500 mb-2 "> {{ $item->begin }}</h2>
                             <p class="text-md font-semibold text-red-500">Price {{ $item->status }}</p>
+                            <p class="text-md font-semibold text-red-500">DateTime {{ $item->updated_at }}</p>
                         </div>
                     </div>
                 </div>
