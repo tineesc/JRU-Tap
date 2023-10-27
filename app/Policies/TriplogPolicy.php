@@ -29,7 +29,7 @@ class TriplogPolicy
      */
     public function create(User $user)
     {
-        return $user->hasRole([1]);
+        // return $user->hasRole([1]);
     }
 
     /**
@@ -37,7 +37,7 @@ class TriplogPolicy
      */
     public function update(User $user, Triplog $triplog)
     {
-        return $user->hasRole([1]);
+        // return $user->hasRole([1]);
     }
 
     /**
@@ -45,7 +45,7 @@ class TriplogPolicy
      */
     public function delete(User $user, Triplog $triplog)
     {
-        return $user->hasRole([1]);
+        // return $user->hasRole([1]);
     }
 
     /**
