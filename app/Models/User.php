@@ -24,12 +24,15 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
     use TwoFactorAuthenticatable;
     use HasRoles;
 
+
+   
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $fillable = ['name', 'email', 'password', 'card_id', 'card_amount', 'wallet_id', 'wallet_amount', 'recaptcha_token'];
+    protected $fillable = ['name', 'email', 'password', 'card_id', 'card_amount', 'wallet_id', 'wallet_amount', 'recaptcha_token','email_verified_at','email_activate'];
 
     
     /**
@@ -65,5 +68,11 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
     public function jeep()
     {
         return $this->hasOne(Jeep::class, 'driver');
+    }
+
+    public function getEmailVerifiedAttribute()
+    {
+        // If email_verified_at is not null and not false, return true, else return false
+        return !is_null($this->attributes['email_verified_at']) && $this->attributes['email_verified_at'] !== false;
     }
 }

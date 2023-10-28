@@ -2,23 +2,28 @@
 
 namespace App\Filament\Resources;
 
+use Carbon\Carbon;
 use Filament\Forms;
 use App\Models\User;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Checkbox;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Columns\CheckboxColumn;
 use Filament\Tables\Columns\TextInputColumn;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserResource\RelationManagers;
-use Filament\Tables\Columns\ToggleColumn;
 
 class UserResource extends Resource
 {
@@ -54,7 +59,11 @@ class UserResource extends Resource
                         ->relationship(name: 'permissions', titleAttribute: 'name')
                         ->searchable()
                         ->preload(),
-                   
+                        Radio::make('email_verified_at')
+                        ->label('Account Activation')
+                        ->options([
+                            Carbon::now('Asia/Manila')->format('Y-m-d H:i') => 'Activate',
+                        ])->inline(false)
                 ])
                 ->columns(2),
         ]);
@@ -85,10 +94,9 @@ class UserResource extends Resource
                     ->label('Last update')
                     ->date('M Y : H m')
                     ->toggleable(isToggledHiddenByDefault: true),
-                     ToggleColumn::make('email_activate')
-                        ->label('Activate')
-                        ->onColor('success')
-                        ->offColor('danger'),
+                IconColumn::make('email_verified')
+                    ->label('Account Status')
+                    ->boolean(),
             ])
             ->filters([
                 //
