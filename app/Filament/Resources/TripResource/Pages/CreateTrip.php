@@ -2,8 +2,9 @@
 
 namespace App\Filament\Resources\TripResource\Pages;
 
-use App\Filament\Resources\TripResource;
 use Filament\Actions;
+use App\Filament\Resources\TripResource;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateTrip extends CreateRecord
@@ -20,5 +21,13 @@ class CreateTrip extends CreateRecord
         return 'Trip Created';
     }
 
-    
+    protected function afterCreate(): void
+    {
+        
+        Notification::make()
+            ->title('Sample')
+            ->icon('heroicon-o-shopping-bag')
+            ->body('New sample created')
+            ->sendToDatabase(auth()->user());
+    }
 }
