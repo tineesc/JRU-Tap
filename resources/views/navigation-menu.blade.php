@@ -126,22 +126,26 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        <div class="mx-5"> 
+                            <p class="font-semibold pt-2 text-md">Notification</p>
+                           <!-- Clear Notifications Button -->
+                           <form action="#" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-500 hover:text-red-400 text-sm">Clear</button>
+                        </form>
+                            <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
+                        </div>
                         <x-dropdown-link href="#">
-                            @foreach(auth()->user()->notifications as $notification)
-                            <div>
-                                <strong>{{ $notification->data['title'] }}</strong>
-                                <p>{{ $notification->data['body'] }}</p>
-                                <!-- Add more details as needed -->
-                            </div>
+                            @foreach (auth()->user()->notifications as $notification)
+                                <div>
+                                    <strong>{{ $notification->data['title'] }}</strong>
+                                    <p>{{ $notification->data['body'] }}</p>
+                                    <!-- Add more details as needed -->
+                                </div>
 
-
-                {{-- @forelse ($user->notifications as $notification)
-                            <a class="dropdown-item">{{ $notification->$data['name'] }}</a>
-                        @empty
-                        <a class="dropdown-item">No Record Found</a>
-                        @endforelse --}}
-                        @endforeach
-
+                                
+                            @endforeach
                         </x-dropdown-link>
                     </x-slot>
                 </x-dropdown>
