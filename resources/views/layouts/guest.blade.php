@@ -15,7 +15,7 @@
 
     {{-- ReCaptcha --}}
     <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
-    
+    @livewireStyles
     <style>
         /* ... your existing styles ... */
         
@@ -42,6 +42,6 @@
 
     @stack('scripts')
     <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
-
+    @livewireScripts
 </body>
 </html>
