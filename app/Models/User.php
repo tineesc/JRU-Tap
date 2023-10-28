@@ -67,4 +67,10 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
         return $this->hasOne(Jeep::class, 'driver');
     }
 
+    // You may have this method already, but make sure it uses HasDatabaseNotifications trait
+    public function routeNotificationForDatabase()
+    {
+        return $this->id; // or any other logic to determine the notifiable key
+    }
+
 }

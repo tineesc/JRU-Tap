@@ -127,11 +127,12 @@
 
                     <x-slot name="content">
                         <x-dropdown-link href="#">
-                            {{-- @include('notifications.notification', ['notification' => $notification]) --}}k
-
-                        </x-dropdown-link>
-                    </x-slot>
-                </x-dropdown>
+                            @foreach(auth()->user()->notifications as $notification)
+                            <div>
+                                <strong>{{ $notification->data['title'] }}</strong>
+                                <p>{{ $notification->data['body'] }}</p>
+                                <!-- Add more details as needed -->
+                            </div>
 
 
                 {{-- @forelse ($user->notifications as $notification)
@@ -139,7 +140,11 @@
                         @empty
                         <a class="dropdown-item">No Record Found</a>
                         @endforelse --}}
+                        @endforeach
 
+                        </x-dropdown-link>
+                    </x-slot>
+                </x-dropdown>
                 {{-- End Notification --}}
 
 
