@@ -53,13 +53,12 @@ class TripResource extends Resource
                 ->required(),
 
             Datepicker::make('Select Date')
-    ->minDate(now()->format('Y-m-d')) // Set the minimum date in 'Y-m-d' format
-    ->format('m-d-Y')
-    ->rules(['date', 'after_or_equal:' . now()->format('Y-m-d')])
-    ->required('create')
-    ->visibleOn('create', 'view')
-    ->native(false),
-
+                ->minDate(now()->format('Y-m-d')) // Set the minimum date in 'Y-m-d' format
+                ->format('m-d-Y')
+                ->rules(['date', 'after_or_equal:' . now()->format('Y-m-d')])
+                ->required('create')
+                ->visibleOn('create', 'view')
+                ->native(false),
 
             TimePicker::make('time')
                 ->required('create')
@@ -97,11 +96,12 @@ class TripResource extends Resource
                 ->readOnly(),
 
             Radio::make('trips')
-            ->label("Trip Jeep Status")
-            ->options([
-                'oneway' => 'One way',
-                'roundtrip' => 'Round Trip'
-            ])->required(),
+                ->label('Trip Jeep Status')
+                ->options([
+                    'oneway' => 'One way',
+                    'roundtrip' => 'Round Trip',
+                ])
+                ->required(),
 
             // Select::make('status')
             //     ->options([
@@ -113,9 +113,9 @@ class TripResource extends Resource
             //     ->native(false),
 
             TextInput::make('status')
-            ->label('Status')
-            ->default('pending')
-            ->readOnly(),
+                ->label('Status')
+                ->default('pending')
+                ->readOnly(),
         ]);
     }
 
@@ -155,7 +155,7 @@ class TripResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: false),
-                    TextColumn::make('trips')
+                TextColumn::make('trips')
                     ->sortable()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: false),

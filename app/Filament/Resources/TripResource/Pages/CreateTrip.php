@@ -21,13 +21,12 @@ class CreateTrip extends CreateRecord
         return 'Trip Created';
     }
 
-    protected function afterCreate(): void
+    protected function getCreatedNotification(): ?Notification
     {
-        
-        Notification::make()
-            ->title('Sample')
-            ->icon('heroicon-o-shopping-bag')
-            ->body('New sample created')
-            ->sendToDatabase(auth()->user());
+        return Notification::make()
+        ->success()
+        ->title('Trip Created')
+        ->body('New Trip Successfully Created')
+        ->sendToDatabase(auth()->user());
     }
 }

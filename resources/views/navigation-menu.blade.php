@@ -141,6 +141,7 @@
                                 <div>
                                     <strong>{{ $notification->data['title'] }}</strong>
                                     <p>{{ $notification->data['body'] }}</p>
+                                    <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
                                     <!-- Add more details as needed -->
                                 </div>
 
