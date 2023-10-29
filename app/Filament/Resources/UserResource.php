@@ -34,6 +34,7 @@ class UserResource extends Resource
     protected static ?int $navigationSort = 1;
 
     protected static ?string $navigationGroup = 'Settings';
+    
 
     public static function form(Form $form): Form
     {
@@ -52,9 +53,10 @@ class UserResource extends Resource
                         ->unique(ignoreRecord: true),
                     TextInput::make('password')
                         ->password()
-                        ->default('actona-password')
+                        ->default('@Ctona123')
+                        ->prefix('@Ctona123')
                         ->visibleOn(['create'])
-                        ,
+                        ->readOnly(),
                     Select::make('Roles')
                         ->multiple()
                         ->relationship(name: 'roles', titleAttribute: 'name')
