@@ -67,11 +67,11 @@ class QueueResource extends Resource
                 ->required()
                 ->visibleOn(['view', 'edit']),
                 
-            Select::make('notify')
-            ->label('Notify Queue')
-            ->options([
-                Carbon::now('Asia/Manila')->format('H:i') => 'Notify Jeep Driver',
-            ]),
+            // Select::make('notify')
+            // ->label('Notify Queue')
+            // ->options([
+            //     Carbon::now('Asia/Manila')->format('H:i') => 'Notify Jeep Driver',
+            // ]),
             // Other fields in your form...
         ]);
     }
@@ -81,8 +81,8 @@ class QueueResource extends Resource
         return $table
             ->columns([TextColumn::make('driver')->label('Driver'), 
             TextColumn::make('jnumber')->label('Plate Number'), 
-            TextColumn::make('begin')->label('Arrival Time'), 
-            TextColumn::make('end')->label('Driver Request in Queue'), 
+            // TextColumn::make('begin')->label('Arrival Time'), 
+            // TextColumn::make('end')->label('Driver Request in Queue'), 
             TextColumn::make('status')->label('Status')])
             ->filters([
                 //

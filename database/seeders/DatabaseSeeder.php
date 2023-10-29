@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Trip::factory(10)->create();
         \App\Models\Jeep::factory(10)->create();
         \App\Models\Fares::factory(10)->create();
-        \App\Models\Places::factory(10)->create();
+        // \App\Models\Places::factory(10)->create();
 
         $this->call(RoleSeeder::class);
         $this->call(PermissionSeeder::class);
@@ -31,9 +31,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        Card::factory()->create([
-            'card_id' => 0363607347,
-            'card_balance' => 100,
-        ]);
+        // Card::factory()->create([
+        //     'card_id' => 0363607347,
+        //     'card_balance' => 100,
+        // ]);
     }
 }

@@ -16,6 +16,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Resources\Resource;
+use Filament\Support\Colors\Color;
 use Illuminate\Support\Facades\DB;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
@@ -63,7 +64,9 @@ class TripResource extends Resource
             TimePicker::make('time')
                 ->required('create')
                 ->visibleOn('create', 'view')
-                ->native(false),
+                ->native(false)
+                ->withoutSeconds()
+                ->displayFormat('H:i A'),
 
             Select::make('fare')
                 ->label('Fare')

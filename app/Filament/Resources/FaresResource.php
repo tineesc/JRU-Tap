@@ -44,13 +44,13 @@ class FaresResource extends Resource
             ->placeholder('Fare')
                 ->numeric()
                 ->required(),
-            Select::make('status')
-                ->options([
-                    'approve' => 'approve',
-                    'pending' => 'pending',
-                    'decline' => 'decline',
-                ])
-                ->required(),
+            // Select::make('status')
+            //     ->options([
+            //         'approve' => 'approve',
+            //         'pending' => 'pending',
+            //         'decline' => 'decline',
+            //     ])
+            //     ->required(),
         ]);
     }
 
@@ -60,12 +60,15 @@ class FaresResource extends Resource
             ->columns([TextColumn::make('location'), 
             TextColumn::make('destination'), 
             TextColumn::make('fare'), 
-            TextColumn::make('status')
+            // TextColumn::make('status')
             ])
             ->filters([
                 //
             ])
-            ->actions([Tables\Actions\ViewAction::make(), Tables\Actions\EditAction::make(), Tables\Actions\DeleteAction::make()])
+            ->actions([
+             Tables\Actions\ViewAction::make(),
+             Tables\Actions\EditAction::make(), 
+             Tables\Actions\DeleteAction::make()])
             ->bulkActions([Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make()])])
             ->emptyStateActions([Tables\Actions\CreateAction::make()]);
     }

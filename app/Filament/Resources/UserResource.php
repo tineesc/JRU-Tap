@@ -41,14 +41,20 @@ class UserResource extends Resource
             Section::make('User')
                 ->description('User Page')
                 ->schema([
-                    TextInput::make('name')->required(),
+                    TextInput::make('name')
+                        ->minLength(8)
+                        ->maxLength(255)
+                        ->required(),
                     TextInput::make('email')
                         ->email()
                         ->required()
+                        ->suffix('@actona')
                         ->unique(ignoreRecord: true),
                     TextInput::make('password')
                         ->password()
-                        ->visibleOn(['create']),
+                        ->default('actona-password')
+                        ->visibleOn(['create'])
+                        ,
                     Select::make('Roles')
                         ->multiple()
                         ->relationship(name: 'roles', titleAttribute: 'name')
@@ -59,11 +65,12 @@ class UserResource extends Resource
                         ->relationship(name: 'permissions', titleAttribute: 'name')
                         ->searchable()
                         ->preload(),
-                        Radio::make('email_verified_at')
+                    Radio::make('email_verified_at')
                         ->label('Account Activation')
                         ->options([
                             Carbon::now('Asia/Manila')->format('Y-m-d H:i') => 'Activate',
-                        ])->inline(false)
+                        ])
+                        ->inline(false),
                 ])
                 ->columns(2),
         ]);

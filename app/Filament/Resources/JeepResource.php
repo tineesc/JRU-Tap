@@ -83,10 +83,10 @@ class JeepResource extends Resource
         return $table
             ->columns([TextColumn::make('driver')->label('Driver'),
              TextColumn::make('jnumber')->label('Plate Number'), 
-             TextColumn::make('begin')->label('Time IN'), 
+             TextColumn::make('begin')->label('Time In'), 
              TextColumn::make('end')->label('Time Out'), 
-             TextColumn::make('queue')->label('Add on Queue'), 
-             TextColumn::make('notify')->label('Request on Queue'), 
+             TextColumn::make('queue')->label('Queue'), 
+             TextColumn::make('notify')->label('Request Queue'), 
              TextColumn::make('status')->label('Status'), 
              TextColumn::make('request')->label('Request'), 
              ])
