@@ -46,12 +46,14 @@ class TripResource extends Resource
                 ->label('Location')
                 ->searchable()
                 ->options(Fares::all()->pluck('location', 'location'))
-                ->required(),
+                ->required()
+                ->disabledOn('edit'),
             Select::make('destination')
                 ->label('Destination')
                 ->searchable()
                 ->options(Fares::all()->pluck('destination', 'destination'))
-                ->required(),
+                ->required()
+                ->disabledOn('edit'),
 
             Datepicker::make('date')
                 ->minDate(now()->format('Y-m-d')) // Set the minimum date in 'Y-m-d' format
@@ -59,20 +61,23 @@ class TripResource extends Resource
                 ->rules(['date', 'after_or_equal:' . now()->format('Y-m-d')])
                 ->required('create')
                 ->visibleOn('create', 'view')
-                ->native(false),
+                ->native(false)
+                ->disabledOn('edit'),
 
             TimePicker::make('time')
                 ->required('create')
                 ->visibleOn('create', 'view')
                 ->native(false)
                 ->withoutSeconds()
-                ->displayFormat('H:i A'),
+                ->displayFormat('H:i A')
+                ->disabledOn('edit'),
 
             Select::make('fare')
                 ->label('Fare')
                 ->searchable()
                 ->required('create')
-                ->options(Fares::all()->pluck('fare', 'fare')),
+                ->options(Fares::all()->pluck('fare', 'fare'))
+                ->disabledOn('edit'),
 
             Select::make('driver')
                 ->label('Driver')
@@ -91,12 +96,14 @@ class TripResource extends Resource
 
                         $set('jnumber', $jeep->jnumber);
                     }
-                }),
+                })
+                ->disabledOn('edit'),
 
             TextInput::make('jnumber')
                 ->label('Plate Number')
                 ->rules('required')
-                ->readOnly(),
+                ->readOnly()
+                ->disabledOn('edit'),
 
             Radio::make('trips')
                 ->label('Trip Jeep Status')
@@ -104,7 +111,8 @@ class TripResource extends Resource
                     'oneway' => 'One way',
                     'roundtrip' => 'Round Trip',
                 ])
-                ->required(),
+                ->required()
+                ->disabledOn('edit'),
 
             Select::make('status')
                 ->options([

@@ -32,7 +32,8 @@ class CardResource extends Resource
         return $form->schema([
             TextInput::make('card_id')
                 ->label('Card Serial')
-                ->required('create'),
+                ->required('create')
+                ->readOnly('edit'),
             TextInput::make('wallet_id')->label('Wallet Serial'),
             Select::make('name')
                 ->label('Name')
@@ -60,7 +61,7 @@ class CardResource extends Resource
                 ->toggleable(isToggledHiddenByDefault: true), 
             TextColumn::make('name')
                 ->label('Owner')
-                ->toggleable(isToggledHiddenByDefault: true),
+                  ->toggleable(isToggledHiddenByDefault: false),
             ])
             ->filters([
                 //
