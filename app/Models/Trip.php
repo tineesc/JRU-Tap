@@ -50,7 +50,7 @@ class Trip extends Model
                     'driver' => $this->driver,
                     'fare' => $this->fare,
                     'jnumber' => $this->jnumber,
-                    'departure' => $this->departure,
+                    'departure' => now(),
                     'trips' => $this->trips,
                     'status' => $this->status,
                 ]);
