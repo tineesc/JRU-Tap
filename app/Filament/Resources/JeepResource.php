@@ -81,10 +81,13 @@ class JeepResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([TextColumn::make('driver')->label('Driver'),
+            ->columns([
+             TextColumn::make('driver')->label('Driver'),
              TextColumn::make('jnumber')->label('Plate Number'), 
-             TextColumn::make('begin')->label('Time In'), 
-             TextColumn::make('end')->label('Time Out'), 
+             TextColumn::make('begin')->label('Time In')
+             ->toggleable(isToggledHiddenByDefault: true), 
+             TextColumn::make('end')->label('Time Out')
+             ->toggleable(isToggledHiddenByDefault: true),
              TextColumn::make('queue')->label('Queue'), 
              TextColumn::make('notify')->label('Request Queue'), 
              TextColumn::make('status')->label('Status'), 

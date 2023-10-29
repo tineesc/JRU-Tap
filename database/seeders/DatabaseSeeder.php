@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // \App\Models\User::factory(10)->create();
-        \App\Models\Trip::factory(10)->create();
+        // \App\Models\Trip::factory(10)->create();
         \App\Models\Jeep::factory(10)->create();
         \App\Models\Fares::factory(10)->create();
         // \App\Models\Places::factory(10)->create();
@@ -31,9 +31,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        // Card::factory()->create([
-        //     'card_id' => 0363607347,
-        //     'card_balance' => 100,
-        // ]);
+        Card::factory()->create([
+            'card_id' => 0363607347,
+            'card_balance' => 10000,
+        ]);
     }
 }

@@ -53,9 +53,9 @@ class TripResource extends Resource
                 ->options(Fares::all()->pluck('destination', 'destination'))
                 ->required(),
 
-            Datepicker::make('Select Date')
+            Datepicker::make('date')
                 ->minDate(now()->format('Y-m-d')) // Set the minimum date in 'Y-m-d' format
-                ->format('m-d-Y')
+                ->format('Y-m-d')
                 ->rules(['date', 'after_or_equal:' . now()->format('Y-m-d')])
                 ->required('create')
                 ->visibleOn('create', 'view')
@@ -106,19 +106,17 @@ class TripResource extends Resource
                 ])
                 ->required(),
 
-            // Select::make('status')
-            //     ->options([
-            //         'completed' => 'Complete',
-            //         'on going' => 'on going',
-            //         'failed' => 'Failed',
-            //     ])
-            //     ->required('create')
-            //     ->native(false),
+            Select::make('status')
+                ->options([
+                    'completed' => 'Complete',
+                    'on going' => 'on going',
+                    'failed' => 'Failed',
+                ])
+                ->default('on goind')
+                ->required('create')
+                ->native(false)
+                ->visibleOn('edit'),
 
-            TextInput::make('status')
-                ->label('Status')
-                ->default('pending')
-                ->readOnly(),
         ]);
     }
 
@@ -144,29 +142,31 @@ class TripResource extends Resource
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: false),
                 TextColumn::make('time')
-                    ->label('Driving Time')
+                    ->label('Time')
                     ->sortable()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: false),
                 TextColumn::make('driver')
                     ->label('Driver')
-                    ->toggleable(),
+                    ->toggleable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('jnumber')
-                    ->label('Plate Number')
-                    ->toggleable(),
+                    ->label('Jeep')
+                    ->toggleable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('fare')
                     ->sortable()
                     ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: false),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('trips')
                     ->sortable()
                     ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: false),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('status')
                     ->sortable()
                     ->searchable()
                     ->badge()
-                    ->toggleable(isToggledHiddenByDefault: false),
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

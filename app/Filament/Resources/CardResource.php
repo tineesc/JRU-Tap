@@ -39,14 +39,29 @@ class CardResource extends Resource
                 ->searchable()
                 ->options(User::all()->pluck('name', 'name'))
                 ->required(),
-        
         ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([TextColumn::make('card_id'), TextColumn::make('card_balance'), TextColumn::make('wallet_id'), TextColumn::make('wallet_balance'), TextColumn::make('name')])
+            ->columns([
+                TextColumn::make('card_id')
+                 ->label('Card ID')
+                 ->toggleable(isToggledHiddenByDefault: false), 
+            TextColumn::make('card_balance')
+                ->label('Card Balance')
+                ->toggleable(isToggledHiddenByDefault: true), 
+            TextColumn::make('wallet_id')
+                ->label('Wallet ID')
+                ->toggleable(isToggledHiddenByDefault: false), 
+            TextColumn::make('wallet_balance')
+                ->label('Wallet Balance')
+                ->toggleable(isToggledHiddenByDefault: true), 
+            TextColumn::make('name')
+                ->label('Owner')
+                ->toggleable(isToggledHiddenByDefault: true),
+            ])
             ->filters([
                 //
             ])

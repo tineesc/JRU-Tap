@@ -17,15 +17,15 @@ return new class extends Migration
             $table->id();
             $table->string('location')->nullable();
             $table->string('destination')->nullable();
-            $table->date('date')->format('d-m-y')->nullable();
-            $table->time('time')->format('H:i')->nullable();
-            $table->time('departure')->format('H:i')->nullable();
+            $table->date('date')->format('Y-m-d')->nullable();
+            $table->time('time')->format('H:i A')->nullable();
+            $table->time('departure')->format('H:i A')->nullable();
             $table->integer('fare')->nullable();
             $table->integer('count')->nullable();
             $table->string('jnumber')->nullable();
             $table->string('driver')->nullable();
             $table->string('trips')->nullable();
-            $table->string('status')->nullable();
+            $table->string('status')->nullable()->default('on going');
             $table->timestamps();
         });
     }
