@@ -39,7 +39,8 @@ class CardResource extends Resource
                 ->label('Name')
                 ->searchable()
                 ->options(User::all()->pluck('name', 'name'))
-                ->required(),
+                ->required()
+                ,
         ]);
     }
 

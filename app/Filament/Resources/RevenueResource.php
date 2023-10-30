@@ -48,7 +48,7 @@ class RevenueResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('card_id'),
-                TextColumn::make('card_amount'),
+                // TextColumn::make('card_amount'),
                 TextColumn::make('fare'),
                 TextColumn::make('payment_method'),
                 TextColumn::make('status'),

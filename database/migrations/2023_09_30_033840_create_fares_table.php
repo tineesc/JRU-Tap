@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->string('destination')->nullable();
             $table->string('fare')->nullable();
-            $table->enum('status', [null,'approve', 'pending', 'decline']);
+            $table->string('status')->nullable()->default('pending');
             $table->timestamps();
         });
     }

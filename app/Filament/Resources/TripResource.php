@@ -29,6 +29,8 @@ use App\Filament\Resources\TripResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\TripResource\RelationManagers;
 
+
+
 class TripResource extends Resource
 {
     protected static ?string $model = Trip::class;
@@ -45,15 +47,24 @@ class TripResource extends Resource
             Select::make('location')
                 ->label('Location')
                 ->searchable()
-                ->options(Fares::all()->pluck('location', 'location'))
-                ->required()
+                ->required('create')
+                ->options(Fares::all()->pluck('location', 'id'))
+                ->native(false)
                 ->disabledOn('edit'),
+
             Select::make('destination')
                 ->label('Destination')
                 ->searchable()
                 ->options(Fares::all()->pluck('destination', 'destination'))
                 ->required()
+                ->live()
                 ->disabledOn('edit'),
+
+            TextInput::make('fare')
+            ->label('Fare')
+            ->rules('required')
+            ->readOnly()
+            ->disabledOn('edit'),
 
             Datepicker::make('date')
                 ->minDate(now()->format('Y-m-d')) // Set the minimum date in 'Y-m-d' format
@@ -70,13 +81,6 @@ class TripResource extends Resource
                 ->native(false)
                 ->withoutSeconds()
                 ->displayFormat('H:i A')
-                ->disabledOn('edit'),
-
-            Select::make('fare')
-                ->label('Fare')
-                ->searchable()
-                ->required('create')
-                ->options(Fares::all()->pluck('fare', 'fare'))
                 ->disabledOn('edit'),
 
             Select::make('driver')
