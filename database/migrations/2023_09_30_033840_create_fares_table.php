@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('location')->nullable();
             $table->string('destination')->nullable();
+            $table->string('code')->nullable();
             $table->string('fare')->nullable();
             $table->string('status')->nullable()->default('pending');
             $table->timestamps();

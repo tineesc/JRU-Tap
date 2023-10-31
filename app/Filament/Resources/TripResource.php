@@ -45,26 +45,25 @@ class TripResource extends Resource
     {
         return $form->schema([
             Select::make('location')
-                ->label('Location')
-                ->searchable()
-                ->required('create')
-                ->options(Fares::all()->pluck('location', 'id'))
-                ->native(false)
-                ->disabledOn('edit'),
-
-            Select::make('destination')
-                ->label('Destination')
-                ->searchable()
-                ->options(Fares::all()->pluck('destination', 'destination'))
-                ->required()
-                ->live()
-                ->disabledOn('edit'),
-
-            TextInput::make('fare')
+            ->label('Location')
+            ->searchable()
+            ->required('create')
+            ->options(Fares::all()->pluck('location', 'location'))
+            ->disabledOn('edit'),
+        
+        Select::make('destination')
+            ->label('Destination')
+            ->searchable()
+            ->options(Fares::all()->pluck('destination', 'destination'))
+            ->required()
+            ->disabledOn('edit'),
+        
+        TextInput::make('fare')
             ->label('Fare')
             ->rules('required')
             ->readOnly()
             ->disabledOn('edit'),
+        
 
             Datepicker::make('date')
                 ->minDate(now()->format('Y-m-d')) // Set the minimum date in 'Y-m-d' format

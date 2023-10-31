@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('jnumber')->nullable();
             $table->string('driver')->nullable();
             $table->string('trips')->nullable();
+            $table->string('code')->nullable();
             $table->string('status')->nullable()->default('on going');
             $table->timestamps();
         });

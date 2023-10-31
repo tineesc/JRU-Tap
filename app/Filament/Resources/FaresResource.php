@@ -11,6 +11,7 @@ use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Support\Facades\Request;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\FaresResource\Pages;
@@ -40,10 +41,18 @@ class FaresResource extends Resource
                 ->searchable()
                 ->options(Places::all()->pluck('location', 'location'))
                 ->required(),
+
             TextInput::make('fare')
-            ->placeholder('Fare')
+                ->placeholder('Fare')
                 ->numeric()
                 ->required(),
+
+            // TextInput::make('code')
+            //     ->label('Code')
+            //     ->rules('required')
+            //     ->readOnly()
+            //     ->disabledOn('edit'),
+
             // Select::make('status')
             //     ->options([
             //         'approve' => 'approve',
@@ -57,20 +66,25 @@ class FaresResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([TextColumn::make('location'), 
-            TextColumn::make('destination'), 
-            TextColumn::make('fare'), 
-            // TextColumn::make('status')
+            ->columns([
+                TextColumn::make('location'),
+                TextColumn::make('destination'),
+                TextColumn::make('fare'),
+                TextColumn::make('code'),
+                // TextColumn::make('status')
             ])
             ->filters([
                 //
             ])
             ->actions([
-             Tables\Actions\ViewAction::make(),
-             Tables\Actions\EditAction::make(), 
-             Tables\Actions\DeleteAction::make()])
-            ->bulkActions([Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make()])])
-            ->emptyStateActions([Tables\Actions\CreateAction::make()]);
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(), 
+                Tables\Actions\DeleteAction::make()
+                ])
+            ->bulkActions([Tables\Actions\BulkActionGroup::make([
+                Tables\Actions\DeleteBulkAction::make()])])
+            ->emptyStateActions([
+                Tables\Actions\CreateAction::make()]);
     }
 
     public static function getRelations(): array
