@@ -44,18 +44,32 @@ class TripResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            Select::make('location')
-            ->label('Location')
+            Select::make('code')
+            ->label('Code')
             ->searchable()
             ->required('create')
-            ->options(Fares::all()->pluck('location', 'location'))
+            ->options(Fares::all()->pluck('code', 'code'))
+            ->live()
+            ->afterStateUpdated(function (Set $set, ?string $state) {
+                $jeep = Fares::where('code', $state)->first();
+                if ($jeep) {
+                    $set('location', $jeep->location);
+                    $set('destination', $jeep->destination);
+                    $set('fare', $jeep->fare);
+                }
+            })
+            ->disabledOn('edit'),
+
+            TextInput::make('location')
+            ->label('Location')
+            ->rules('required')
+            ->readOnly()
             ->disabledOn('edit'),
         
-        Select::make('destination')
+            TextInput::make('destination')
             ->label('Destination')
-            ->searchable()
-            ->options(Fares::all()->pluck('destination', 'destination'))
-            ->required()
+            ->rules('required')
+            ->readOnly()
             ->disabledOn('edit'),
         
         TextInput::make('fare')

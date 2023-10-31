@@ -47,12 +47,6 @@ class FaresResource extends Resource
                 ->numeric()
                 ->required(),
 
-            // TextInput::make('code')
-            //     ->label('Code')
-            //     ->rules('required')
-            //     ->readOnly()
-            //     ->disabledOn('edit'),
-
             // Select::make('status')
             //     ->options([
             //         'approve' => 'approve',

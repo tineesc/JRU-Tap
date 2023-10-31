@@ -23,12 +23,6 @@ class Fares extends Model
             $model->code = $locationFirstTwoLetters . '' . $destinationFirstTwoLetters . '' . $model->fare;
         });
     }
-    
-    
-
-    
-    
-
 
     protected $fillable = [
         'location',
