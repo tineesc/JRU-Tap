@@ -45,11 +45,13 @@ class UserResource extends Resource
                     TextInput::make('name')
                         ->minLength(8)
                         ->maxLength(255)
-                        ->required(),
+                        ->required()
+                        ->disabledOn('edit'),
                     TextInput::make('email')
                         ->email()
                         ->required()
                         ->suffix('@actona')
+                        ->disabledOn('edit')
                         ->unique(ignoreRecord: true),
                     TextInput::make('password')
                         ->password()

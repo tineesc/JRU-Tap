@@ -22,6 +22,7 @@ class CardPolicy
     public function view(User $user, Card $card)
     {
         return $user->hasRole(1);
+       
     }
 
     /**
@@ -29,8 +30,7 @@ class CardPolicy
      */
     public function create(User $user)
     {
-        return $user->hasRole(1);
-        if($user->hasPermissionTo(22)) {
+        if($user->hasPermissionTo(22) || $user->hasRole(1)) {
             return true;
         }
     }
@@ -40,8 +40,7 @@ class CardPolicy
      */
     public function update(User $user, Card $card)
     {
-        return $user->hasRole(1);
-        if($user->hasPermissionTo(23)) {
+        if($user->hasPermissionTo(23) || $user->hasRole(1) ) {
             return true;
         }
     }
@@ -51,8 +50,7 @@ class CardPolicy
      */
     public function delete(User $user, Card $card)
     {
-        return $user->hasRole(1);
-        if($user->hasPermissionTo(24)) {
+        if($user->hasPermissionTo(24) || $user->hasRole(1)) {
             return true;
         }
     }

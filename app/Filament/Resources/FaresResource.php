@@ -61,10 +61,10 @@ class FaresResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('code'),
                 TextColumn::make('location'),
                 TextColumn::make('destination'),
                 TextColumn::make('fare'),
-                TextColumn::make('code'),
                 // TextColumn::make('status')
             ])
             ->filters([

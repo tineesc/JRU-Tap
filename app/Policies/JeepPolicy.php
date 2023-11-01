@@ -29,8 +29,7 @@ class JeepPolicy
      */
     public function create(User $user)
     {
-        return $user->hasRole(1);
-        if($user->hasPermissionTo(19)) {
+        if($user->hasPermissionTo(19) || $user->hasRole(1)) {
             return true;
         }
     }
@@ -40,8 +39,7 @@ class JeepPolicy
      */
     public function update(User $user, Jeep $jeep)
     {
-        return $user->hasRole(1);
-        if($user->hasPermissionTo(20)) {
+        if($user->hasPermissionTo(20) || $user->hasRole(1)) {
             return true;
         }
     }
@@ -51,8 +49,7 @@ class JeepPolicy
      */
     public function delete(User $user, Jeep $jeep)
     {
-        return $user->hasRole(1);
-        if($user->hasPermissionTo(21)) {
+        if($user->hasPermissionTo(21) || $user->hasRole(1)){
             return true;
         }
     }

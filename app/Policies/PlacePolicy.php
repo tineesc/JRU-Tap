@@ -29,8 +29,7 @@ class PlacePolicy
      */
     public function create(User $user)
     {
-        return $user->hasRole([1]);
-        if($user->hasPermissionTo(13)) {
+        if($user->hasPermissionTo(13) || $user->hasRole([1])) {
             return true;
         }
     }
@@ -40,8 +39,7 @@ class PlacePolicy
      */
     public function update(User $user, Places $places)
     {
-        return $user->hasRole([1]);
-        if($user->hasPermissionTo(14)) {
+        if($user->hasPermissionTo(14) || $user->hasRole([1])) {
             return true;
         }
     }
@@ -51,8 +49,7 @@ class PlacePolicy
      */
     public function delete(User $user, Places $places)
     {
-        return $user->hasRole([1]);
-        if($user->hasPermissionTo(15)) {
+        if($user->hasPermissionTo(15) || $user->hasRole([1])) {
             return true;
         }
     }

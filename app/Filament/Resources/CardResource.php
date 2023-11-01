@@ -32,15 +32,16 @@ class CardResource extends Resource
         return $form->schema([
             TextInput::make('card_id')
                 ->label('Card Serial')
-                ->required('create')
-                ->readOnly('edit'),
-            TextInput::make('wallet_id')->label('Wallet Serial'),
+                ->required()
+                ->disabledOn('edit'),
+                
+            TextInput::make('wallet_id')
+            ->label('Wallet Serial'),
+            
             Select::make('name')
                 ->label('Name')
                 ->searchable()
-                ->options(User::all()->pluck('name', 'name'))
-                ->required()
-                ,
+                ->options(User::all()->pluck('name', 'name')),
         ]);
     }
 
