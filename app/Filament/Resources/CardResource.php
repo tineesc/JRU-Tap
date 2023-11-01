@@ -32,6 +32,8 @@ class CardResource extends Resource
         return $form->schema([
             TextInput::make('card_id')
                 ->label('Card Serial')
+                ->minLength(8)
+                ->maxLength(255)
                 ->required()
                 ->disabledOn('edit'),
                 

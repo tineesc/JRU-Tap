@@ -22,6 +22,7 @@ class EditTrip extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+    
    protected function getSavedNotification(): ?Notification
    {
     return Notification::make()

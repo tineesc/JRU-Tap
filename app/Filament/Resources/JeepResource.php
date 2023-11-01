@@ -49,28 +49,28 @@ class JeepResource extends Resource
                         ->where('model_has_roles.model_type', User::class)
                         ->where('model_has_roles.role_id', Role::where('name', 'Driver')->first()->id)
                         ->pluck('users.name', 'users.name')->toArray(),
-                )->required()->native(false),
+                )->visibleOn('edit')->native(false),
 
             Select::make('queue')
                 ->label('Add to Queue')
                 ->options([
                     '' => 'Reset',
                     Carbon::now('Asia/Manila')->format('H:i') => 'Add to Jeep Queue',
-                ])->native(false),
+                ])->visibleOn('edit')->native(false),
 
                 Select::make('begin')
                 ->label('Time In')
                 ->options([
                     '' => 'Reset',
                     Carbon::now('Asia/Manila')->format('Y-m-d H:i') => 'Time IN',
-                ])->native(false),
+                ])->visibleOn('edit')->native(false),
 
                 Select::make('end')
                 ->label('Time Out')
                 ->options([
                     '' => 'Reset',
-                    Carbon::now('Asia/Manila')->format('H:i') => 'Time Out',
-                ])->native(false),
+                    Carbon::now('Asia/Manila')->format('Y-m-d H:i') => 'Time OUT',
+                ])->visibleOn('edit')->native(false),
 
 
 

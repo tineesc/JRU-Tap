@@ -45,6 +45,8 @@ class FaresResource extends Resource
             TextInput::make('fare')
                 ->placeholder('Fare')
                 ->numeric()
+                ->minLength(3)
+                ->maxLength(8)
                 ->required(),
 
             // Select::make('status')
