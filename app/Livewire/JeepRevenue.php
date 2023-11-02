@@ -51,9 +51,7 @@ class JeepRevenue extends Component
 
     public function break()
     {
-        $user = User::whereHas('roles', function ($query) {
-            $query->where('id', [1, 2]);
-        })->get();
+        
 
         $auth = Auth::user();
 
@@ -65,27 +63,34 @@ class JeepRevenue extends Component
                 $jeep->status = 'pending';
                 $jeep->save();
                 flash()->addSuccess('Request Sent Successfully');
+              
+
+                 // You can add additional logic here as per your requirements
+                Notification::make()
+                ->success()
+                ->icon('heroicon-o-archive-box')
+                ->title('Driver Request Notification')
+                ->body(Auth::user()->name . ' Request for Break ')
+                ->sendToDatabase(
+                    $usersToNotify =    User::whereHas('roles', function ($query) {
+                    $query->where('id', [1, 2]);
+                })->get());
+
+                $usersToNotify->push(Auth::user()); 
+
                 return redirect()->to('/driver');
             } else {
                 flash()->addError('Something went wrong!');
                 return redirect()->to('/driver');
             }
 
-             // You can add additional logic here as per your requirements
-             Notification::make()
-             ->success()
-             ->icon('heroicon-o-archive-box')
-             ->title('Driver Request Notification')
-             ->body(Auth::user()->name . ' Request for Break ')
-             ->sendToDatabase([$user,$auth]);
         }
+
     }
 
     public function lunch()
     {
-        $user = User::whereHas('roles', function ($query) {
-            $query->where('id', [1, 2]);
-        })->get();
+        
         
         $auth = Auth::user();
 
@@ -109,7 +114,12 @@ class JeepRevenue extends Component
                 ->icon('heroicon-o-inbox-stack')
                 ->title('Driver Request Notification')
                 ->body(Auth::user()->name . ' Request for Lunch ')
-                ->sendToDatabase([$user,$auth]);
+                ->sendToDatabase(
+                    $usersToNotify =    User::whereHas('roles', function ($query) {
+                    $query->where('id', [1, 2]);
+                })->get());
+
+                $usersToNotify->push(Auth::user()); 
         }
     }
     
@@ -117,9 +127,7 @@ class JeepRevenue extends Component
     public function driving()
     {
 
-        $user = User::whereHas('roles', function ($query) {
-            $query->where('id', [1, 2]);
-        })->get();
+    
 
         $auth = Auth::user();
         // Check if the user has an assigned trip and is marked as the driver
@@ -142,7 +150,12 @@ class JeepRevenue extends Component
                 ->icon('heroicon-o-megaphone')
                 ->title('Driver Driving Notification')
                 ->body(Auth::user()->name . ' Leave the Terminal Start Driving ')
-                ->sendToDatabase([$user,$auth]);
+                ->sendToDatabase(
+                    $usersToNotify =    User::whereHas('roles', function ($query) {
+                    $query->where('id', [1, 2]);
+                })->get());
+
+                $usersToNotify->push(Auth::user()); 
             // Display a success message
             flash()->addSuccess(' Driving Time updated Successfully');
             return redirect()->to('/driver');
@@ -156,9 +169,7 @@ class JeepRevenue extends Component
     public function departure()
     {
 
-        $user = User::whereHas('roles', function ($query) {
-            $query->where('id', [1, 2]);
-        })->get();
+       
 
         $auth = Auth::user();
 
@@ -192,7 +203,12 @@ class JeepRevenue extends Component
                 ->icon('heroicon-o-check-badge')
                 ->title('Driver Departure Notification')
                 ->body(Auth::user()->name . ' Arrive on Departure Destination ')
-                ->sendToDatabase([$user,$auth]);
+                ->sendToDatabase(
+                    $usersToNotify =    User::whereHas('roles', function ($query) {
+                    $query->where('id', [1, 2]);
+                })->get());
+
+                $usersToNotify->push(Auth::user()); 
             // Display a success message
             flash()->addSuccess('Departure Time updated Successfully');
             return redirect()->to('/driver');
@@ -206,9 +222,7 @@ class JeepRevenue extends Component
     public function failed()
     {
 
-        $user = User::whereHas('roles', function ($query) {
-            $query->where('id', [1, 2]);
-        })->get();
+      
 
         $auth = Auth::user();
 
@@ -232,7 +246,12 @@ class JeepRevenue extends Component
                 ->icon('heroicon-o-check-badge')
                 ->title('Driver Failure Notification')
                 ->body(Auth::user()->name . ' Failure on Departure Destination')
-                ->sendToDatabase([$user,$auth]);
+                ->sendToDatabase(
+                    $usersToNotify =    User::whereHas('roles', function ($query) {
+                    $query->where('id', [1, 2]);
+                })->get());
+
+                $usersToNotify->push(Auth::user()); 
             // Display a success message
             flash()->addSuccess('Failure Departure Time updated Successfully');
             return redirect()->to('/driver');
@@ -245,9 +264,7 @@ class JeepRevenue extends Component
 
     public function updateQueue()
     {
-        $user = User::whereHas('roles', function ($query) {
-            $query->where('id', [1, 2]);
-        })->get();
+     
 
         $auth = auth()->user(); // Get the authenticated user
 
@@ -270,7 +287,12 @@ class JeepRevenue extends Component
                     ->icon('heroicon-o-truck')
                     ->title('Driver Queue Notification')
                     ->body(Auth::user()->name . ' Request to add on queue')
-                    ->sendToDatabase([$user,$auth]);
+                    ->sendToDatabase(
+                        $usersToNotify =    User::whereHas('roles', function ($query) {
+                        $query->where('id', [1, 2]);
+                    })->get());
+    
+                    $usersToNotify->push(Auth::user()); 
 
                 // event(new DatabaseNotificationsSent($user));
 
