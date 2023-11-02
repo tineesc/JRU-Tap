@@ -19,6 +19,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Tables\Columns\CheckboxColumn;
 use Filament\Tables\Columns\TextInputColumn;
 use App\Filament\Resources\UserResource\Pages;
@@ -34,7 +35,6 @@ class UserResource extends Resource
     protected static ?int $navigationSort = 1;
 
     protected static ?string $navigationGroup = 'Settings';
-    
 
     public static function form(Form $form): Form
     {
@@ -69,12 +69,14 @@ class UserResource extends Resource
                         ->relationship(name: 'permissions', titleAttribute: 'name')
                         ->searchable()
                         ->preload(),
-                    Radio::make('email_verified_at')
+                        Radio::make('email_verified_at')
                         ->label('Account Activation')
                         ->options([
                             Carbon::now('Asia/Manila')->format('Y-m-d H:i') => 'Activate',
                         ])
+                        ->visible(fn ($record) => $record->email_verified_at === null)
                         ->inline(false),
+                    
                 ])
                 ->columns(2),
         ]);
