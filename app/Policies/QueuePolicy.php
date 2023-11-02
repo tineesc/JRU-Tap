@@ -21,7 +21,7 @@ class QueuePolicy
      */
     public function view(User $user, Queue $queue)
     {
-        return $user->hasRole([1]);
+        // return $user->hasRole([1]);
     }
 
     /**
@@ -45,7 +45,7 @@ class QueuePolicy
      */
     public function delete(User $user, Queue $queue)
     {
-        // return $user->hasRole([1]);
+        return $user->hasRole([1]);
     }
 
     /**
@@ -53,7 +53,7 @@ class QueuePolicy
      */
     public function restore(User $user, Queue $queue)
     {
-        // return $user->hasRole([1]);
+        return $user->hasRole([1]);
     }
 
     /**
@@ -61,6 +61,6 @@ class QueuePolicy
      */
     public function forceDelete(User $user, Queue $queue)
     {
-        // return $user->hasRole([1]);
+        return $user->hasRole([1]);
     }
 }

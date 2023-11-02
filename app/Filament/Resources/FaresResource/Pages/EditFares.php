@@ -42,7 +42,7 @@ class EditFares extends EditRecord
                 ->warning()
                 ->icon('heroicon-o-presentation-chart-bar')
                 ->title('Fare Resource Modified')
-                ->body("** Fare {$fare->code} Modified by {$auth->name}! **")
+                ->body("Fare {$fare->code} Modified by {$auth->name}!")
                 ->actions([Action::make('View')->url(FaresResource::getUrl('edit', ['record' => $fare]))])
                 ->sendToDatabase($user);
         }

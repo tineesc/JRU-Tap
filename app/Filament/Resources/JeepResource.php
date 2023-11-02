@@ -39,7 +39,8 @@ class JeepResource extends Resource
         return $form->schema([
             TextInput::make('jnumber')
                 ->label('Plate Number')
-                ->required(),
+                ->required()
+                ->disabledOn('edit'),
 
             Select::make('driver')
                 ->label('Driver')

@@ -40,7 +40,7 @@ class EditCard extends EditRecord
                 ->warning()
                 ->icon('heroicon-o-credit-card')
                 ->title('Card Resource Modified')
-                ->body("**Card {$card->card_id} Modified by {$auth->name}! **")
+                ->body("Card {$card->card_id} Modified by {$auth->name}!")
                 ->actions([Action::make('View')->url(CardResource::getUrl('edit', ['record' => $card]))])
                 ->sendToDatabase($user);
         }
