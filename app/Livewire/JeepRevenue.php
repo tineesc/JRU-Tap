@@ -51,10 +51,14 @@ class JeepRevenue extends Component
 
     public function break()
     {
-        $user = Auth::user();
+        $user = User::whereHas('roles', function ($query) {
+            $query->where('id', [1, 2]);
+        })->get();
 
-        if ($user) {
-            $jeep = Jeep::where('driver', $user->name)->first();
+        $auth = Auth::user();
+
+        if ($auth) {
+            $jeep = Jeep::where('driver', $auth->name)->first();
 
             if ($jeep) {
                 $jeep->request = 'break';
@@ -66,15 +70,27 @@ class JeepRevenue extends Component
                 flash()->addError('Something went wrong!');
                 return redirect()->to('/driver');
             }
+
+             // You can add additional logic here as per your requirements
+             Notification::make()
+             ->success()
+             ->icon('heroicon-o-archive-box')
+             ->title('Driver Request Notification')
+             ->body(Auth::user()->name . ' Request for Break ')
+             ->sendToDatabase([$user,$auth]);
         }
     }
 
     public function lunch()
     {
-        $user = Auth::user();
+        $user = User::whereHas('roles', function ($query) {
+            $query->where('id', [1, 2]);
+        })->get();
+        
+        $auth = Auth::user();
 
-        if ($user) {
-            $jeep = Jeep::where('driver', $user->name)->first();
+        if ($auth) {
+            $jeep = Jeep::where('driver', $auth->name)->first();
 
             if ($jeep) {
                 $jeep->request = 'lunch';
@@ -86,12 +102,26 @@ class JeepRevenue extends Component
                 flash()->addError('Something went wrong!');
                 return redirect()->to('/driver');
             }
+
+            // You can add additional logic here as per your requirements
+            Notification::make()
+                ->success()
+                ->icon('heroicon-o-inbox-stack')
+                ->title('Driver Request Notification')
+                ->body(Auth::user()->name . ' Request for Lunch ')
+                ->sendToDatabase([$user,$auth]);
         }
     }
     
 
     public function driving()
     {
+
+        $user = User::whereHas('roles', function ($query) {
+            $query->where('id', [1, 2]);
+        })->get();
+
+        $auth = Auth::user();
         // Check if the user has an assigned trip and is marked as the driver
         $trip = Trip::where('driver', Auth::user()->name)->first();
 
@@ -111,24 +141,27 @@ class JeepRevenue extends Component
                 ->success()
                 ->icon('heroicon-o-megaphone')
                 ->title('Driver Driving Notification')
-                ->body(Auth::user()->name . 'Leave the Terminal Start Driving')
-                ->sendToDatabase(
-                    User::whereHas('roles', function ($query) {
-                        $query->where('id', [1, 2]);
-                    })->get(),
-                );
+                ->body(Auth::user()->name . ' Leave the Terminal Start Driving ')
+                ->sendToDatabase([$user,$auth]);
             // Display a success message
-            flash()->addSuccess('Driving Time updated Successfully');
+            flash()->addSuccess(' Driving Time updated Successfully');
             return redirect()->to('/driver');
         } else {
             // Display an error message
-            flash()->addError('No assigned trip for you.');
+            flash()->addError(' No assigned trip for you. ');
             return redirect()->to('/driver');
         }
     }
 
     public function departure()
     {
+
+        $user = User::whereHas('roles', function ($query) {
+            $query->where('id', [1, 2]);
+        })->get();
+
+        $auth = Auth::user();
+
         // Check if the user has an assigned trip and is marked as the driver
         $trip = Trip::where('driver', Auth::user()->name)->first();
 
@@ -158,12 +191,8 @@ class JeepRevenue extends Component
                 ->success()
                 ->icon('heroicon-o-check-badge')
                 ->title('Driver Departure Notification')
-                ->body(Auth::user()->name . 'Arrive on Departure Destination')
-                ->sendToDatabase(
-                    User::whereHas('roles', function ($query) {
-                        $query->where('id', [1, 2]);
-                    })->get(),
-                );
+                ->body(Auth::user()->name . ' Arrive on Departure Destination ')
+                ->sendToDatabase([$user,$auth]);
             // Display a success message
             flash()->addSuccess('Departure Time updated Successfully');
             return redirect()->to('/driver');
@@ -176,6 +205,13 @@ class JeepRevenue extends Component
 
     public function failed()
     {
+
+        $user = User::whereHas('roles', function ($query) {
+            $query->where('id', [1, 2]);
+        })->get();
+
+        $auth = Auth::user();
+
         // Check if the user has an assigned trip and is marked as the driver
         $trip = Trip::where('driver', Auth::user()->name)->first();
 
@@ -195,12 +231,8 @@ class JeepRevenue extends Component
                 ->success()
                 ->icon('heroicon-o-check-badge')
                 ->title('Driver Failure Notification')
-                ->body(Auth::user()->name . 'Failure on Departure Destination')
-                ->sendToDatabase(
-                    User::whereHas('roles', function ($query) {
-                        $query->where('id', [1, 2]);
-                    })->get(),
-                );
+                ->body(Auth::user()->name . ' Failure on Departure Destination')
+                ->sendToDatabase([$user,$auth]);
             // Display a success message
             flash()->addSuccess('Failure Departure Time updated Successfully');
             return redirect()->to('/driver');
@@ -213,11 +245,15 @@ class JeepRevenue extends Component
 
     public function updateQueue()
     {
-        $user = auth()->user(); // Get the authenticated user
+        $user = User::whereHas('roles', function ($query) {
+            $query->where('id', [1, 2]);
+        })->get();
 
-        if ($user) {
+        $auth = auth()->user(); // Get the authenticated user
+
+        if ($auth) {
             // Check if the user is listed in the Queue table
-            $queueRecord = Jeep::where('driver', $user->name)->first();
+            $queueRecord = Jeep::where('driver', $auth->name)->first();
 
             if ($queueRecord) {
                 // Update the "end" column in the specific record
@@ -234,11 +270,7 @@ class JeepRevenue extends Component
                     ->icon('heroicon-o-truck')
                     ->title('Driver Queue Notification')
                     ->body(Auth::user()->name . ' Request to add on queue')
-                    ->sendToDatabase(
-                        User::whereHas('roles', function ($query) {
-                            $query->where('id', [1, 2]);
-                        })->get(),
-                    );
+                    ->sendToDatabase([$user,$auth]);
 
                 // event(new DatabaseNotificationsSent($user));
 
