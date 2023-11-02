@@ -1,11 +1,12 @@
 <?php
 
 use App\Livewire\Credits;
+use App\Livewire\JeepRevenue;
+use App\Livewire\JeepRevenueTable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentController;
-use App\Livewire\JeepRevenue;
-use App\Livewire\JeepRevenueTable;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,3 +78,6 @@ Route::controller(PaymentController::class)
     // Route::get('refund','refund');
     // Route::get('refund-status/{id}','refundStatus');
  });
+
+ Route::delete('/clear',[NotificationController::class,'clear'])->name('clear');
+

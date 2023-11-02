@@ -54,7 +54,7 @@ class EditJeep extends EditRecord
                 ->success()
                 ->icon('heroicon-o-truck')
                 ->title('Jeep Resource Modified')
-                ->body("Time IN!")
+                ->body("Driver {$jeep->driver} Time IN {$jeep->begin}")
                 ->actions([Action::make('View')->url(JeepResource::getUrl('edit', ['record' => $jeep]))])
                 ->sendToDatabase([$driverUser, $auth]);
         } elseif ($jeep->wasChanged('queue')) {
@@ -62,7 +62,7 @@ class EditJeep extends EditRecord
                 ->success()
                 ->icon('heroicon-o-truck')
                 ->title('Jeep Resource Modified')
-                ->body("Queue!")
+                ->body("Driver {$jeep->driver} Added to Queue {$jeep->queue} !")
                 ->actions([Action::make('View')->url(JeepResource::getUrl('edit', ['record' => $jeep]))])
                 ->sendToDatabase([$driverUser, $auth]);
         } elseif ($jeep->wasChanged('end')) {
@@ -70,7 +70,7 @@ class EditJeep extends EditRecord
                 ->success()
                 ->icon('heroicon-o-truck')
                 ->title('Jeep Resource Modified')
-                ->body("Time OUT!")
+                ->body("Driver {$jeep->driver} Time OUT {$jeep->end}!")
                 ->actions([Action::make('View')->url(JeepResource::getUrl('edit', ['record' => $jeep]))])
                 ->sendToDatabase([$driverUser, $auth]);
         } elseif ($jeep->driver !== null) {
