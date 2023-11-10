@@ -10,6 +10,8 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         "./node_modules/flowbite/**/*.js",
+        "./src/**/*.{html,js}",
+    "./node_modules/tw-elements/dist/js/**/*.js"
     ],
 
     theme: {
@@ -24,7 +26,6 @@ export default {
                 forms, 
                 typography,
                 require('flowbite/plugin'),
-            ],
-
-    
+                require("tw-elements/dist/plugin.cjs"),
+            ],darkMode: "class",
 };

@@ -20,6 +20,7 @@ class Credits extends Component
     public $cardId;
     public $credits;
     public $user;
+    
 
     // Open Modal
     public function showModal()
