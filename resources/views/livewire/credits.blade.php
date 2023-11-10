@@ -3,63 +3,64 @@
         <div class="flex justify-between">
             <div>
                 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Title for Credits') }}
-                <p class="text-slate-500 text-sm py-2">Additional Subtitle here</p>
-            </h2>
-        </div>
-        @role(3)
-        <div class="order-last" x-data="{ open: false }">
-            <a @click="open = ! open" 
-            class="bg-yellow-500 p-2 rounded-md shadow-md hover:bg-yellow-400">Driver Virtual Card</a>
+                    {{ __('Title for Credits') }}
+                    <p class="text-slate-500 text-sm py-2">Additional Subtitle here</p>
+                </h2>
+            </div>
+            @role(3)
+                <div class="order-last" x-data="{ open: false }">
+                    <a @click="open = ! open" class="bg-yellow-500 p-2 rounded-md shadow-md hover:bg-yellow-400">Driver
+                        Virtual Card</a>
 
-            @teleport('body')
-            <div x-show="open" @click="open = false" x-cloak class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
-                <!-- Virtual Card Section -->
-                <div class="flex justify-center">
-                    <div class="block w-full rounded-lg bg-slate-700 p-5">
-                        <!-- Content -->
-                       <div class="flex justify-between">
-                        <div class="block">
-                            <h2 class="font-semibold text-2xl">Driver Virtual Card</h2>
-                            <h2 class="font-semibold text-2xl">(ACTONA)</h2>
-                        </div>
-                        <div class="flex order-last">
-                            <div class="block">
-                                <p >Balance</p> 
-                            <h2 class="font-bold text-xl">
-                                @if ($walletBalance !== null)
-                                        <p class="semi-bold">{{ $walletBalance }}</p>
-                                    @else
-                                        <p>No Balance</p>
-                                    @endif
-                            </h2>
+                    @teleport('body')
+                        <div x-show="open" @click="open = false" x-cloak
+                            class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
+                            <!-- Virtual Card Section -->
+                            <div class="flex justify-center">
+                                <div class="block w-full rounded-lg bg-slate-700 p-5">
+                                    <!-- Content -->
+                                    <div class="flex justify-between">
+                                        <div class="block">
+                                            <h2 class="font-semibold text-2xl">Driver Virtual Card</h2>
+                                            <h2 class="font-semibold text-2xl">(ACTONA)</h2>
+                                        </div>
+                                        <div class="flex order-last">
+                                            <div class="block">
+                                                <p>Balance</p>
+                                                <h2 class="font-bold text-xl">
+                                                    @if ($walletBalance !== null)
+                                                        <p class="semi-bold">{{ $walletBalance }}</p>
+                                                    @else
+                                                        <p>No Balance</p>
+                                                    @endif
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pt-16 pb-10 flex flex-col md:flex-row justify-between items-center">
+                                        <img src="/image/chip.png" alt=""
+                                            class="max-w-full h-10 md:w-20 md:h-12  mb-4 md:mb-0" />
+                                        <h2 class="font-semibold text-2xl">{{ Auth::user()->name }}</h2>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <p class="text-3xl pt-6 font-bold mr-36" id="myText">
+                                            @if ($walletSerial !== null)
+                                                {{ $walletSerial }}
+                                            @else
+                                                No Register ID
+                                            @endif
+                                        </p>
+                                        <button id="copy-button"
+                                            class="onclick:text-red-200 rounded-md text-white p-2 mt-2 z-10"
+                                            onclick="copyContent()">Copy to Clipboard
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                       </div>
-                        <div class="pt-16 pb-10 flex flex-col md:flex-row justify-between items-center">
-                            <img src="/image/chip.png" alt=""
-                                class="max-w-full h-10 md:w-20 md:h-12  mb-4 md:mb-0" />
-                            <h2 class="font-semibold text-2xl">{{ Auth::user()->name }}</h2>
-                        </div>
-                        <div class="flex justify-between">
-                            <p class="text-3xl pt-6 font-bold mr-36" id="myText">
-                                @if ($walletSerial !== null)
-                                        {{ $walletSerial }}
-                                    @else
-                                        No Register ID
-                                    @endif
-                            </p>
-                            <button id="copy-button"
-                                class="onclick:text-red-200 rounded-md text-white p-2 mt-2 z-10"
-                                onclick="copyContent()">Copy to Clipboard
-                            </button>
-                        </div>
-                    </div>
+                    @endteleport
                 </div>
-            </div>
-        @endteleport
-        </div>
-        @endrole
+            @endrole
         </div>
     </x-slot>
     <div class="py-12">
@@ -68,11 +69,11 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 rounded shadow-md mb-3">
                     <!-- Top-Up Credits Form -->
-                    <div class="rounded-lg">
+                    <div class="rounded-lg bg-slate-50">
                         <!-- Content -->
                         <form action="{{ route('pay') }}">
                             @csrf
-                            <h2 class="font-semibold text-3xl text-center text-slate-950 py-5 mx-auto">Top up Credits
+                            <h2 class="font-semibold text-3xl text-center text-slate-950 py-5 mx-auto">ADD CREDITS
                             </h2>
                             <div class="mx-6 py-2">
                                 <x-label for="credits" value="{{ __('Credits') }}" />
@@ -97,45 +98,65 @@
                     </div>
 
                     <!-- Virtual Card Section -->
-                    <div class="flex justify-center">
-                        <div class="block w-full rounded-lg bg-slate-700 p-5">
-                            <!-- Content -->
-                           <div class="flex justify-between">
-                            <div class="block">
-                                <h2 class="font-semibold text-2xl">Virtual Card</h2>
-                                <h2 class="font-semibold text-2xl">(ACTONA)</h2>
-                            </div>
-                            <div class="flex order-last">
-                                <div class="block">
-                                    <p >Balance</p> 
-                                <h2 class="font-bold text-xl">
-                                    @if ($cardBalance !== null)
-                                        <p class="semi-bold">{{ $cardBalance }}</p>
-                                    @else
-                                        <p>No Balance to show</p>
-                                    @endif
-                                </h2>
-                                </div>
-                            </div>
-                           </div>
-                            <div class="pt-16 pb-10 flex flex-col md:flex-row justify-between items-center">
-                                <img src="/image/chip.png" alt=""
-                                    class="max-w-full h-10 md:w-20 md:h-12  mb-4 md:mb-0" />
-                                <h2 class="font-semibold text-2xl">{{ Auth::user()->name }}</h2>
-                            </div>
+                    <div
+                        class="w-full h-full m-auto bg-red-100 rounded-xl relative text-white shadow-2xl transition-transform transform hover:scale-110">
+
+                        <img class="relative object-cover w-full h-full rounded-xl" src="/image/debit.png">
+
+                        <div class="w-full px-8 absolute top-8">
                             <div class="flex justify-between">
-                                <p class="text-3xl pt-6 font-bold" id="myText">
+                                <div class="pt-5">
+                                    <p class="font-light">
+                                        Name
+                                        </h1>
+                                    <p class="font-medium tracking-widest">
+                                        {{ Auth::user()->name }}
+                                    </p>
+                                </div>
+                                <img class="w-14 h-14" src="/image/masterCard.png" />
+                            </div>
+                            <div class="pt-5">
+                                <p class="font-light">
+                                    Card Number
+                                    </h1>
+                                <p class="font-medium tracking-more-wider">
                                     @if ($cardSerial !== null)
                                         {{ $cardSerial }}
                                     @else
                                         No Register ID
                                     @endif
                                 </p>
-                                <button id="copy-button"
-                                    class="onclick:text-red-200 rounded-md text-white p-2 mt-2 z-10"
-                                    onclick="copyContent()">Copy to Clipboard
-                                </button>
                             </div>
+                            <div class="pt-20 pr-6">
+                                <div class="flex justify-between">
+                                    <div class="">
+                                        <p class="font-light text-xs">
+                                            Valid
+                                            </h1>
+                                        <p class="font-medium tracking-wider text-sm">
+                                            11/15
+                                        </p>
+                                    </div>
+                                    <div class="">
+                                        <p class="font-light text-xs">
+                                            Expiry
+                                            </h1>
+                                        <p class="font-medium tracking-wider text-sm">
+                                            03/25
+                                        </p>
+                                    </div>
+
+                                    <div class="">
+                                        <p class="font-light text-xs">
+                                            Balance
+                                            </h1>
+                                        <p class="font-bold tracking-more-wider text-sm">
+                                            {{ $cardBalance }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -202,9 +223,11 @@
                                 <div class="py-2 text-center">
                                     <div class="py-2 text-center">
                                         <div class="p-4 bg-slate-50 bg-opacity-75 shadow-lg rounded-md">
-                                            <p class="text-md font-semibold text-red-500">Date {{ $card->card_id }}</p>
+                                            <p class="text-md font-semibold text-red-500">Date {{ $card->card_id }}
+                                            </p>
                                             <p class="text-md font-semibold text-red-400">Time {{ $card->amount }}</p>
-                                            <p class="text-md font-semibold text-red-500">Price {{ $card->status }}</p>
+                                            <p class="text-md font-semibold text-red-500">Price {{ $card->status }}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

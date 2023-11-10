@@ -14,7 +14,7 @@
                 {{-- Name --}}
                 <div class="mb-4">
                     <x-label for="name" value="{{ __('Name') }}" />
-                    <x-input id="name" class="block w-full" type="text" name="name" :value="old('name')"
+                    <x-input id="name" onkeypress="return onlyAlphabets(event,this);" class="block w-full" type="text" name="name" :value="old('name')"
                         required autofocus autocomplete="name" />
                 </div>
 
@@ -141,6 +141,29 @@
                 });
             </script>
         @endpush
+
+        <script language="Javascript" type="text/javascript">
+
+            function onlyAlphabets(e, t) {
+                try {
+                    if (window.event) {
+                        var charCode = window.event.keyCode;
+                    }
+                    else if (e) {
+                        var charCode = e.which;
+                    }
+                    else { return true; }
+                    if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                        return true;
+                    else
+                        return false;
+                }
+                catch (err) {
+                    alert(err.Description);
+                }
+            }
+    
+        </script>
 
     </x-authentication-card>
 
