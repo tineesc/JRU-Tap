@@ -160,7 +160,7 @@
                                     </label>
                                 </li>
                                 <li class="mx-5">
-                                    <input  type="radio" id="hosting" name="credits" value="400" class="hidden peer">
+                                    <input  type="radio" id="hosting" name="credits" value="500" class="hidden peer">
                                     <label for="hosting" class="inline-flex items-center justify-between w-full p-3 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                                         <div class="block">
                                             <div class="w-full text-lg font-semibold">500</div>
@@ -171,7 +171,7 @@
                                     </label>
                                 </li>
                                 <li class="mx-5">
-                                    <input  type="radio" id="small" name="credits" value="500" class="hidden peer">
+                                    <input  type="radio" id="small" name="credits" value="1000" class="hidden peer">
                                     <label for="small" class="inline-flex items-center justify-between w-full p-3 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                                         <div class="block">
                                             <div class="w-full text-lg font-semibold">1000</div>
@@ -182,7 +182,7 @@
                                     </label>
                                 </li>
                                 <li class="mx-5">
-                                    <input  type="radio" id="over" name="credits" value="1000" class="hidden peer">
+                                    <input  type="radio" id="over" name="credits" value="2000" class="hidden peer">
                                     <label for="over" class="inline-flex items-center justify-between w-full p-3 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                                         <div class="block">
                                             <div class="w-full text-lg font-semibold">2000</div>
