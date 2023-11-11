@@ -16,27 +16,9 @@
     {{-- ReCaptcha --}}
     <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
     @livewireStyles
-    <style>
-        /* ... your existing styles ... */
-        
-        /* Add responsive styles here */
-        @media (max-width: 768px) {
-            /* Define styles for smaller screens here */
-            .popup {
-                width: 100%;
-            }
-            .block.text-center.md\:text-left {
-                text-align: center;
-            }
-            .flex.flex-col.items-center.md\:flex-row.md\:items-center.justify-center.md\:justify-between.mt-4 {
-                justify-content: center;
-            }
-        }
-    </style>
-    
 </head>
-<body>
-    <div class="font-sans text-gray-900 antialiased">
+<body class="font-mono bg-gray-400 mt-40 h-14 bg-gradient-to-r from-violet-300 to-fuchsia-300">
+    <div>
         {{ $slot }}
     </div>
 
