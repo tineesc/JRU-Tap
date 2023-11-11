@@ -12,8 +12,10 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Section;
 use Illuminate\Support\Facades\Config;
 use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Fieldset;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
@@ -37,45 +39,63 @@ class JeepResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            TextInput::make('jnumber')
-                ->label('Plate Number')
-                ->required()
-                ->disabledOn('edit'),
+            Fieldset::make('Jeep')->schema([
+                TextInput::make('jnumber')
+                    ->label('Plate Number')
+                    ->required()
+                    ->disabledOn('edit')
+                    ->columnSpanFull(),
+            ]),
 
-            Select::make('driver')
-                ->label('Driver')
-                ->options(
-                    // Fetch users with the "Driver" role and create options array
-                    User::join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
-                        ->where('model_has_roles.model_type', User::class)
-                        ->where('model_has_roles.role_id', Role::where('name', 'Driver')->first()->id)
-                        ->pluck('users.name', 'users.name')->toArray(),
-                )->visibleOn('edit')->native(false),
+            Section::make('User with Driver Role')
+                // ->description('Prevent abuse by limiting the number of requests per period')
+                ->schema([
+                    Select::make('driver')
+                        ->label('Driver')
+                        ->options(
+                            // Fetch users with the "Driver" role and create options array
+                            User::join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+                                ->where('model_has_roles.model_type', User::class)
+                                ->where('model_has_roles.role_id', Role::where('name', 'Driver')->first()->id)
+                                ->pluck('users.name', 'users.name')
+                                ->toArray(),
+                        )
+                        ->visibleOn('edit')
+                        ->native(false),
 
-            Select::make('queue')
-                ->label('Add to Queue')
-                ->options([
-                    '' => 'Reset',
-                    Carbon::now('Asia/Manila')->format('H:i') => 'Add to Jeep Queue',
-                ])->visibleOn('edit')->native(false),
+                    Select::make('queue')
+                        ->label('Add to Queue')
+                        ->options([
+                            '' => 'Reset',
+                            Carbon::now('Asia/Manila')->format('H:i') => 'Add to Jeep Queue',
+                        ])
+                        ->visibleOn('edit')
+                        ->native(false),
+                ])
+                ->columns(2),
 
-                Select::make('begin')
-                ->label('Time In')
-                ->options([
-                    '' => 'Reset',
-                    Carbon::now('Asia/Manila')->format('Y-m-d H:i') => 'Time IN',
-                ])->visibleOn('edit')->native(false),
+            Section::make('Clock in')
+                // ->description('Prevent abuse by limiting the number of requests per period')
+                ->schema([
+                    Select::make('begin')
+                        ->label('Time In')
+                        ->options([
+                            '' => 'Reset',
+                            Carbon::now('Asia/Manila')->format('Y-m-d H:i') => 'Time IN',
+                        ])
+                        ->visibleOn('edit')
+                        ->native(false),
 
-                Select::make('end')
-                ->label('Time Out')
-                ->options([
-                    '' => 'Reset',
-                    Carbon::now('Asia/Manila')->format('Y-m-d H:i') => 'Time OUT',
-                ])->visibleOn('edit')->native(false),
-
-
-
-            // Other fields in your form...
+                    Select::make('end')
+                        ->label('Time Out')
+                        ->options([
+                            '' => 'Reset',
+                            Carbon::now('Asia/Manila')->format('Y-m-d H:i') => 'Time OUT',
+                        ])
+                        ->visibleOn('edit')
+                        ->native(false),
+                ])
+                ->columns(2),
         ]);
     }
 
@@ -83,17 +103,19 @@ class JeepResource extends Resource
     {
         return $table
             ->columns([
-             TextColumn::make('driver')->label('Driver'),
-             TextColumn::make('jnumber')->label('Plate Number'), 
-             TextColumn::make('begin')->label('Time In')
-             ->toggleable(isToggledHiddenByDefault: true), 
-             TextColumn::make('end')->label('Time Out')
-             ->toggleable(isToggledHiddenByDefault: true),
-             TextColumn::make('queue')->label('Queue'), 
-             TextColumn::make('notify')->label('Request Queue'), 
-             TextColumn::make('status')->label('Status'), 
-             TextColumn::make('request')->label('Request'), 
-             ])
+                TextColumn::make('driver')->label('Driver'),
+                TextColumn::make('jnumber')->label('Plate Number'),
+                TextColumn::make('begin')
+                    ->label('Time In')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('end')
+                    ->label('Time Out')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('queue')->label('Queue'),
+                TextColumn::make('notify')->label('Request Queue'),
+                TextColumn::make('status')->label('Status'),
+                TextColumn::make('request')->label('Request'),
+            ])
             ->filters([
                 //
             ])

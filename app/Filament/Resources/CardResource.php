@@ -10,6 +10,8 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Fieldset;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
@@ -30,20 +32,33 @@ class CardResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            TextInput::make('card_id')
-                ->label('Card Serial')
-                ->minLength(8)
-                ->maxLength(255)
-                ->required()
-                ->disabledOn('edit'),
-                
-            TextInput::make('wallet_id')
-            ->label('Wallet Serial'),
-            
+
+            Section::make('Card Registration')
+    ->description('Prevent abuse by limiting the number of requests per period')
+    ->schema([
+        Fieldset::make('Users Belongs this Card')
+        ->schema([
             Select::make('name')
-                ->label('Name')
-                ->searchable()
-                ->options(User::all()->pluck('name', 'name')),
+                    ->label('Name')
+                    ->searchable()
+                    ->options(User::all()->pluck('name', 'name'))
+                    ->columnSpanFull(),
+        ]),
+                TextInput::make('card_id')
+                    ->label('Card Serial')
+                    ->minLength(8)
+                    ->maxLength(255)
+                    ->required()
+                    ->disabledOn('edit'),
+                    
+                TextInput::make('wallet_id')
+                ->label('Wallet Serial'),
+    ])->columns(2),
+
+            
+           
+            
+            
         ]);
     }
 

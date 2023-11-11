@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Fieldset;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Support\Facades\Request;
 use Filament\Forms\Components\TextInput;
@@ -31,23 +32,27 @@ class FaresResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            Select::make('location')
-                ->label('Location')
-                ->searchable()
-                ->options(Places::all()->pluck('location', 'location'))
-                ->required(),
-            Select::make('destination')
-                ->label('Destination')
-                ->searchable()
-                ->options(Places::all()->pluck('location', 'location'))
-                ->required(),
+            Fieldset::make('Fares Table')
+                ->schema([
+                    Select::make('location')
+                        ->label('Location')
+                        ->searchable()
+                        ->options(Places::all()->pluck('location', 'location'))
+                        ->required(),
+                    Select::make('destination')
+                        ->label('Destination')
+                        ->searchable()
+                        ->options(Places::all()->pluck('location', 'location'))
+                        ->required(),
 
-            TextInput::make('fare')
-                ->placeholder('Fare')
-                ->numeric()
-                ->minLength(3)
-                ->maxLength(8)
-                ->required(),
+                    TextInput::make('fare')
+                        ->placeholder('Fare')
+                        ->numeric()
+                        ->minLength(2)
+                        ->maxLength(8)
+                        ->required()->columnSpanFull(),
+                ])
+                ->columns(2),
 
             // Select::make('status')
             //     ->options([
@@ -72,15 +77,9 @@ class FaresResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(), 
-                Tables\Actions\DeleteAction::make()
-                ])
-            ->bulkActions([Tables\Actions\BulkActionGroup::make([
-                Tables\Actions\DeleteBulkAction::make()])])
-            ->emptyStateActions([
-                Tables\Actions\CreateAction::make()]);
+            ->actions([Tables\Actions\ViewAction::make(), Tables\Actions\EditAction::make(), Tables\Actions\DeleteAction::make()])
+            ->bulkActions([Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make()])])
+            ->emptyStateActions([Tables\Actions\CreateAction::make()]);
     }
 
     public static function getRelations(): array
