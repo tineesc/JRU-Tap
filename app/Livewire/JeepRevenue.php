@@ -290,7 +290,7 @@ class JeepRevenue extends Component
                     ->sendToDatabase(
                         $usersToNotify =    User::whereHas('roles', function ($query) {
                         $query->where('id', [1, 2]);
-                    })->get());
+                    })->get())->broadcast($usersToNotify);
     
                     $usersToNotify->push(Auth::user()); 
 
