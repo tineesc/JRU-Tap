@@ -6,12 +6,14 @@ use App\Models\User;
 use App\Models\Queue;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Jeep extends Model
 {
     use HasFactory;
-
+    use softDeletes;
+    
     protected $fillable = ['jnumber', 'driver', 'begin', 'end', 'notify', 'status', 'notify','queue'];
 
     public function driver()

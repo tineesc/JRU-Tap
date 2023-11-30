@@ -12,6 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -23,6 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasRoles;
+    use softDeletes;
 
 
    
