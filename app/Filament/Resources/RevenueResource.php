@@ -14,6 +14,7 @@ use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\RevenueResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use App\Filament\Resources\RevenueResource\RelationManagers;
 
 class RevenueResource extends Resource
@@ -52,6 +53,10 @@ class RevenueResource extends Resource
                 TextColumn::make('fare'),
                 TextColumn::make('payment_method'),
                 TextColumn::make('status'),
+                TextColumn::make('created_at')
+                    ->searchable()
+                    ->date('Y M D')
+                    ->toggleable(isToggledHiddenByDefault: false),
             ])
             ->filters([
                 //
@@ -62,6 +67,7 @@ class RevenueResource extends Resource
                 // Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
+                ExportBulkAction::make(),
                 Tables\Actions\BulkActionGroup::make([
                     // Tables\Actions\DeleteBulkAction::make(),
                 ]),

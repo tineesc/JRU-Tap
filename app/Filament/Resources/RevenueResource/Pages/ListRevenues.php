@@ -16,4 +16,15 @@ class ListRevenues extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    public  function getTabs(): array
+    {
+        return [
+            null => ListRecords\Tab::make('All'),
+            'daily' => ListRecords\Tab::make('Today')->query(fn ($query) => $query->whereDate('created_at', today())),
+            'monthly' => ListRecords\Tab::make('Monthly')->query(fn ($query) => $query->whereMonth('created_at', now()->month)),
+            'yearly' => ListRecords\Tab::make('Yearly')->query(fn ($query) => $query->whereYear('created_at', now()->year)),
+        ];
+        
+    }
 }
