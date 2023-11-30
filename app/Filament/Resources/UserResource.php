@@ -101,7 +101,7 @@ class UserResource extends Resource
                 TextColumn::make('created_at')
                     ->searchable()
                     ->date('M Y')
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: false),
                 TextColumn::make('updated_at')
                     ->searchable()
                     ->label('Last update')
