@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\Revenue;
 use Filament\Widgets\ChartWidget;
 
 class RevenueAnnualChart extends ChartWidget
@@ -10,14 +11,20 @@ class RevenueAnnualChart extends ChartWidget
 
     protected function getData(): array
     {
+        $annualData = Revenue::selectRaw('YEAR(created_at) as year, SUM(fare) as totalRevenue')
+            ->groupBy('year')
+            ->orderBy('year')
+            ->pluck('totalRevenue')
+            ->toArray();
+
         return [
             'datasets' => [
                 [
-                    'label' => 'Annual Revenue in All Jeepny Fares',
-                    'data' => [0, 10, 5, 2, 21, 32, 45, 74, 65, 45, 77, 200],
+                    'label' => 'Annual Revenue in All Jeep Fares',
+                    'data' => $annualData,
                 ],
             ],
-            'labels' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            'labels' => range(date('Y') - 11, date('Y')), // Adjust the range based on your data
         ];
     }
 

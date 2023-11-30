@@ -2,7 +2,9 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\Revenue;
 use Filament\Widgets\ChartWidget;
+
 
 class RevenueMonthlyChart extends ChartWidget
 {
@@ -10,11 +12,17 @@ class RevenueMonthlyChart extends ChartWidget
 
     protected function getData(): array
     {
+        $monthlyData = Revenue::selectRaw('MONTH(created_at) as month, SUM(fare) as totalRevenue')
+            ->groupBy('month')
+            ->orderBy('month')
+            ->pluck('totalRevenue')
+            ->toArray();
+
         return [
             'datasets' => [
                 [
-                    'label' => 'Monthly Revenue in All Jeepny Fares',
-                    'data' => [0, 10, 5, 2, 21, 32, 45, 74, 65, 45, 77, 200],
+                    'label' => 'Monthly Revenue in All Jeep Fares',
+                    'data' => $monthlyData,
                 ],
             ],
             'labels' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
