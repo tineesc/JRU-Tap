@@ -75,7 +75,7 @@ class UserResource extends Resource
                         ->options([
                             Carbon::now('Asia/Manila')->format('Y-m-d H:i') => 'Activate',
                         ])
-                        ->visible(fn($record) => $record->email_verified_at === null)
+                        ->visible(fn ($record) => $record->email_verified_at === null)
                         ->inline(false),
                 ])
                 ->columns(2),
@@ -112,29 +112,36 @@ class UserResource extends Resource
                     ->boolean(),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(), 
+                Tables\Filters\TrashedFilter::make(),
             ])
-            ->actions([Tables\Actions\ViewAction::make(), Tables\Actions\EditAction::make(), Tables\Actions\DeleteAction::make()])
+            ->actions([
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+            ])
             ->bulkActions([
                 ExportBulkAction::make(),
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(), 
-                    Tables\Actions\ForceDeleteBulkAction::make(), 
-                    Tables\Actions\RestoreBulkAction::make()])])
-            ->emptyStateActions([Tables\Actions\CreateAction::make()]);
+                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
+                ])
+            ])
+            ->emptyStateActions([Tables\Actions\CreateAction::make()
+        ]);
     }
 
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-        ->withoutGlobalScopes([SoftDeletingScope::class]);
+            ->withoutGlobalScopes([SoftDeletingScope::class]);
     }
 
     public static function getRelations(): array
     {
         return [
-                //
-            ];
+            //
+        ];
     }
 
     public static function getPages(): array
