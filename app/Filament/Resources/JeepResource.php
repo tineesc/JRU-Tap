@@ -118,30 +118,36 @@ class JeepResource extends Resource
                 TextColumn::make('request')->label('Request'),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(), 
+                Tables\Filters\TrashedFilter::make(),
             ])
-            ->actions([Tables\Actions\ViewAction::make(), Tables\Actions\EditAction::make(), Tables\Actions\DeleteAction::make()])
+            ->actions([
+                Tables\Actions\ViewAction::make(),
+                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
+            ])
             ->bulkActions([
                 ExportBulkAction::make(),
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\ForceDeleteBulkAction::make(),
                     Tables\Actions\RestoreBulkAction::make(),
-                    Tables\Actions\DeleteBulkAction::make()])])
+                    Tables\Actions\DeleteBulkAction::make(),
+                ])
+            ])
             ->emptyStateActions([Tables\Actions\CreateAction::make()]);
     }
 
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-        ->withoutGlobalScopes([SoftDeletingScope::class]);
+            ->withoutGlobalScopes([SoftDeletingScope::class]);
     }
 
 
     public static function getRelations(): array
     {
         return [
-                //
-            ];
+            //
+        ];
     }
 
     public static function getPages(): array
