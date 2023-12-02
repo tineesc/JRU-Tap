@@ -12,7 +12,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
                         </svg>
-                        <div class="pl-2 md:pl-4 text-sm font-normal">
+                        <div wire:poll class="pl-2 md:pl-4 text-sm font-normal">
                             @forelse ($jnumber as $jeep)
                                 <p>{{ $jeep->jnumber }}</p>
                             @empty
@@ -30,7 +30,7 @@
                                 d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
 
-                        <div class="pl-2 md:pl-4 text-sm font-normal">
+                        <div wire:poll class="pl-2 md:pl-4 text-sm font-normal">
                             @forelse ($jnumber as $jeep)
                                 @if ($jeep->begin === null)
                                     No Time IN
@@ -52,7 +52,7 @@
                                 d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
                         </svg>
 
-                        <div class="pl-2 md:pl-4 text-sm font-normal">
+                        <div wire:poll class="pl-2 md:pl-4 text-sm font-normal">
                             @forelse ($jnumber as $jeep)
                                 @if ($jeep->end === null)
                                     No Time Out
@@ -103,7 +103,7 @@
                     </div>
                 </div>
 
-                <div class="order-last mt-3 md:mt-0">
+                <div wire:poll class="order-last mt-3 md:mt-0">
                     <button type="button" wire:click="updateQueue"
                         class=" inline-flex items-center p-2 md:p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -148,7 +148,7 @@
         </div>
 
 
-        <div class="">
+        <div wire:poll class="">
             <form wire:submit.prevent="addRevenue">
                 <div class="py-3 px-6">
                     @forelse($trips as $trip)
@@ -222,7 +222,7 @@
         </div>
 
         {{-- Tables --}}
-        <div class="grid grid-cols-1 sm:grid-cols-2">
+        <div wire:poll class="grid grid-cols-1 sm:grid-cols-2">
             {{-- Revenue Table --}}
             <div class="py-6">
                 <div class="mx-auto px-4 sm:px-6 lg:px-8">
