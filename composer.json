@@ -19,6 +19,7 @@
         "laravel/jetstream": "^4.0",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
+        "leandrocfe/filament-apex-charts": "3.0",
         "livewire/livewire": "^3.0",
         "php-flasher/flasher-laravel": "^1.15",
         "psr/simple-cache": "2.0",
