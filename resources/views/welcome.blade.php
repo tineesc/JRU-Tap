@@ -100,7 +100,7 @@
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex h-[32rem]">
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2 rounded py-1 px-5">
                     <div data-aos="fade-left" data-aos-duration="1000" class="container auto">
-                        <img src="https://res.cloudinary.com/drcyxqm6p/image/upload/v1692721042/171023135755-jeepney-philippines-6_edyr28.jpg"
+                        <img src="https://media.discordapp.net/attachments/1101129291619647582/1181981450149580852/IMG_7832.jpg?ex=65830901&is=65709401&hm=c8be03724d5b72d151244706f754d01f03cbf1e445851adafcff67e8839bfc6d&=&format=webp&width=561&height=421"
                             alt="" class="rounded h-40 w-full object-cover sm:h-56 md:h-full skew-y-6" />
                     </div>
                     <div data-aos="fade-left" data-aos-duration="2000"
