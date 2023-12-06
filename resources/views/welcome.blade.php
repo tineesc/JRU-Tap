@@ -106,7 +106,7 @@
                     <div data-aos="fade-left" data-aos-duration="2000"
                         class="grid grid-cols-2 gap-4 md:grid-cols-1 lg:grid-cols-2">
                         <img alt=""
-                            src="https://res.cloudinary.com/drcyxqm6p/image/upload/v1692721211/hino_modern_philippine_jeepney_class_ii_by_hardrocker78_dfqbv71-pre.jpg_x8fbnt.jpg"
+                            src="https://media.discordapp.net/attachments/1101129291619647582/1181982069912518677/IMG_7831.jpg?ex=65830995&is=65709495&hm=a05aff5040e40ae72be8e6f8e2b222a86fdbccc31a8f08adccb4d4bdc4b61a62&=&format=webp&width=561&height=421"
                             class="rounded h-40 w-full object-cover object- sm:h-56 md:h-full skew-y-6" />
 
                         <img alt=""
